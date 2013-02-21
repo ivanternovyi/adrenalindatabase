@@ -2,7 +2,7 @@ class CreateTowns < ActiveRecord::Migration
   def change
     create_table :towns do |t|
       t.string :name
-      t.boolean :office
+      t.boolean :office, default: false
 
       t.timestamps
     end
