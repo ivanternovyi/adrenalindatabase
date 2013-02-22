@@ -1,11 +1,10 @@
 Adrenalindatabase::Application.routes.draw do
-  resources :towns
-
-
   devise_for :users
 
   root :to => "users#index"
-  resource :users
+  resources :users
+  resources :towns
+  resources :admins
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -5,6 +5,8 @@ class Ability
     user ||= User.new
     if user.role? :super_admin_user
         can :manage, :all
+    elsif user.role? :region_admin_user
+        can :manage, User
     elsif user.role? :regular_user
         if user.id.blank?
             raise CanCan::AccessDenied.new('Not authorized!')

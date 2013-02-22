@@ -1,0 +1,27 @@
+<%= form_for @user do |f| %>
+	<div class="field">
+		<%= f.label :email %>
+		<%= f.text_field :email %>
+	</div>
+	<div class="field">
+		<%= f.label :card_number %>
+		<%= f.text_field :card_number %>
+	</div>
+	<div class="field">
+		<%= f.label :password %>
+		<%= f.password_field :password %>
+	</div>
+	<div class="field">
+		<%= f.label :password_confirmation %>
+		<%= f.password_field :password_confirmation %>
+	</div>
+	<div class="field">
+		<%= f.label :town_office %>
+		<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id %>
+	</div>
+	<div class="field">
+		<%= f.label :role_id %>
+		<%= f.select :role_id, Role.all.collect{ |role| [role.name, role.id]}, selected: @user.role_id %>
+	</div>
+	<%= f.submit 'Save data' %>
+<% end %>

@@ -1,4 +1,5 @@
 <h1>Список учасников</h1>
 <% @users.each do |usr| %>
-  <p><%= usr.email %></p>
+  <p><%= link_to "#{usr.card_number} #{usr.email}", edit_user_path(usr) %></p>
 <% end %>
+<%= link_to 'Добавить учасника', new_user_path %>
