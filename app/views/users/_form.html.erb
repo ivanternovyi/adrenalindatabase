@@ -19,15 +19,43 @@
 		<%= f.label :town_office %>
 		<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id %>
 	</div>
-	<div class="field">
-		<%= f.label :role_id %>
-		<%= f.select :role_id, Role.all.collect{ |role| [role.name, role.id]}, selected: @user.role_id %>
-	</div>
-	<div class="field">
-		<% Town.with_office.each do |office| %>
-			<p><%= check_box_tag 'user[town_ids][]', office.id, @user.towns.include?(office)  %><%= office.name %></p>
+
+	<div class="fields">
+		<%= f.fields_for :user_detail do |ud| %>
+			<p>
+				<%= ud.label :name %>
+				<%= ud.text_field :name %>
+			</p>
+			<p>
+				<%= ud.label :surname %>
+				<%= ud.text_field :surname %>
+			</p>			
+			<p>
+				<%= ud.label :mid_name %>
+				<%= ud.text_field :mid_name %>
+			</p>			
+			<p>
+				<%= ud.label :birthday %>
+				<%= ud.date_select :birthday, {order: [:day, :month, :year], start_year: Date.today.year - 70, end_year: Date.today.year, use_month_names: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']} %>
+			</p>			
+			<p>
+				<%= ud.label :post_address %>
+				<%= ud.text_field :post_address %>
+			</p>
 		<% end %>
 	</div>
+
+	<% if current_user.role? :super_admin_user %>
+		<div class="field">
+			<%= f.label :role_id %>
+			<%= f.select :role_id, Role.all.collect{ |role| [role.name, role.id]}, selected: @user.role_id %>
+		</div>
+		<div class="field">
+			<% Town.with_office.each do |office| %>
+				<p><%= check_box_tag 'user[town_ids][]', office.id, @user.towns.include?(office)  %><%= office.name %></p>
+			<% end %>
+		</div>
+	<% end %>
 	<%= f.submit 'Save data' %>
 <% end %>
 

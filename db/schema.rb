@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130226143035) do
+ActiveRecord::Schema.define(:version => 20130227160820) do
 
   create_table "admin_user_to_towns", :force => true do |t|
     t.integer  "user_id"
@@ -40,6 +40,23 @@ ActiveRecord::Schema.define(:version => 20130226143035) do
   end
 
   add_index "towns", ["name"], :name => "index_towns_on_name"
+
+  create_table "user_details", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "surname"
+    t.string   "mid_name"
+    t.string   "post_address"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.date     "birthday"
+  end
+
+  add_index "user_details", ["birthday"], :name => "index_user_details_on_birthday"
+  add_index "user_details", ["mid_name"], :name => "index_user_details_on_mid_name"
+  add_index "user_details", ["name"], :name => "index_user_details_on_name"
+  add_index "user_details", ["surname"], :name => "index_user_details_on_surname"
+  add_index "user_details", ["user_id"], :name => "index_user_details_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

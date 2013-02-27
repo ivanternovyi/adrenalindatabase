@@ -1,11 +1,16 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
   def index
-    @users = User.all
+    if current_user.role? :super_admin_user
+      @users = User.all
+    elsif current_user.role? :region_admin_user
+      @users = User.where(town_office_id: current_user.towns.collect{|admin_towns| admin_towns.id})
+    end
+      
   end
 
   def new
-  	@user = User.new
+  	@user = User.new(user_detail: UserDetail.new)
   end
 
   def create
@@ -19,6 +24,9 @@ class UsersController < ApplicationController
 
   def edit
   	@user = User.find(params[:id])
+    if @user.user_detail == nil
+      @user.user_detail = UserDetail.new
+    end
   end
 
   def update
@@ -27,7 +35,7 @@ class UsersController < ApplicationController
 	    params[:user].delete(:password)
 	    params[:user].delete(:password_confirmation)
 		end
-  	if @user.update_attributes(params[:user])
+  	if @user.update_attributes(params[:user]) && @user.user_detail.update_attributes(params[:user][:user_detail_attributes])
   		redirect_to root_path
   	else
   		render action: 'edit'
