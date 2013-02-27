@@ -10,6 +10,6 @@ class Town < ActiveRecord::Base
   private
   def remove_unchecked_offices
     towns = Town.where(office: false).collect {|t| t.id}
-    UserToAdminRegion.where(town_id: towns).destroy_all
+    AdminUserToTown.where(town_id: towns).destroy_all
   end
 end

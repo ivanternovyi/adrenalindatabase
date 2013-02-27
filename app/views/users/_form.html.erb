@@ -23,6 +23,11 @@
 		<%= f.label :role_id %>
 		<%= f.select :role_id, Role.all.collect{ |role| [role.name, role.id]}, selected: @user.role_id %>
 	</div>
+	<div class="field">
+		<% Town.with_office.each do |office| %>
+			<p><%= check_box_tag 'user[town_ids][]', office.id, @user.towns.include?(office)  %><%= office.name %></p>
+		<% end %>
+	</div>
 	<%= f.submit 'Save data' %>
 <% end %>
 
