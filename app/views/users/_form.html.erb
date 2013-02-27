@@ -39,10 +39,17 @@
 				<%= ud.date_select :birthday, {order: [:day, :month, :year], start_year: Date.today.year - 70, end_year: Date.today.year, use_month_names: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']} %>
 			</p>			
 			<p>
-				<%= ud.label :post_address %>
-				<%= ud.text_field :post_address %>
+				<%= ud.label :post_address %><br />
+				<%= ud.text_area :post_address, cols: 40, rows: 2 %>
 			</p>
 		<% end %>
+	</div>
+
+	<div class="fields">
+		<%= f.fields_for :phones do |phon| %>
+			<%= render 'phone_fields', f: phon %>
+		<% end %>
+		<%= link_to_add_fields 'Добавить телефон', f, :phones %>
 	</div>
 
 	<% if current_user.role? :super_admin_user %>

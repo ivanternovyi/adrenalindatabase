@@ -1,0 +1,8 @@
+<fieldset>
+	<%= f.label :phone_number %>
+	<%= f.text_field :phone_number %>
+	<%= f.label :main, "главный" %>
+	<%= f.check_box :main %> |
+	<%= f.hidden_field :_destroy %>
+	<%= link_to 'Удалить', '#', class: "remove_fields" %>
+</fieldset>

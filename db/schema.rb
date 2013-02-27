@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227160820) do
+ActiveRecord::Schema.define(:version => 20130227163817) do
 
   create_table "admin_user_to_towns", :force => true do |t|
     t.integer  "user_id"
@@ -22,6 +22,18 @@ ActiveRecord::Schema.define(:version => 20130227160820) do
 
   add_index "admin_user_to_towns", ["town_id"], :name => "index_admin_user_to_towns_on_town_id"
   add_index "admin_user_to_towns", ["user_id"], :name => "index_admin_user_to_towns_on_user_id"
+
+  create_table "phones", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "phone_number"
+    t.boolean  "main",         :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "phones", ["main"], :name => "index_phones_on_main"
+  add_index "phones", ["phone_number"], :name => "index_phones_on_phone_number"
+  add_index "phones", ["user_id"], :name => "index_phones_on_user_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
