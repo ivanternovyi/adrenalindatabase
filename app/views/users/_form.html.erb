@@ -36,12 +36,18 @@
 			</p>			
 			<p>
 				<%= ud.label :birthday %>
-				<%= ud.date_select :birthday, {order: [:day, :month, :year], start_year: Date.today.year - 70, end_year: Date.today.year, use_month_names: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']} %>
+				<%= ud.date_select :birthday, {order: [:day, :month, :year], start_year: Date.today.year - 70, end_year: Date.today.year - 14, use_month_names: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']} %>
 			</p>			
 			<p>
 				<%= ud.label :post_address %><br />
 				<%= ud.text_area :post_address, cols: 40, rows: 2 %>
 			</p>
+		<% end %>
+	</div>
+
+	<div class="fields">
+		<%= f.fields_for :contact do |builder| %>
+			<%= render 'contact_fields', f: builder %>
 		<% end %>
 	</div>
 
