@@ -1,0 +1,14 @@
+<fieldset>
+	<%= f.label :payment_date, 'Дата оплаты' %>
+	<%= f.date_select :payment_date %>
+	<%= f.label :payment, 'Сумма платежа' %>
+	<%= f.text_field :payment %>
+	<%= f.label :valid_until_date, 'Оплачено до' %>
+	<%= f.date_select :valid_until_date %>
+	<%= f.label :reminder_date, 'Дата напоминания' %>
+	<%= f.date_select :reminder_date %>
+	<%= f.label :payment_reward, 'Комиссия' %>
+	<%= f.text_field :payment_reward %>
+	<%= f.hidden_field :_destroy %>
+	<%= link_to 'Удалить', '#', class: "remove_fields" %>
+</fieldset>

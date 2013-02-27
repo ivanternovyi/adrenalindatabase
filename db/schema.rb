@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227210435) do
+ActiveRecord::Schema.define(:version => 20130227212223) do
 
   create_table "admin_user_to_towns", :force => true do |t|
     t.integer  "user_id"
@@ -49,6 +49,19 @@ ActiveRecord::Schema.define(:version => 20130227210435) do
   add_index "contacts", ["icq_number"], :name => "index_contacts_on_icq_number"
   add_index "contacts", ["skype_name"], :name => "index_contacts_on_skype_name"
   add_index "contacts", ["user_id"], :name => "index_contacts_on_user_id"
+
+  create_table "payment_infos", :force => true do |t|
+    t.integer  "card_info_id"
+    t.date     "payment_date"
+    t.date     "valid_until_date"
+    t.date     "reminder_date"
+    t.integer  "payment_reward"
+    t.integer  "payment"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "payment_infos", ["card_info_id"], :name => "index_payment_infos_on_card_info_id"
 
   create_table "phones", :force => true do |t|
     t.integer  "user_id"
