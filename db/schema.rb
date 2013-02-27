@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227200543) do
+ActiveRecord::Schema.define(:version => 20130227210435) do
 
   create_table "admin_user_to_towns", :force => true do |t|
     t.integer  "user_id"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(:version => 20130227200543) do
 
   add_index "admin_user_to_towns", ["town_id"], :name => "index_admin_user_to_towns_on_town_id"
   add_index "admin_user_to_towns", ["user_id"], :name => "index_admin_user_to_towns_on_user_id"
+
+  create_table "card_infos", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "barcode"
+    t.date     "send_date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "card_infos", ["barcode"], :name => "index_card_infos_on_barcode"
+  add_index "card_infos", ["user_id"], :name => "index_card_infos_on_user_id"
 
   create_table "contacts", :force => true do |t|
     t.integer  "user_id"

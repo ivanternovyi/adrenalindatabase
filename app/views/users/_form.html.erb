@@ -8,6 +8,11 @@
 		<%= f.text_field :card_number %>
 	</div>
 	<div class="field">
+		<%= f.fields_for :card_info do |builder| %>
+			<%= render 'card_info_fields', f: builder %>
+		<% end %>
+	</div>
+	<div class="field">
 		<%= f.label :password %>
 		<%= f.password_field :password %>
 	</div>

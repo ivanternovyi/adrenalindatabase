@@ -1,0 +1,6 @@
+<fieldset>
+	<%= f.label :barcode, 'Штрихкод' %>
+	<%= f.text_field :barcode %><br />
+	<%= f.label :send_date, 'Дата отправки карты' %>
+	<%= f.date_select :send_date , {order: [:day, :month, :year], start_year: Date.today.year - 5, end_year: Date.today.year, use_month_names: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']} %>
+</fieldset>

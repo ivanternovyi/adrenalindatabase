@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def new
-  	@user = User.new(user_detail: UserDetail.new, phones: [Phone.new], contact: Contact.new)
+  	@user = User.new(user_detail: UserDetail.new, phones: [Phone.new], contact: Contact.new, card_info: CardInfo.new)
   end
 
   def create
@@ -32,6 +32,9 @@ class UsersController < ApplicationController
     end
     if @user.contact.nil?
       @user.contact = Contact.new
+    end
+    if @user.card_info.nil?
+      @user.card_info = CardInfo.new
     end
   end
 
