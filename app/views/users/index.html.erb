@@ -1,5 +1,15 @@
-<h1>Список учасников</h1>
-<% @users.each do |usr| %>
-  <p><%= link_to "#{usr.user_detail.name}  #{usr.card_number} #{usr.email} #{Role.find(usr.role_id).name}", edit_user_path(usr) %></p>
-<% end %>
+<div class="grid_16">
+	<h1>Список учасников</h1>
+</div>
+<div class="clear"></div>
+<div class="grid_16 heading">
+	<div class="grid_5 alpha fio">Фамилия Имя Отчество</div>
+ 	<div class="grid_2"> № карты</div>
+ 	<div class="grid_3">Дата рождения</div>
+ 	<div class="grid_3">Город представительство</div>
+ 	<div class="grid_3 omega">&nbsp;</div>
+ 	<div class="clear"></div>
+</div>
+<%= render @users %>
+
 <%= link_to 'Добавить учасника', new_user_path %>

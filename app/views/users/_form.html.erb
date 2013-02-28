@@ -1,4 +1,28 @@
 <%= form_for @user do |f| %>
+	<div class="grid_8 alpha">
+		<%= f.fields_for :user_detail do |ud| %>
+			<p>
+				<%= ud.label :surname, 'Фамилия' %><br />
+				<%= ud.text_field :surname %>
+			</p>			
+			<p>
+				<%= ud.label :name, 'Имя' %><br />
+				<%= ud.text_field :name %>
+			</p>
+			<p>
+				<%= ud.label :mid_name, 'Отчество' %><br />
+				<%= ud.text_field :mid_name %>
+			</p>			
+			<p>
+				<%= ud.label :birthday, 'День рождения' %><br />
+				<%= ud.date_select :birthday, {order: [:day, :month, :year], start_year: Date.today.year - 70, end_year: Date.today.year - 14, use_month_names: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']} %>
+			</p>			
+			<p>
+				<%= ud.label :post_address, 'Почтовый адрес' %><br />
+				<%= ud.text_area :post_address, cols: 40, rows: 2 %>
+			</p>
+		<% end %>
+	</div>
 	<div class="field">
 		<%= f.label :email %>
 		<%= f.email_field :email %>
@@ -23,31 +47,6 @@
 	<div class="field">
 		<%= f.label :town_office %>
 		<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id %>
-	</div>
-
-	<div class="field">
-		<%= f.fields_for :user_detail do |ud| %>
-			<p>
-				<%= ud.label :name %>
-				<%= ud.text_field :name %>
-			</p>
-			<p>
-				<%= ud.label :surname %>
-				<%= ud.text_field :surname %>
-			</p>			
-			<p>
-				<%= ud.label :mid_name %>
-				<%= ud.text_field :mid_name %>
-			</p>			
-			<p>
-				<%= ud.label :birthday %>
-				<%= ud.date_select :birthday, {order: [:day, :month, :year], start_year: Date.today.year - 70, end_year: Date.today.year - 14, use_month_names: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']} %>
-			</p>			
-			<p>
-				<%= ud.label :post_address %><br />
-				<%= ud.text_area :post_address, cols: 40, rows: 2 %>
-			</p>
-		<% end %>
 	</div>
 
 	<div class="field">

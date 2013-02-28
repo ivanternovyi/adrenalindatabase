@@ -6,7 +6,6 @@ class UsersController < ApplicationController
     elsif current_user.role? :region_admin_user
       @users = User.where(town_office_id: current_user.towns.collect{|admin_towns| admin_towns.id})
     end
-      
   end
 
   def new

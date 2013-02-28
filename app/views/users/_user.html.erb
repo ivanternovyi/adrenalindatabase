@@ -1,0 +1,18 @@
+<div class="grid_16 record">
+	<div class="grid_5 alpha fio">
+  	<%= link_to "#{user.user_detail.surname} #{user.user_detail.name} #{user.user_detail.mid_name}", edit_user_path(user) %>
+ 	</div>
+ 	<div class="grid_2">
+ 		<%= user.card_number %>
+ 	</div>
+ 	<div class="grid_3 town_office">
+ 		<%= user.user_detail.birthday %>
+ 	</div>
+ 	<div class="grid_3 town_office">
+ 		<%= Town.find(user.town_office_id).name %>
+ 	</div>
+ 	<div class="grid_3 omega">
+ 		<%= link_to 'Удалить', user_path(user), method: :delete, data: {confirm: "Удалить пользователя #{user.user_detail.surname} #{user.user_detail.surname} #{user.user_detail.mid_name}?"} %>
+ 	</div>
+ 	<div class="clear"></div>
+</div>

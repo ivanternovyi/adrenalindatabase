@@ -1,0 +1,21 @@
+$adr_color: #ef4e23;
+$row_h: 10px;
+
+@mixin uni-border-radius($rad: 3px) {
+	-moz-border-radius: #{$rad};
+	-webkit-border-radius: #{$rad};
+	border-radius: #{$rad};
+}
+
+@mixin uni-box-shadow($shear_hor: 1px, $shear_vert: 1px, $shadow_size: 2px, $shadow_color: #888) {
+	-moz-box-shadow: $shear_hor $shear_vert $shadow_size $shadow_color;
+	-webkit-box-shadow: $shear_hor $shear_vert $shadow_size $shadow_color;
+	box-shadow: $shear_hor $shear_vert $shadow_size $shadow_color;
+}
+
+a {
+	color: #111;
+	&:hover {
+		color: $adr_color;
+	}
+}

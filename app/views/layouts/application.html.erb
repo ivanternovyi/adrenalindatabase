@@ -7,11 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<%= render 'layouts/header' %>
 	<%= render 'layouts/main_nav' %>
-  <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  <%= yield %>
-
+	<%= render 'layouts/alert_notice' %>
+	<div class="container_16">
+	  <%= yield %>
+	</div>
 </body>
 </html>
