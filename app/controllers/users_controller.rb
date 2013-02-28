@@ -24,18 +24,10 @@ class UsersController < ApplicationController
 
   def edit
   	@user = User.find(params[:id])
-    if @user.user_detail.nil?
-      @user.user_detail = UserDetail.new
-    end
-    if @user.phones.empty?
-      @user.phones << Phone.new
-    end
-    if @user.contact.nil?
-      @user.contact = Contact.new
-    end
-    if @user.card_info.nil?
-      @user.card_info = CardInfo.new
-    end
+    @user.user_detail =   UserDetail.new  if @user.user_detail.nil?
+    @user.phones      <<  Phone.new       if @user.phones.empty?
+    @user.contact     =   Contact.new     if @user.contact.nil?
+    @user.card_info   =   CardInfo.new    if @user.card_info.nil?
   end
 
   def update
