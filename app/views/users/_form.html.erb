@@ -17,17 +17,17 @@
 				<%= ud.label :surname, 'Прізвище' %><br />
 				<%= ud.text_field :surname %>
 			</p>			
-			<div class="field">
+			<p>
 				<%= ud.label :name, 'Ім\'я' %><br />
 				<%= ud.text_field :name %>
-			</div>
+			</p>
 			<p>
 				<%= ud.label :mid_name, 'По-Батькові' %><br />
 				<%= ud.text_field :mid_name %>
 			</p>			
 			<p>
 				<%= ud.label :birthday, 'Дата народження' %><br />
-				<%= ud.date_select :birthday, {order: [:day, :month, :year], start_year: Date.today.year - 70, end_year: Date.today.year - 14, use_month_names: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'], include_blank: true} %>
+				<%= ud.date_select :birthday, {order: [:day, :month, :year], start_year: Date.today.year - 70, end_year: Date.today.year - 14, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
 			</p>			
 			<p>
 				<%= ud.label :post_address, 'Поштова адреса для отримання повідомлень від ВГО «Адреналін», в т.ч. картки «I`m Adrenalin»' %><br />
@@ -35,56 +35,59 @@
 			</p>
 		<% end %>
 	</div>
-	<div class="field">
-		<%= f.label :email %>
-		<%= f.email_field :email %>
-	</div>
-	<div class="field">
-		<%= f.label :card_number %>
-		<%= f.text_field :card_number %>
-	</div>
-	<div class="field">
-		<%= f.fields_for :card_info do |builder| %>
-			<%= render 'card_info_fields', f: builder %>
-		<% end %>
-	</div>
-	<div class="field">
-		<%= f.label :password %>
+	<div class="grid_8 omega">
+		<p>
+			<%= f.label :email %><br />
+			<%= f.email_field :email %>
+		</p>
+		<p>
+		<%= f.label :password %><br />
 		<%= f.password_field :password %>
-	</div>
-	<div class="field">
-		<%= f.label :password_confirmation %>
+	</p>
+	<p>
+		<%= f.label :password_confirmation %><br />
 		<%= f.password_field :password_confirmation %>
+	</p>
 	</div>
-	<div class="field">
-		<%= f.label :town_office %>
-		<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id, include_blank: true %>
+	<div class="clear"></div>
+	<div class="grid_8 alpha">
+		<p>
+			<%= f.label :card_number %><br />
+			<%= f.text_field :card_number %>
+		</p>
+		<p>
+			<%= f.label :town_office, 'Зручне для Вас місце з офісом Адреналіну' %><br />
+			<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id, include_blank: true %>
+		</p>
+		<p>
+			<%= f.fields_for :card_info do |builder| %>
+				<%= render 'card_info_fields', f: builder %>
+			<% end %>
+		</p>
 	</div>
-
-	<div class="field">
+	<div class="grid_8 omega">
 		<%= f.fields_for :contact do |builder| %>
 			<%= render 'contact_fields', f: builder %>
 		<% end %>
-	</div>
-
-	<div class="field">
 		<%= f.fields_for :phones do |phon| %>
 			<%= render 'phone_fields', f: phon %>
 		<% end %>
-		<%= link_to_add_fields 'Добавить телефон', f, :phones %>
+		<%= link_to_add_fields 'Додати телефонний номер', f, :phones %>
 	</div>
-
+	<div class="clear"></div>
 	<% if current_user.role? :super_admin_user %>
-		<div class="field">
-			<%= f.label :role_id, 'Права доступу' %>
-			<%= f.select :role_id, Role.all.collect{ |role| [role.name, role.id]}, selected: @user.role_id %>
-		</div>
-		<div class="field">
-			<% Town.with_office.each do |office| %>
-				<p><%= check_box_tag 'user[town_ids][]', office.id, @user.towns.include?(office)  %><%= office.name %></p>
-			<% end %>
+		<div class="grid_16 alpha omega">
+			<div class="grid_3 alpha">
+				<%= f.label :role_id, 'Права доступу' %>
+				<%= f.select :role_id, Role.all.collect{ |role| [role.name, role.id]}, selected: @user.role_id %>
+			</div>
+			<div class="grid_13 omega">
+				<% Town.with_office.each do |office| %>
+					<%= check_box_tag 'user[town_ids][]', office.id, @user.towns.include?(office)  %><%= office.name %><br />
+				<% end %>
+			</div>
 		</div>
 	<% end %>
-	<%= f.submit 'Save data' %>
+	<%= f.submit 'Зберегти' %>
 <% end %>
 

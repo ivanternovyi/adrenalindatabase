@@ -1,11 +1,14 @@
 <fieldset>
-	<%= f.label :barcode, 'Штрихкод' %>
-	<%= f.text_field :barcode %><br />
-	<%= f.label :send_date, 'Дата отправки карты' %>
-	<%= f.date_select :send_date , {order: [:day, :month, :year], start_year: Date.today.year - 5, end_year: Date.today.year, use_month_names: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'], include_blank: true} %>
+	<p>
+		<%= f.label :barcode, 'Штрихкод' %><br />
+		<%= f.text_field :barcode %>
+	</p>
+	<p>
+		<%= f.label :send_date, 'Дата відправки карти' %><br />
+		<%= f.date_select :send_date , {order: [:day, :month, :year], start_year: Date.today.year - 5, end_year: Date.today.year, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
+	</p>
 	<%= f.fields_for :payment_infos do |build| %>
 		<%= render 'payment_info_fields', f: build %>
 	<% end %>
-	<br />
-	<%= link_to_add_fields 'Добавить платеж', f, :payment_infos %>
+	<%= link_to_add_fields 'Додати проплату', f, :payment_infos %>
 </fieldset>

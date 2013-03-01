@@ -1,9 +1,11 @@
 <fieldset>
-	<%= f.label :icq_number, 'ICQ#' %>
-	<%= f.text_field :icq_number %>
-	<%= f.label :by_icq, 'Получать сообщения' %>
-	<%= f.check_box :by_icq %><br />
-	<%= f.label :skype_name, 'Skype' %>
+	<p>
+		<%= f.label :icq_number, 'ICQ#' %><br />
+		<%= f.text_field :icq_number %>
+		<%= f.label :by_icq, 'Отримувати інфо' %>
+		<%= f.check_box :by_icq %>
+	</p>
+	<%= f.label :skype_name, 'Skype' %><br />
 	<%= f.text_field :skype_name %>
 	<%= f.label :by_skype, 'Получать сообщения' %>
 	<%= f.check_box :by_skype %><br />
