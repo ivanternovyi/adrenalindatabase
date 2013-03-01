@@ -11,7 +11,7 @@ class Ability
         if user.id.blank?
             raise CanCan::AccessDenied.new('Not authorized!')
         end
-        can :read, Town
+        can :read, [Town, User]
     end
         
 
