@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-  	puts "!!!!!!!!!!!!!!!!!! #{current_user.role? :regular_user}"
   	if current_user.role? :regular_user
   		if current_user.id.blank?
         raise CanCan::AccessDenied.new('Not authorized!')
