@@ -1,11 +1,11 @@
 class FillTowns < ActiveRecord::Migration
   def up
-    File.open('db/ukraine_towns.txt').each do |line|
+    File.open('db/ukraine_towns_ua.txt').each do |line|
       Town.create(name: line)
     end
   end
 
   def down
-    Towns.destroy_all
+    Town.destroy_all
   end
 end
