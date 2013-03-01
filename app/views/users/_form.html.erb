@@ -1,24 +1,36 @@
 <%= form_for @user do |f| %>
+	<% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= pluralize(@user.errors.count, "error") %> prohibited this town from being saved:</h3>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 	<div class="grid_8 alpha">
 		<%= f.fields_for :user_detail do |ud| %>
 			<p>
-				<%= ud.label :surname, 'Фамилия' %><br />
+				<%= ud.label :surname, 'Прізвище' %><br />
 				<%= ud.text_field :surname %>
 			</p>			
-			<p>
-				<%= ud.label :name, 'Имя' %><br />
+			<div class="field">
+				<%= ud.label :name, 'Ім\'я' %><br />
 				<%= ud.text_field :name %>
-			</p>
+			</div>
 			<p>
-				<%= ud.label :mid_name, 'Отчество' %><br />
+				<%= ud.label :mid_name, 'По-Батькові' %><br />
 				<%= ud.text_field :mid_name %>
 			</p>			
 			<p>
-				<%= ud.label :birthday, 'День рождения' %><br />
-				<%= ud.date_select :birthday, {order: [:day, :month, :year], start_year: Date.today.year - 70, end_year: Date.today.year - 14, use_month_names: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']} %>
+				<%= ud.label :birthday, 'Дата народження' %><br />
+				<%= ud.date_select :birthday, {order: [:day, :month, :year], start_year: Date.today.year - 70, end_year: Date.today.year - 14, use_month_names: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'], include_blank: true} %>
 			</p>			
 			<p>
-				<%= ud.label :post_address, 'Почтовый адрес' %><br />
+				<%= ud.label :post_address, 'Поштова адреса для отримання повідомлень від ВГО «Адреналін», в т.ч. картки «I`m Adrenalin»' %><br />
 				<%= ud.text_area :post_address, cols: 40, rows: 2 %>
 			</p>
 		<% end %>
@@ -46,7 +58,7 @@
 	</div>
 	<div class="field">
 		<%= f.label :town_office %>
-		<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id %>
+		<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id, include_blank: true %>
 	</div>
 
 	<div class="field">
@@ -64,7 +76,7 @@
 
 	<% if current_user.role? :super_admin_user %>
 		<div class="field">
-			<%= f.label :role_id %>
+			<%= f.label :role_id, 'Права доступу' %>
 			<%= f.select :role_id, Role.all.collect{ |role| [role.name, role.id]}, selected: @user.role_id %>
 		</div>
 		<div class="field">

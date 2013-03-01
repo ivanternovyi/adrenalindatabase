@@ -12,7 +12,7 @@
 <% @towns.each do |town| %>
   <tr>
     <td><%= town.name %></td>
-    <td><%= town.office %></td>
+    <td><%= '+' if town.office %></td>
     <td><%= link_to 'Show', town %></td>
     <td><%= link_to 'Edit', edit_town_path(town) %></td>
     <td><%= link_to 'Destroy', town, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
 
   has_one :user_detail, dependent: :destroy
   accepts_nested_attributes_for :user_detail
+  # validates_associated :user_detail
 
   has_many :phones, dependent: :destroy
   accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: lambda {|attrs| attrs.all? {|key, value| value.blank?}}

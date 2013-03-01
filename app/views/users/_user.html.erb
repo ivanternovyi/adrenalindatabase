@@ -1,18 +1,26 @@
 <div class="grid_16 record">
 	<div class="grid_5 alpha fio">
-  	<%= link_to "#{user.user_detail.surname} #{user.user_detail.name} #{user.user_detail.mid_name}", edit_user_path(user) %>
+		<% if !user.user_detail.nil? %>
+  		<%= link_to "#{user.user_detail.surname} #{user.user_detail.name} #{user.user_detail.mid_name}", edit_user_path(user) %>
+		<% else %>
+			&nbsp;
+		<% end %>
  	</div>
  	<div class="grid_2">
+ 		<%= raw '&nbsp;' if user.card_number.blank? %>
  		<%= user.card_number %>
  	</div>
- 	<div class="grid_3 town_office">
+ 	<div class="grid_3">
+ 		<%= raw '&nbsp;' if user.user_detail.birthday.blank? %>
  		<%= user.user_detail.birthday %>
  	</div>
  	<div class="grid_3 town_office">
- 		<%= Town.find(user.town_office_id).name %>
+ 		<% if !user.town_office_id.blank? %>
+ 			<%= Town.find(user.town_office_id).name %>
+		<% end %>
  	</div>
  	<div class="grid_3 omega">
- 		<%= link_to 'Удалить', user_path(user), method: :delete, data: {confirm: "Удалить пользователя #{user.user_detail.surname} #{user.user_detail.surname} #{user.user_detail.mid_name}?"} %>
+ 		<%= link_to '[X]', user_path(user), method: :delete, data: {confirm: "Удалить пользователя #{user.user_detail.surname} #{user.user_detail.surname} #{user.user_detail.mid_name}?"} %>
  	</div>
  	<div class="clear"></div>
 </div>

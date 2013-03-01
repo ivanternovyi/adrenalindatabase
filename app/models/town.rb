@@ -5,6 +5,8 @@ class Town < ActiveRecord::Base
   has_many :admin_user_to_towns, dependent: :destroy
   has_many :users, through: :admin_user_to_towns
 
+  validates_presence_of :name
+
   scope :with_office, where(office: true)
 
   private
