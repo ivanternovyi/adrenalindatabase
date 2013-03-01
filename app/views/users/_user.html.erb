@@ -11,8 +11,12 @@
  		<%= user.card_number %>
  	</div>
  	<div class="grid_3">
- 		<%= raw '&nbsp;' if user.user_detail.birthday.blank? %>
- 		<%= user.user_detail.birthday %>
+    <% if !user.user_detail.nil? %>
+   		<%= raw '&nbsp;' if user.user_detail.birthday.blank? %>
+   		<%= user.user_detail.birthday %>
+    <% else %>
+      &nbsp;
+    <% end %>
  	</div>
  	<div class="grid_3 town_office">
  		<% if !user.town_office_id.blank? %>
@@ -20,7 +24,7 @@
 		<% end %>
  	</div>
  	<div class="grid_3 omega">
- 		<%= link_to '[X]', user_path(user), method: :delete, data: {confirm: "Удалить пользователя #{user.user_detail.surname} #{user.user_detail.surname} #{user.user_detail.mid_name}?"} %>
+ 		<%= link_to '[X]', user_path(user), method: :delete, data: {confirm: "Видалити дані учасника Адреналіну?"} %>
  	</div>
  	<div class="clear"></div>
 </div>
