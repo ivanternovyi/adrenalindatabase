@@ -1,6 +1,6 @@
 # encoding: utf-8
 class UserDetail < ActiveRecord::Base
-  attr_accessible :mid_name, :name, :post_address, :surname, :birthday, :user_id
+  attr_accessible :mid_name, :name, :post_address, :surname, :birthday, :user_id, :registration_timestamp, :comment
 
   belongs_to :user
 

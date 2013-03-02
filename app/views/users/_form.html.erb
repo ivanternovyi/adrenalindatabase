@@ -13,6 +13,7 @@
 
 	<div class="grid_8 alpha">
 		<%= f.fields_for :user_detail do |ud| %>
+			Користувач зареєстрований <%= @user.user_detail.registration_timestamp %>
 			<p>
 				<%= ud.label :surname, 'Прізвище' %><br />
 				<%= ud.text_field :surname %>
@@ -32,6 +33,10 @@
 			<p>
 				<%= ud.label :post_address, 'Поштова адреса для отримання повідомлень від ВГО «Адреналін», в т.ч. картки «I`m Adrenalin»' %><br />
 				<%= ud.text_area :post_address, cols: 40, rows: 2 %>
+			</p>			
+			<p>
+				<%= ud.label :comment, 'Коментар' %><br />
+				<%= ud.text_area :comment, cols: 40, rows: 2 %>
 			</p>
 		<% end %>
 	</div>

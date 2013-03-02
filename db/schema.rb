@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130302134808) do
+ActiveRecord::Schema.define(:version => 20130302160115) do
 
   create_table "admin_user_to_towns", :force => true do |t|
     t.integer  "user_id"
@@ -106,9 +106,11 @@ ActiveRecord::Schema.define(:version => 20130302134808) do
     t.string   "surname"
     t.string   "mid_name"
     t.string   "post_address"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.date     "birthday"
+    t.datetime "registration_timestamp"
+    t.text     "comment"
   end
 
   add_index "user_details", ["birthday"], :name => "index_user_details_on_birthday"
