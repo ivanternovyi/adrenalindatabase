@@ -16,6 +16,10 @@
 		<%= f.date_select :send_date , {order: [:day, :month, :year], start_year: Date.today.year - 5, end_year: Date.today.year, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
 	</p>
 	<p>
+		<%= f.label :reminder_date, 'Дата листа нагадування' %><br />
+		<%= f.date_select :reminder_date , {order: [:day, :month, :year], start_year: Date.today.year - 5, end_year: Date.today.year, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
+	</p>
+	<p>
 		<%= f.label :comment, 'Коментар' %><br />
 		<%= f.text_area :comment, cols: 40, rows: 2 %>
 	</p>

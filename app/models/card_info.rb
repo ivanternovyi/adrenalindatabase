@@ -1,5 +1,5 @@
 class CardInfo < ActiveRecord::Base
-  attr_accessible :barcode, :send_date, :user_id, :payment_infos_attributes, :card_number, :discard, :comment
+  attr_accessible :barcode, :send_date, :reminder_date, :user_id, :payment_infos_attributes, :card_number, :discard, :comment
 
   belongs_to :user
 
