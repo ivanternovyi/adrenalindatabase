@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def new
-  	@user = User.new(user_detail: UserDetail.new, phones: [Phone.new], contact: Contact.new, card_info: CardInfo.new)
+  	@user = User.new(user_detail: UserDetail.new, phones: [Phone.new], contact: Contact.new, card_info: [CardInfo.new])
   end
 
   def create
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     @user.user_detail =   UserDetail.new  if @user.user_detail.nil?
     @user.phones      <<  Phone.new       if @user.phones.empty?
     @user.contact     =   Contact.new     if @user.contact.nil?
-    @user.card_info   =   CardInfo.new    if @user.card_info.nil?
+    @user.card_infos  <<  CardInfo.new    if @user.card_infos.empty?
   end
 
   def update

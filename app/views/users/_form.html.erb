@@ -52,15 +52,11 @@
 	<div class="clear"></div>
 	<div class="grid_8 alpha">
 		<p>
-			<%= f.label :card_number %><br />
-			<%= f.text_field :card_number %>
-		</p>
-		<p>
 			<%= f.label :town_office, 'Зручне для Вас місце з офісом Адреналіну' %><br />
 			<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id, include_blank: true %>
 		</p>
 		<p>
-			<%= f.fields_for :card_info do |builder| %>
+			<%= f.fields_for :card_infos do |builder| %>
 				<%= render 'card_info_fields', f: builder %>
 			<% end %>
 		</p>

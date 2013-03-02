@@ -7,8 +7,7 @@
 		<% end %>
  	</div>
  	<div class="grid_2">
- 		<%= raw '&nbsp;' if user.card_number.blank? %>
- 		<%= user.card_number %>
+ 		<%= card_number_text(user) || raw('&nbsp;') %>
  	</div>
  	<div class="grid_3">
     <% if !user.user_detail.nil? %>
