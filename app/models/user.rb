@@ -2,17 +2,19 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, 
+  devise :database_authenticatable,
           # :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         authentication_keys: [ :card_number ]
+         authentication_keys: [ :auth_field ]
 
+  attr_accessor :auth_field
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :card_number, :password, :password_confirmation, 
+  attr_accessible :email, :auth_field, :password, :password_confirmation, 
           :remember_me, :role_id, :town_office_id, :towns, :town_ids, 
           :user_detail, :user_detail_attributes, :phones_attributes,
           :contact_attributes, :card_infos_attributes, :active_card, :tst
+
   # attr_accessible :title, :body
   has_many :admin_user_to_towns, dependent: :destroy
   has_many :towns, through: :admin_user_to_towns
@@ -30,13 +32,12 @@ class User < ActiveRecord::Base
   has_many :card_infos, dependent: :destroy
   accepts_nested_attributes_for :card_infos
 
-  
-
   def role?(role)
     return Role.find_by_name(role.to_s.camelize).id == self.role_id
   end
   def self.find_for_database_authentication(conditions={})
-    self.where('card_number = ?', conditions[:card_number]).limit(1).first ||
-    self.where('email = ?', conditions[:card_number]).limit(1).first
+    puts conditions[:auth_field]
+    self.includes(:card_infos).where(card_infos: {discard: false}).where(card_infos: {card_number: conditions[:auth_field]}).limit(1).first ||
+    self.where('email = ?', conditions[:auth_field]).limit(1).first
   end
 end
