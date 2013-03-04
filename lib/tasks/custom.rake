@@ -43,7 +43,7 @@ namespace :adrenalin do
 		# headers: true - becouse CSV have first header row
 		CSV.foreach(file, headers: true) do |row|
 			def chf(val)
-				if val == '-'
+				if val == '-' || val == ''
 					nil
 				else
 					val
@@ -90,27 +90,51 @@ namespace :adrenalin do
 			passwd = passrand.rand(10000000..99999999)
 			town_office_id = get_town(chf(row[office_town]))
 
-			usr = User.new(email: chf(row[email]), 
+			usr = User.new(
+										email: chf(row[email]), 
 										password: passwd,
 										password_confirmation: passwd, 
-										town_office_id: town_office_id)
+										town_office_id: town_office_id
+										)
 			name_ary = parse_name(row[username])
-			user_detail = UserDetail.new(surname: name_ary[0], 
+			user_detail = UserDetail.new(
+																	surname: name_ary[0], 
 																	name: name_ary[1], 
 																	mid_name: name_ary[2],
 																	post_address: chf(row[post_address]), 
 																	birthday: chf(row[birthday]),
 																	registration_timestamp: set_datetime(row[register_timestamp]),
-																	comment: chf(row[user_comment]))
+																	comment: chf(row[user_comment])
+																	)
+			usr.user_detail = user_detail
 
-			card_info = CardInfo.new(card_number: chf(row[card_number].delete '_'),
+			card_info = CardInfo.new(
+																card_number: chf(row[card_number].delete '_'),
 																send_date: chf(row[card_send_date]),
 																reminder_date: chf(row[date_reminder]),
 																payment_reward: chf(row[payment_reward_s]),
-																valid_until: chf(row[valid_until_date])																)
-			
-			usr.user_detail = user_detail
+																valid_until: chf(row[valid_until_date])
+																)
 			usr.card_infos << card_info
+			
+			if !chf(row[phone_one]).nil?
+				sms = row[contact_by].include?('SMS') ? true : false
+				ph_one = Phone.new(
+													main: sms,
+													phone_number: row[phone_one]
+													)
+				usr.phones << ph_one
+			end
+			
+			if !chf(row[phone_two]).nil?
+				sms = row[contact_by].include?('SMS') && usr.phones.nil? ? true : false
+				phone_two = Phone.new(
+													main: sms,
+													phone_number: row[phone_two]
+													)
+				usr.phones << phone_two
+			end
+			
 			begin
 				usr.save!
 				puts "Ok to save user #{row[username]}."
