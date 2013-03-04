@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'csv'
 
 namespace :adrenalin do
@@ -62,7 +63,7 @@ namespace :adrenalin do
 			def get_town(name)
 				town = Town.where('name LIKE ?', "%#{name}%").first
 				if town.nil?
-					puts "!!! name: #{name} - not exist!"
+					puts "Warning: Офіс у #{name} - не існує!"
 					nil
 				else
 					town.id
@@ -74,10 +75,14 @@ namespace :adrenalin do
 					nil
 				else
 					date = var.split(" ")[0]
-					time = var.split(" ")[1]
 					date_y, date_m, date_d = date.split(".")[2], date.split(".")[1], date.split(".")[0]
-					time_h, time_m, time_s = time.split(":")[0], time.split(":")[1], time.split(":")[3]
-					Datetime.new(date_y, date_m, date_d, time_h, time_m, time_s)
+					time = var.split(" ")[1]
+					if !time.empty?
+						time_h, time_m, time_s = time.split(":")[0], time.split(":")[1], time.split(":")[3]
+						Datetime.new(date_y, date_m, date_d, time_h, time_m, time_s)
+					else
+						Datetime.new(date_y, date_m, date_d, 0, 0, 0)
+					end
 				end
 			end
 
@@ -85,17 +90,33 @@ namespace :adrenalin do
 			passwd = passrand.rand(10000000..99999999)
 			town_office_id = get_town(chf(row[office_town]))
 
-			usr = User.create(email: chf(row[email]), 
-												password: passwd, password_confirmation: passwd, 
-												town_office_id: town_office_id)
+			usr = User.new(email: chf(row[email]), 
+										password: passwd,
+										password_confirmation: passwd, 
+										town_office_id: town_office_id)
 			name_ary = parse_name(row[username])
-			puts "User ID= #{usr.id}"
-			# usr.user_detail << UserDetail.create(surname: name_ary[0], name: name_ary[1], mid_name: name_ary[2],
-			# 																		post_address: chf(row[post_address]), birthday: chf(row[birthday]),
-			# 																		registration_timestamp: set_datetime(row[register_timestamp]),
-			# 																		comment: chf(row[user_comment]))
-			usr.save
-			# puts parse_name(chf(row[username]))[0]
+			user_detail = UserDetail.new(surname: name_ary[0], 
+																	name: name_ary[1], 
+																	mid_name: name_ary[2],
+																	post_address: chf(row[post_address]), 
+																	birthday: chf(row[birthday]),
+																	registration_timestamp: set_datetime(row[register_timestamp]),
+																	comment: chf(row[user_comment]))
+
+			card_info = CardInfo.new(card_number: chf(row[card_number].delete '_'),
+																send_date: chf(row[card_send_date]),
+																reminder_date: chf(row[date_reminder]),
+																payment_reward: chf(row[payment_reward_s]),
+																valid_until: chf(row[valid_until_date])																)
+			
+			usr.user_detail = user_detail
+			usr.card_infos << card_info
+			begin
+				usr.save!
+				puts "Ok to save user #{row[username]}."
+			rescue => error
+				puts "Error to save #{row[username]}: #{error.message}"
+			end
 		end
 	end
 end
