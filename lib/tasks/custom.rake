@@ -37,7 +37,7 @@ namespace :adrenalin do
 			payment_date_s = 			18,
 			payment_method_s = 		19,
 			payment_s = 					20,
-			
+
 			payment_reward_s = 		21,
 			valid_until_date = 		22
 
@@ -146,6 +146,8 @@ namespace :adrenalin do
 														skype_name: chf(row[skype])
 														)
 			usr.contact = contact
+
+			
 
 			begin
 				usr.save!
