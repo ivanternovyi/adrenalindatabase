@@ -45,6 +45,7 @@ namespace :adrenalin do
 		# headers: true - becouse CSV have first header row
 		CSV.foreach(file, headers: true) do |row|
 			puts row[d[:username]]
+			
 		end
 
 	end

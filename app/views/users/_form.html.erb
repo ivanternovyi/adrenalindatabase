@@ -57,7 +57,7 @@
 	<div class="clear"></div>
 	<div class="grid_8 alpha">
 		<p>
-			<%= f.label :town_office, 'Зручне для Вас місце з офісом Адреналіну' %><br />
+			<%= f.label :town_office, 'Зручне для Вас місто з офісом Адреналіну' %><br />
 			<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id, include_blank: true %>
 		</p>
 		<p>

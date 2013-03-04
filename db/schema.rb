@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130302204436) do
+ActiveRecord::Schema.define(:version => 20130304110608) do
 
   create_table "admin_user_to_towns", :force => true do |t|
     t.integer  "user_id"
@@ -27,14 +27,15 @@ ActiveRecord::Schema.define(:version => 20130302204436) do
     t.integer  "user_id"
     t.string   "barcode"
     t.date     "send_date"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.text     "comment"
     t.date     "valid_until"
-    t.boolean  "valid_unlimit", :default => false
-    t.boolean  "discard",       :default => false
+    t.boolean  "valid_unlimit",  :default => false
+    t.boolean  "discard",        :default => false
     t.string   "card_number"
     t.date     "reminder_date"
+    t.integer  "payment_reward"
   end
 
   add_index "card_infos", ["barcode"], :name => "index_card_infos_on_barcode"
@@ -60,11 +61,9 @@ ActiveRecord::Schema.define(:version => 20130302204436) do
   create_table "payment_infos", :force => true do |t|
     t.integer  "card_info_id"
     t.date     "payment_date"
-    t.date     "valid_until_date"
-    t.integer  "payment_reward"
     t.integer  "payment"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "paying_method"
   end
 
