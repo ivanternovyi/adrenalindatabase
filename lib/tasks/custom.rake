@@ -87,6 +87,30 @@ namespace :adrenalin do
 				end
 			end
 
+			def is_digit(var)
+				if (var =~ /^[0-9]+$/).nil?
+					false
+				elsif (var =~ /^[0-9]+$/) == 0
+					true
+				end
+			end
+
+			def code_to_barcode(code)
+				if is_digit(code)
+					const_prefix = '000'
+					full_dig_array = (const_prefix + code).scan(/./)
+					odd_num_dig_sum = 0
+					full_dig_array.each_with_index{ |val, index| odd_num_dig_sum += Integer(val) if index.odd? }
+					even_num_dig_sum = 0
+					full_dig_array.each_with_index{ |val, index| even_num_dig_sum += Integer(val) if index.even? }
+					check_digit = 10 - ((even_num_dig_sum + odd_num_dig_sum) % 10)
+					const_prefix + code + check_digit.to_s
+				else
+					puts "Помилковий код карти #{code} !"
+					'00000000'
+				end
+			end
+
 			passrand = Random.new
 			passwd = passrand.rand(10000000..99999999)
 			town_office_id = get_town(chf(row[office_town]))
@@ -109,8 +133,10 @@ namespace :adrenalin do
 																	)
 			usr.user_detail = user_detail
 
+			card_num = chf(row[card_number].delete '_')
 			card_info = CardInfo.new(
-																card_number: 				chf(row[card_number].delete '_'),
+																card_number: 				card_num,
+																barcode: 						code_to_barcode(card_num),
 																send_date: 					chf(row[card_send_date]),
 																reminder_date: 			chf(row[date_reminder]),
 																payment_reward: 		chf(row[payment_reward_s]),
@@ -157,4 +183,5 @@ namespace :adrenalin do
 			end
 		end
 	end
+
 end
