@@ -9,6 +9,37 @@ namespace :adrenalin do
 		end
 	end
 
+	desc "Barcode generator based on card code XXXX (X - is digit)"
+	task :barcode, :code do |t, args|
+		def is_digit(var)
+			if (var =~ /^[0-9]+$/).nil?
+				false
+			elsif (var =~ /^[0-9]+$/) == 0
+				true
+			end
+		end
+		def code_to_barcode(code)
+			if is_digit(code) && (code.length == 4)
+				const_prefix = '000'
+				full_dig_array = (const_prefix + code).scan(/./)
+
+				odd_num_dig_sum = 0
+				full_dig_array.each_with_index{ |val, index| odd_num_dig_sum += Integer(val) if (index + 1).odd? }
+
+				even_num_dig_sum = 0
+				full_dig_array.each_with_index{ |val, index| even_num_dig_sum += Integer(val) if (index + 1).even? }
+
+				odd_num_dig_sum *= 3
+				check_digit = 10 - ((even_num_dig_sum + odd_num_dig_sum) % 10)
+				const_prefix + code + check_digit.to_s
+			else
+				puts "Помилковий код карти #{code} !"
+				'00000000'
+			end
+		end
+		puts code_to_barcode args[:code]
+	end
+
 	desc "Import csv data to database"
 	task :import => :environment do
 		file = '/Users/admin/Downloads/_data.csv'
@@ -96,13 +127,17 @@ namespace :adrenalin do
 			end
 
 			def code_to_barcode(code)
-				if is_digit(code)
+				if is_digit(code) && (code.length == 4)
 					const_prefix = '000'
 					full_dig_array = (const_prefix + code).scan(/./)
+
 					odd_num_dig_sum = 0
-					full_dig_array.each_with_index{ |val, index| odd_num_dig_sum += Integer(val) if index.odd? }
+					full_dig_array.each_with_index{ |val, index| odd_num_dig_sum += Integer(val) if (index + 1).odd? }
+
 					even_num_dig_sum = 0
-					full_dig_array.each_with_index{ |val, index| even_num_dig_sum += Integer(val) if index.even? }
+					full_dig_array.each_with_index{ |val, index| even_num_dig_sum += Integer(val) if (index + 1).even? }
+
+					odd_num_dig_sum *= 3
 					check_digit = 10 - ((even_num_dig_sum + odd_num_dig_sum) % 10)
 					const_prefix + code + check_digit.to_s
 				else
