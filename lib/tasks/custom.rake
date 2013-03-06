@@ -24,10 +24,10 @@ namespace :adrenalin do
 				full_dig_array = (const_prefix + code).scan(/./)
 
 				odd_num_dig_sum = 0
-				full_dig_array.each_with_index{ |val, index| odd_num_dig_sum += Integer(val) if (index + 1).odd? }
+				full_dig_array.each_with_index{ |val, index| odd_num_dig_sum += val.to_i if (index + 1).odd? }
 
 				even_num_dig_sum = 0
-				full_dig_array.each_with_index{ |val, index| even_num_dig_sum += Integer(val) if (index + 1).even? }
+				full_dig_array.each_with_index{ |val, index| even_num_dig_sum += val.to_i if (index + 1).even? }
 
 				odd_num_dig_sum *= 3
 				check_digit = 10 - ((even_num_dig_sum + odd_num_dig_sum) % 10)
@@ -111,20 +111,27 @@ namespace :adrenalin do
 					time = var.split(" ")[1]
 					if !time.empty?
 						time_h, time_m, time_s = time.split(":")[0], time.split(":")[1], time.split(":")[3]
-						Datetime.new(date_y, date_m, date_d, time_h, time_m, time_s)
+						Datetime.new(date_y.to_i, date_m.to_i, date_d.to_i, time_h.to_i, time_m.to_i, time_s.to_i)
 					else
-						Datetime.new(date_y, date_m, date_d, 0, 0, 0)
+						Datetime.new(date_y.to_i, date_m.to_i, date_d.to_i, 0, 0, 0)
 					end
 				end
+			end
+
+			def days_in_month(year, month)
+			  (Date.new(year, 12, 31) << (12-month)).day
 			end
 
 			def set_date(var)
 				if chf(var).nil?
 					nil
 				else
-					date_ary = var.split '.'
+					date_ary = var.split('.')
 					date_y, date_m, date_d = date_ary[2], date_ary[1], date_ary[0]
-					Date.new(date_y, date_m, date_d)
+					return nil if date_y.nil? || date_m.nil? || date_d.nil?
+					return nil if date_m.to_i > 12 && date_m.to_i < 1
+					return nil if 1 > date_d.to_i && date_d.to_i > days_in_month(date_y.to_i, date_m.to_i)
+					Date.new(date_y.to_i, date_m.to_i, date_d.to_i)
 				end
 			end
 
@@ -142,10 +149,10 @@ namespace :adrenalin do
 					full_dig_array = (const_prefix + code).scan(/./)
 
 					odd_num_dig_sum = 0
-					full_dig_array.each_with_index{ |val, index| odd_num_dig_sum += Integer(val) if (index + 1).odd? }
+					full_dig_array.each_with_index{ |val, index| odd_num_dig_sum += val.to_i if (index + 1).odd? }
 
 					even_num_dig_sum = 0
-					full_dig_array.each_with_index{ |val, index| even_num_dig_sum += Integer(val) if (index + 1).even? }
+					full_dig_array.each_with_index{ |val, index| even_num_dig_sum += val.to_i if (index + 1).even? }
 
 					odd_num_dig_sum *= 3
 					check_digit = 10 - ((even_num_dig_sum + odd_num_dig_sum) % 10)
@@ -159,7 +166,8 @@ namespace :adrenalin do
 			passrand = Random.new
 			passwd = passrand.rand(10000000..99999999)
 			town_office_id = get_town(chf(row[office_town]))
-
+			puts' '
+			puts '------------------------------------------------------'
 			usr = User.new(
 										email: chf(row[email]), 
 										password: passwd,
@@ -172,14 +180,14 @@ namespace :adrenalin do
 																	name: 									name_ary[1], 
 																	mid_name: 							name_ary[2],
 																	post_address: 					chf(row[post_address]), 
-																	birthday: 							chf(row[birthday]),
+																	birthday: 							set_date(row[birthday]),
 																	registration_timestamp: set_datetime(row[register_timestamp]),
 																	comment: 								chf(row[user_comment])
 																	)
 			usr.user_detail = user_detail
 
 			card_num = chf(row[card_number].delete '_')
-			unlimit = !(chf(row[valid_until_date]) =~ /unlimit/).nil? ? true : false
+			unlimit = !chf(row[valid_until_date]).nil? && !(row[valid_until_date].index 'unlim').nil? ? true : false
 			val_until = !unlimit && !chf(row[valid_until_date]).nil? ? set_date(row[valid_until_date]) : nil
 			card_info = CardInfo.new(
 																card_number: 				card_num,
@@ -187,7 +195,7 @@ namespace :adrenalin do
 																send_date: 					set_date(row[card_send_date]),
 																reminder_date: 			set_date(row[date_reminder]),
 																payment_reward: 		chf(row[payment_reward_s]),
-																valid_unlimit: 			unlimit
+																valid_unlimit: 			unlimit,
 																valid_until: 				val_until
 																)
 			usr.card_infos << card_info
@@ -220,6 +228,21 @@ namespace :adrenalin do
 														skype_name: chf(row[skype])
 														)
 			usr.contact = contact
+
+			if !chf(row[payment_o]).nil? && !chf(row[payment_date_o]).nil?
+				card_info.payment_infos << PaymentInfo.new(
+																										payment: chf(row[payment_o]),
+																										payment_date: set_date(row[payment_date_o]),
+																										paying_method: chf(row[payment_method_o])
+																									)
+			end
+			if !chf(row[payment_s]).nil? && !chf(row[payment_date_s]).nil?
+				card_info.payment_infos << PaymentInfo.new(
+																										payment: chf(row[payment_s]),
+																										payment_date: set_date(row[payment_date_s]),
+																										paying_method: chf(row[payment_method_s])
+																									)
+			end
 
 
 			begin
