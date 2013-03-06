@@ -1,0 +1,10 @@
+ua:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "Будь-ласка, вкажіть email id"
+              taken: "Цей email вже використано. Email не може дублюватися! id"
+              invalid: "Email помилковий! Вкажіть, будь-ласка, правильний email. id"
