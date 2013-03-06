@@ -118,6 +118,16 @@ namespace :adrenalin do
 				end
 			end
 
+			def set_date(var)
+				if chf(var).nil?
+					nil
+				else
+					date_ary = var.split '.'
+					date_y, date_m, date_d = date_ary[2], date_ary[1], date_ary[0]
+					Date.new(date_y, date_m, date_d)
+				end
+			end
+
 			def is_digit(var)
 				if (var =~ /^[0-9]+$/).nil?
 					false
@@ -169,13 +179,16 @@ namespace :adrenalin do
 			usr.user_detail = user_detail
 
 			card_num = chf(row[card_number].delete '_')
+			unlimit = !(chf(row[valid_until_date]) =~ /unlimit/).nil? ? true : false
+			val_until = !unlimit && !chf(row[valid_until_date]).nil? ? set_date(row[valid_until_date]) : nil
 			card_info = CardInfo.new(
 																card_number: 				card_num,
 																barcode: 						code_to_barcode(card_num),
-																send_date: 					chf(row[card_send_date]),
-																reminder_date: 			chf(row[date_reminder]),
+																send_date: 					set_date(row[card_send_date]),
+																reminder_date: 			set_date(row[date_reminder]),
 																payment_reward: 		chf(row[payment_reward_s]),
-																valid_until: 				chf(row[valid_until_date])
+																valid_unlimit: 			unlimit
+																valid_until: 				val_until
 																)
 			usr.card_infos << card_info
 			
@@ -208,7 +221,6 @@ namespace :adrenalin do
 														)
 			usr.contact = contact
 
-			
 
 			begin
 				usr.save!
