@@ -24,6 +24,8 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'cancan'
 
+gem 'activerecord-mysql2-adapter'
+
 group :test, :development do
   gem 'rspec-rails'
 end
