@@ -1,7 +1,7 @@
 <fieldset>
 	<p>
 		<%= f.label :payment_date, 'Дата оплаты' %><br />
-		<%= f.date_select :payment_date, include_blank: true %>
+		<%= f.date_select :payment_date, { include_blank: true, order: [:day, :month, :year], start_year: Date.today.year - 5, end_year: Date.today.year, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
 	</p>
 	<p>
 		<%= f.label :payment, 'Сумма платежа' %><br />

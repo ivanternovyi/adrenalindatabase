@@ -8,20 +8,24 @@
 		<%= f.text_field :barcode %>
 	</p>
 	<p>
-		<%= f.label :discard, 'Курту аннульовано' %><br />
+		<%= f.label :valid_unlimit, 'Безлімітна картка' %><br />
+		<%= f.check_box :valid_unlimit %>
+	</p>
+	<p>
+		<%= f.label :discard, 'Карту аннульовано' %><br />
 		<%= f.check_box :discard %>
 	</p>
 	<p>
 		<%= f.label :send_date, 'Дата відправки карти' %><br />
-		<%= f.date_select :send_date , {order: [:day, :month, :year], start_year: Date.today.year - 5, end_year: Date.today.year, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
+		<%= f.date_select :send_date, {order: [:day, :month, :year], start_year: Date.today.year - 5, end_year: Date.today.year, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
 	</p>
 	<p>
 		<%= f.label :reminder_date, 'Дата листа нагадування' %><br />
-		<%= f.date_select :reminder_date , {order: [:day, :month, :year], start_year: Date.today.year - 5, end_year: Date.today.year, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
+		<%= f.date_select :reminder_date, {order: [:day, :month, :year], start_year: Date.today.year - 5, end_year: Date.today.year, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
 	</p>
 		<p>
 		<%= f.label :valid_until, 'Дійсна до' %><br />
-		<%= f.date_select :valid_until , {order: [:day, :month, :year], start_year: Date.today.year - 5, end_year: Date.today.year, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
+		<%= f.date_select :valid_until, {order: [:day, :month, :year], start_year: Date.today.year - 5, end_year: Date.today.year, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
 	</p>
 	<p>
 		<%= f.label :payment_reward, 'Комиссия' %><br />

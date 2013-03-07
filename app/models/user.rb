@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :auth_field, :password, :password_confirmation, 
           :remember_me, :role_id, :town_office_id, :towns, :town_ids, 
-          :user_detail, :user_detail_attributes, :phones_attributes,
-          :contact_attributes, :card_infos_attributes
+          :user_detail, :user_detail_attributes, :phones, :phones_attributes,
+          :contact, :contact_attributes, :card_infos, :card_infos_attributes
 
   # attr_accessible :title, :body
   has_many :admin_user_to_towns, dependent: :destroy
