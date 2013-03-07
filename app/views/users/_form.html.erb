@@ -64,6 +64,7 @@
 			<%= f.fields_for :card_infos do |builder| %>
 				<%= render 'card_info_fields', f: builder %>
 			<% end %>
+			<%= link_to_add_fields 'Додати карту', f, :card_infos %>
 		</p>
 	</div>
 	<div class="grid_8 omega">
