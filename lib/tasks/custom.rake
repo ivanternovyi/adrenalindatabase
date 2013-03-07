@@ -190,17 +190,7 @@ namespace :adrenalin do
 			card_num = chf(row[card_number].delete '_')
 			unlimit = !chf(row[valid_until_date]).nil? && !(row[valid_until_date].index 'unlim').nil? ? true : false
 			val_until = !unlimit && !chf(row[valid_until_date]).nil? ? set_date(row[valid_until_date]) : nil
-			card_info = CardInfo.new(
-																card_number: 				card_num,
-																barcode: 						code_to_barcode(card_num),
-																send_date: 					set_date(row[card_send_date]),
-																reminder_date: 			set_date(row[date_reminder]),
-																payment_reward: 		chf(row[payment_reward_s]),
-																valid_unlimit: 			unlimit,
-																valid_until: 				val_until
-																)
-			usr.card_infos << card_info
-			
+
 			if !chf(row[phone_one]).nil?
 				sms = true
 				ph_one = Phone.new(
@@ -230,19 +220,32 @@ namespace :adrenalin do
 														)
 			usr.contact = contact
 
-			if !chf(row[payment_o]).nil? && !chf(row[payment_date_o]).nil?
-				card_info.payment_infos << PaymentInfo.new(
-																										payment: chf(row[payment_o]),
-																										payment_date: set_date(row[payment_date_o]),
-																										paying_method: chf(row[payment_method_o])
-																									)
-			end
-			if !chf(row[payment_s]).nil? && !chf(row[payment_date_s]).nil?
-				card_info.payment_infos << PaymentInfo.new(
-																										payment: chf(row[payment_s]),
-																										payment_date: set_date(row[payment_date_s]),
-																										paying_method: chf(row[payment_method_s])
-																									)
+			if !card_num.nil?
+				card_info = CardInfo.new(
+																	card_number: 				card_num,
+																	barcode: 						code_to_barcode(card_num),
+																	send_date: 					set_date(row[card_send_date]),
+																	reminder_date: 			set_date(row[date_reminder]),
+																	payment_reward: 		chf(row[payment_reward_s]),
+																	valid_unlimit: 			unlimit,
+																	valid_until: 				val_until
+																	)
+				usr.card_infos << card_info
+			
+				if !chf(row[payment_o]).nil? && !chf(row[payment_date_o]).nil?
+					card_info.payment_infos << PaymentInfo.new(
+																											payment: chf(row[payment_o]),
+																											payment_date: set_date(row[payment_date_o]),
+																											paying_method: chf(row[payment_method_o])
+																										)
+				end
+				if !chf(row[payment_s]).nil? && !chf(row[payment_date_s]).nil?
+					card_info.payment_infos << PaymentInfo.new(
+																											payment: chf(row[payment_s]),
+																											payment_date: set_date(row[payment_date_s]),
+																											paying_method: chf(row[payment_method_s])
+																										)
+				end
 			end
 
 
