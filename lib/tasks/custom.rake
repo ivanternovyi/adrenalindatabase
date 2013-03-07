@@ -129,8 +129,8 @@ namespace :adrenalin do
 					date_ary = var.split('.')
 					date_y, date_m, date_d = date_ary[2], date_ary[1], date_ary[0]
 					return nil if date_y.nil? || date_m.nil? || date_d.nil?
-					return nil if date_m.to_i > 12 && date_m.to_i < 1
-					return nil if 1 > date_d.to_i && date_d.to_i > days_in_month(date_y.to_i, date_m.to_i)
+					return nil if date_m.to_i > 12 || date_m.to_i < 1
+					return nil if 1 > date_d.to_i || date_d.to_i > days_in_month(date_y.to_i, date_m.to_i)
 					Date.new(date_y.to_i, date_m.to_i, date_d.to_i)
 				end
 			end
