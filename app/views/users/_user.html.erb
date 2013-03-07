@@ -20,7 +20,9 @@
  	<div class="grid_3 town_office">
  		<% if !user.town_office_id.blank? %>
  			<%= Town.find(user.town_office_id).name %>
-		<% end %>
+		<% else %>
+      &nbsp;
+    <% end %>
  	</div>
  	<div class="grid_3 omega">
  		<%= link_to '[X]', user_path(user), method: :delete, data: {confirm: "Видалити дані учасника Адреналіну?"} %>
