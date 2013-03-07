@@ -41,9 +41,7 @@ namespace :adrenalin do
 	end
 
 	desc "Import csv data to database"
-	task :import => :environment do
-		file = '/Users/admin/Downloads/_data.csv'
-
+	task :import => :environment, :file_path do |t, args|
 			register_timestamp = 	0,
 			username = 						1,
 			post_address = 				2,
@@ -163,7 +161,7 @@ namespace :adrenalin do
 				end
 			end
 		# headers: true - becouse CSV have first header row
-		CSV.foreach(file, headers: true) do |row|
+		CSV.foreach(args[:file_path], headers: true) do |row|
 			passrand = Random.new
 			passwd = passrand.rand(10000000..99999999)
 			town_office_id = get_town(chf(row[office_town]))
