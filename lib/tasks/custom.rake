@@ -201,9 +201,13 @@ namespace :adrenalin do
 				usr.phones << ph_two
 			end
 			
-			contact_on_email = 	row[contact_by].include?('email') ? true : false
-			contact_on_skype = 	row[contact_by].include?('skype') || row[contact_by].include?('skype') || !chf(row[skype]).nil? ? true : false
-			contact_on_phone =	row[contact_by].include?('SMS') || !ph_one.nil? || !ph_two.nil? ? true : false
+			if chf(row[contact_by]).nil?
+				contact_on_email, contact_on_skype, contact_on_phone = false, false, false
+			else
+				contact_on_email = 	row[contact_by].include?('email') ? true : false
+				contact_on_skype = 	row[contact_by].include?('skype') || row[contact_by].include?('Skype') || !chf(row[skype]).nil? ? true : false
+				contact_on_phone =	row[contact_by].include?('SMS') || !ph_one.nil? || !ph_two.nil? ? true : false
+			end
 			contact = Contact.new(
 														by_email: 	contact_on_email,
 														by_skype: 	contact_on_skype,
