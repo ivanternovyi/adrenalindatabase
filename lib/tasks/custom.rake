@@ -40,128 +40,128 @@ namespace :adrenalin do
 		puts code_to_barcode args[:code]
 	end
 
-	desc "Import csv data to database"
-	task :import => :environment, :file_path do |t, args|
-			register_timestamp = 	0,
-			username = 						1,
-			post_address = 				2,
-			birthday = 						3,
-			email =								4,
-			phone_one =						5,
-			phone_two =						6,
-			skype = 							7,
-			contact_by = 					8,
-			user_comment = 			 	9,
-			office_town = 				10,
+	desc "Import csv data to database set path to file: rake adrenalin:import FILEPATH=path_to_file"
+	task :import => :environment do
+		register_timestamp = 	0,
+		username = 						1,
+		post_address = 				2,
+		birthday = 						3,
+		email =								4,
+		phone_one =						5,
+		phone_two =						6,
+		skype = 							7,
+		contact_by = 					8,
+		user_comment = 			 	9,
+		office_town = 				10,
 
-			payment_date_o = 			11,
-			payment_method_o = 		12,
-			payment_o = 					13,
+		payment_date_o = 			11,
+		payment_method_o = 		12,
+		payment_o = 					13,
 
-			card_send_date = 			14,
-			date_answer_mail = 		15,
-			date_reminder = 			16,
-			card_number = 				17,
+		card_send_date = 			14,
+		date_answer_mail = 		15,
+		date_reminder = 			16,
+		card_number = 				17,
 
-			payment_date_s = 			18,
-			payment_method_s = 		19,
-			payment_s = 					20,
+		payment_date_s = 			18,
+		payment_method_s = 		19,
+		payment_s = 					20,
 
-			payment_reward_s = 		21,
-			valid_until_date = 		22
+		payment_reward_s = 		21,
+		valid_until_date = 		22
 
-			def chf(val)
-				val.gsub! "\r", "" if !val.nil?
-				if val == '-' || val == '' || val == '- ' || val == ' -' || val == ' - '
-					nil
+		def chf(val)
+			val.gsub! "\r", "" if !val.nil?
+			if val == '-' || val == '' || val == '- ' || val == ' -' || val == ' - '
+				nil
+			else
+				val
+			end
+		end
+		
+		def parse_name(fullname)
+			if chf(fullname).nil?
+				name = Array.new
+				3.times{ name << nil }
+				name
+			else 
+				fullname.split
+			end
+		end
+
+		def get_town(name)
+			town = Town.where('name LIKE ?', "%#{name}%").first
+			if town.nil?
+				puts "Warning: Офіс у #{name} - не існує!"
+				nil
+			else
+				town.id
+			end
+		end
+
+		def set_datetime(var)
+			if chf(var).nil?
+				nil
+			else
+				date = var.split(" ")[0]
+				date_y, date_m, date_d = date.split(".")[2], date.split(".")[1], date.split(".")[0]
+				time = var.split(" ")[1]
+				if !time.empty?
+					time_h, time_m, time_s = time.split(":")[0], time.split(":")[1], time.split(":")[3]
+					Datetime.new(date_y.to_i, date_m.to_i, date_d.to_i, time_h.to_i, time_m.to_i, time_s.to_i)
 				else
-					val
+					Datetime.new(date_y.to_i, date_m.to_i, date_d.to_i, 0, 0, 0)
 				end
 			end
-			
-			def parse_name(fullname)
-				if chf(fullname).nil?
-					name = Array.new
-					3.times{ name << nil }
-					name
-				else 
-					fullname.split
-				end
+		end
+
+		def days_in_month(year, month)
+		  (Date.new(year, 12, 31) << (12-month)).day
+		end
+
+		def set_date(var)
+			if chf(var).nil?
+				nil
+			else
+				date_ary = var.split('.')
+				date_y, date_m, date_d = date_ary[2], date_ary[1], date_ary[0]
+				return nil if date_y.nil? || date_m.nil? || date_d.nil?
+				return nil if date_m.to_i > 12 || date_m.to_i < 1
+				return nil if 1 > date_d.to_i || date_d.to_i > days_in_month(date_y.to_i, date_m.to_i)
+				Date.new(date_y.to_i, date_m.to_i, date_d.to_i)
 			end
+		end
 
-			def get_town(name)
-				town = Town.where('name LIKE ?', "%#{name}%").first
-				if town.nil?
-					puts "Warning: Офіс у #{name} - не існує!"
-					nil
-				else
-					town.id
-				end
+		def is_digit(var)
+			if (var =~ /^[0-9]+$/).nil?
+				false
+			elsif (var =~ /^[0-9]+$/) == 0
+				true
 			end
+		end
 
-			def set_datetime(var)
-				if chf(var).nil?
-					nil
-				else
-					date = var.split(" ")[0]
-					date_y, date_m, date_d = date.split(".")[2], date.split(".")[1], date.split(".")[0]
-					time = var.split(" ")[1]
-					if !time.empty?
-						time_h, time_m, time_s = time.split(":")[0], time.split(":")[1], time.split(":")[3]
-						Datetime.new(date_y.to_i, date_m.to_i, date_d.to_i, time_h.to_i, time_m.to_i, time_s.to_i)
-					else
-						Datetime.new(date_y.to_i, date_m.to_i, date_d.to_i, 0, 0, 0)
-					end
-				end
+		def code_to_barcode(code)
+			if is_digit(code) && (code.length == 4)
+				const_prefix = '000'
+				full_dig_array = (const_prefix + code).scan(/./)
+
+				odd_num_dig_sum = 0
+				full_dig_array.each_with_index{ |val, index| odd_num_dig_sum += val.to_i if (index + 1).odd? }
+
+				even_num_dig_sum = 0
+				full_dig_array.each_with_index{ |val, index| even_num_dig_sum += val.to_i if (index + 1).even? }
+
+				odd_num_dig_sum *= 3
+				check_digit = 10 - ((even_num_dig_sum + odd_num_dig_sum) % 10)
+				const_prefix + code + check_digit.to_s
+			else
+				puts "Помилковий код карти #{code} !" if !code.empty?
+				puts "Нема картки!" if code.empty?
+				'00000000'
 			end
-
-			def days_in_month(year, month)
-			  (Date.new(year, 12, 31) << (12-month)).day
-			end
-
-			def set_date(var)
-				if chf(var).nil?
-					nil
-				else
-					date_ary = var.split('.')
-					date_y, date_m, date_d = date_ary[2], date_ary[1], date_ary[0]
-					return nil if date_y.nil? || date_m.nil? || date_d.nil?
-					return nil if date_m.to_i > 12 || date_m.to_i < 1
-					return nil if 1 > date_d.to_i || date_d.to_i > days_in_month(date_y.to_i, date_m.to_i)
-					Date.new(date_y.to_i, date_m.to_i, date_d.to_i)
-				end
-			end
-
-			def is_digit(var)
-				if (var =~ /^[0-9]+$/).nil?
-					false
-				elsif (var =~ /^[0-9]+$/) == 0
-					true
-				end
-			end
-
-			def code_to_barcode(code)
-				if is_digit(code) && (code.length == 4)
-					const_prefix = '000'
-					full_dig_array = (const_prefix + code).scan(/./)
-
-					odd_num_dig_sum = 0
-					full_dig_array.each_with_index{ |val, index| odd_num_dig_sum += val.to_i if (index + 1).odd? }
-
-					even_num_dig_sum = 0
-					full_dig_array.each_with_index{ |val, index| even_num_dig_sum += val.to_i if (index + 1).even? }
-
-					odd_num_dig_sum *= 3
-					check_digit = 10 - ((even_num_dig_sum + odd_num_dig_sum) % 10)
-					const_prefix + code + check_digit.to_s
-				else
-					puts "Помилковий код карти #{code} !" if !code.empty?
-					puts "Нема картки!" if code.empty?
-					'00000000'
-				end
-			end
+		end
 		# headers: true - becouse CSV have first header row
-		CSV.foreach(args[:file_path], headers: true) do |row|
+		CSV.foreach(ENV['FILEPATH'], headers: true) do |row|
 			passrand = Random.new
 			passwd = passrand.rand(10000000..99999999)
 			town_office_id = get_town(chf(row[office_town]))
