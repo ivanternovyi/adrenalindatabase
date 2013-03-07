@@ -72,9 +72,8 @@ namespace :adrenalin do
 			payment_reward_s = 		21,
 			valid_until_date = 		22
 
-		# headers: true - becouse CSV have first header row
-		CSV.foreach(file, headers: true) do |row|
 			def chf(val)
+				val.gsub! "\r", "" if !val.nil?
 				if val == '-' || val == '' || val == '- ' || val == ' -' || val == ' - '
 					nil
 				else
@@ -158,11 +157,13 @@ namespace :adrenalin do
 					check_digit = 10 - ((even_num_dig_sum + odd_num_dig_sum) % 10)
 					const_prefix + code + check_digit.to_s
 				else
-					puts "Помилковий код карти #{code} !"
+					puts "Помилковий код карти #{code} !" if !code.empty?
+					puts "Нема картки!" if code.empty?
 					'00000000'
 				end
 			end
-
+		# headers: true - becouse CSV have first header row
+		CSV.foreach(file, headers: true) do |row|
 			passrand = Random.new
 			passwd = passrand.rand(10000000..99999999)
 			town_office_id = get_town(chf(row[office_town]))
