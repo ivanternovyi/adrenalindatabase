@@ -8,6 +8,7 @@ class CardInfo < ActiveRecord::Base
   has_many :payment_infos, dependent: :destroy
   
   validates_uniqueness_of :card_number, message: 'Помилка: Дублюється номер карти!'
+  validates_format_of :card_number, with: /^[0-9]+$/, message: 'Помилка: Неправильний код карти!'
   
   accepts_nested_attributes_for :payment_infos, allow_destroy: true, reject_if: lambda {|attrs| attrs.all? {|key, value| value.blank?}}
 
