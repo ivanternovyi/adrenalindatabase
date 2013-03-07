@@ -92,7 +92,6 @@ namespace :adrenalin do
 		def get_town(name)
 			town = Town.where('name LIKE ?', "%#{name}%").first
 			if town.nil?
-				puts "Warning: Офіс у #{name} - не існує!"
 				nil
 			else
 				town.id
@@ -165,8 +164,6 @@ namespace :adrenalin do
 			passrand = Random.new
 			passwd = passrand.rand(10000000..99999999)
 			town_office_id = get_town(chf(row[office_town]))
-			puts' '
-			puts '------------------------------------------------------'
 			usr = User.new(
 										email: chf(row[email]), 
 										password: passwd,
@@ -184,10 +181,7 @@ namespace :adrenalin do
 																	comment: 								chf(row[user_comment])
 																	)
 			usr.user_detail = user_detail
-
-			card_num = chf(row[card_number].delete '_')
-			unlimit = !chf(row[valid_until_date]).nil? && !(row[valid_until_date].index 'unlim').nil? ? true : false
-			val_until = !unlimit && !chf(row[valid_until_date]).nil? ? set_date(row[valid_until_date]) : nil
+			puts "Warning: Офіс у #{chf(row[office_town])} - не існує! (#{name_ary[0]} #{name_ary[1]} #{name_ary[2]})" if town_office_id.nil?
 
 			if !chf(row[phone_one]).nil?
 				sms = true
@@ -218,6 +212,10 @@ namespace :adrenalin do
 														)
 			usr.contact = contact
 
+
+			card_num = chf(row[card_number]).nil? ? nil : chf(row[card_number]).delete('_')
+			unlimit = !chf(row[valid_until_date]).nil? && !(row[valid_until_date].index 'unlim').nil? ? true : false
+			val_until = !unlimit && !chf(row[valid_until_date]).nil? ? set_date(row[valid_until_date]) : nil
 			if !card_num.nil?
 				card_info = CardInfo.new(
 																	card_number: 				card_num,
@@ -249,9 +247,9 @@ namespace :adrenalin do
 
 			begin
 				usr.save!
-				puts "Ok to save user #{row[username]}."
 			rescue => error
 				puts "Error to save #{row[username]}: #{error.message}"
+				puts '------------------------------------------------------'
 			end
 		end
 	end
