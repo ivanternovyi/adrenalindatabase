@@ -1,5 +1,6 @@
 require 'spec_helper'
 
 describe UserDetail do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should add to database with valid data" do
+  end
 end
