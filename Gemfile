@@ -30,6 +30,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'factory_girl'
   gem 'capybara'
+  gem 'lorem-ipsum'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
