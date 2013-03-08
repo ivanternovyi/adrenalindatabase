@@ -1,11 +1,9 @@
 require 'spec_helper'
 
 describe User do
-  let(:user) {User.new}
-
-  it "should require email" do
-  	user.email = nil
-  	user.should_not be_valid
-  	user.errors.on(:email).should_not be_valid
-  end
+  it "shoud create user"
+    count_users = User.all.count
+    user = FactoryGirl.create(:user)
+    puts user
+    User.all.count.should eql(count_users + 1)
 end

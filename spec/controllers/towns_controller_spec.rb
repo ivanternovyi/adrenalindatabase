@@ -19,7 +19,7 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe TownsController do
-
+  login_user
   # This should return the minimal set of attributes required to create a valid
   # Town. As you add validations to Town, be sure to
   # update the return value of this method accordingly.
