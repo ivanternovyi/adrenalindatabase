@@ -1,9 +1,8 @@
 require 'spec_helper'
 
 describe User do
-  it "should not add usel to database if new" do
+  it "should not add user to database if new" do
     usr = FactoryGirl.build(:user)
-    # usr = User.new(email: "email#{Time.now.to_i}@email.ex", password: '12345678')
     usr.id.should be_nil
   end
 

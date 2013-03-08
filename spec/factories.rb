@@ -5,4 +5,9 @@ FactoryGirl.define do
     password 'thisisdefpass'
     password_confirmation { |u| u.password }
   end
+
+  factory :town do
+    sequence(:name) { |n| 'town#{}' }
+    office false
+  end
 end

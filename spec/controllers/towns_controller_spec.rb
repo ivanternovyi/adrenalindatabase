@@ -19,7 +19,7 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe TownsController do
-  login_user
+  login_admin
   # This should return the minimal set of attributes required to create a valid
   # Town. As you add validations to Town, be sure to
   # update the return value of this method accordingly.
@@ -36,7 +36,7 @@ describe TownsController do
 
   describe "GET index" do
     it "assigns all towns as @towns" do
-      town = Town.create! valid_attributes
+      town = FactoryGirl.create(:town)
       get :index, {}, valid_session
       assigns(:towns).should eq([town])
     end
