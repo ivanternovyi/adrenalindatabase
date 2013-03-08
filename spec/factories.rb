@@ -1,4 +1,4 @@
-FactoryGirl.define do |f|
+FactoryGirl.define do
   factory :user do
     email "example#{Time.now.to_i}@email.com"
     town_office_id 1
