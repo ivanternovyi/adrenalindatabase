@@ -7,11 +7,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
   	if current_user.role? :regular_user
-  		if current_user.id.blank?
-        raise CanCan::AccessDenied.new('Not authorized!')
-      else
-      	redirect_to user_path(id: current_user.id)
-  		end
+  		current_user
   	else
   		super
   	end	

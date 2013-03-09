@@ -36,7 +36,6 @@ class User < ActiveRecord::Base
     return Role.find_by_name(role.to_s.camelize).id == self.role_id
   end
   def self.find_for_database_authentication(conditions={})
-    puts conditions[:auth_field]
     self.includes(:card_infos).where(card_infos: {discard: false}).where(card_infos: {card_number: conditions[:auth_field]}).limit(1).first ||
     self.where(email: conditions[:auth_field]).limit(1).first
   end

@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Town < ActiveRecord::Base
   after_update :remove_unchecked_offices
   attr_accessible :name, :office, :users
@@ -5,7 +6,7 @@ class Town < ActiveRecord::Base
   has_many :admin_user_to_towns, dependent: :destroy
   has_many :users, through: :admin_user_to_towns
 
-  validates_presence_of :name
+  validates_presence_of :name, message: 'Назва міста не може бути порожньою.'
 
   scope :with_office, where(office: true)
 

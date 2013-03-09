@@ -1,7 +1,7 @@
 # encoding: utf-8
 FactoryGirl.define do
   factory :user do
-    email "example#{Time.now.to_i}@email.com"
+    sequence(:email) { |n| "example#{n}@email.com" }
     town_office_id 1
     password 'thisisdefpass'
     password_confirmation { |u| u.password }

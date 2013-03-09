@@ -9,9 +9,9 @@ class Ability
         can :manage, User
     elsif user.role? :regular_user
         if user.id.blank?
-            raise CanCan::AccessDenied.new('Not authorized!')
+           raise CanCan::AccessDenied.new('Not authorized!')
         end
-        can :read, [Town, User]
+        can :show, User, id: user.id
     end
         
 
