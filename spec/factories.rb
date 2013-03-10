@@ -27,6 +27,18 @@ FactoryGirl.define do
     description { generate(:random_string)}
   end
 
+  factory :card_info do
+    barcode                   { |ci| ci.card_number }
+    send_date                 { 20.days.ago }
+    reminder_date             { 10.days.from_now }
+    sequence(:card_number)    { |n| (3000 + n).to_s }
+    valid_unlimit             false
+    comment                   { generate(:random_string) }
+    discard                   false
+    valid_until               { 5.days.from_now }
+    payment_reward            20
+  end
+
   sequence(:random_string) {|n| "Два дня после этого Ростов не видал Долохова у своих и не заставал его дома; на третий день он получил от него записку.
 «Так как я в доме у вас бывать более не намерен по известным тебе причинам и еду в армию, то нынче вечером я даю моим приятелям прощальную пирушку — приезжай в Английскую гостиницу». Ростов в десятом часу, из театра, где он был вместе с своими и Денисовым, приехал в назначенный день в Английскую гостиницу. Его тотчас же провели в лучшее помещение гостиницы, занятое на эту ночь Долоховым.#{n}" }
 end

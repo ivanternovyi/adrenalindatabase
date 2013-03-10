@@ -21,4 +21,18 @@ describe User do
     FactoryGirl.create(:user)
     User.all.count.should be(usr_count + 1)
   end
+
+  describe "associated models" do
+    it "should have one user detail" do
+      usr_det = FactoryGirl.create(:user_detail)
+      usr = FactoryGirl.create(:user, user_detail: usr_det)
+      usr.user_detail.should eql(usr_det)
+    end
+
+    it "should have many card_infos" do
+      usr = FactoryGirl.create(:user)
+      3.times{ usr.card_infos << FactoryGirl.create(:card_info) }
+      usr.card_infos.count.should be(3)
+    end
+  end
 end
