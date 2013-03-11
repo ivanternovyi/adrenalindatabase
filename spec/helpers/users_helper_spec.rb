@@ -11,5 +11,19 @@ require 'spec_helper'
 #   end
 # end
 describe UsersHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "check card_number_text" do
+    it "should return nil if no cards" do
+      card_number_text(FactoryGirl.create(:user)).should be_nil
+    end
+
+    it "should return nil if no active card" do
+      card_number_text(FactoryGirl.create(:user, card_infos: [FactoryGirl.create(:card_info, discard: true)])).should be_nil
+    end
+
+    it "should return active card number" do
+      active_card = FactoryGirl.create(:card_info, discard: false)
+      active_card_number = active_card.card_number
+      card_number_text(FactoryGirl.create(:user, card_infos: [FactoryGirl.create(:card_info, discard: true), active_card])).should eql(active_card_number)
+    end
+  end
 end

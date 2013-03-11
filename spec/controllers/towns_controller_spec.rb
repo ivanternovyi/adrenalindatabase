@@ -24,16 +24,16 @@ describe TownsController do
   # update the return value of this method accordingly.
   login_admin
 
-  def valid_attributes
-    { "name" => "MyString" }
-  end
+  # def valid_attributes
+  #   { "name" => "MyString" }
+  # end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # TownsController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
+  # def valid_session
+  #   {}
+  # end
 
   describe "GET index" do
     it "assigns all towns as @towns" do
@@ -45,7 +45,7 @@ describe TownsController do
 
   describe "GET show" do
     it "assigns the requested town as @town" do
-      town = Town.create! valid_attributes
+      town = FactoryGirl.create(:town)
       get :show, {:id => town.to_param}
       assigns(:town).should eq(town)
     end
@@ -60,7 +60,7 @@ describe TownsController do
 
   describe "GET edit" do
     it "assigns the requested town as @town" do
-      town = Town.create! valid_attributes
+      town = FactoryGirl.create(:town)
       get :edit, {:id => town.to_param}
       assigns(:town).should eq(town)
     end
@@ -70,18 +70,18 @@ describe TownsController do
     describe "with valid params" do
       it "creates a new Town" do
         expect {
-          post :create, {:town => valid_attributes}
+          post :create, town: FactoryGirl.attributes_for(:town)
         }.to change(Town, :count).by(1)
       end
 
       it "assigns a newly created town as @town" do
-        post :create, {:town => valid_attributes}
+        post :create, town: FactoryGirl.attributes_for(:town)
         assigns(:town).should be_a(Town)
         assigns(:town).should be_persisted
       end
 
       it "redirects to the created town" do
-        post :create, {:town => valid_attributes}
+        post :create, town: FactoryGirl.attributes_for(:town)
         response.should redirect_to(Town.last)
       end
     end
@@ -90,14 +90,14 @@ describe TownsController do
       it "assigns a newly created but unsaved town as @town" do
         # Trigger the behavior that occurs when invalid params are submitted
         Town.any_instance.stub(:save).and_return(false)
-        post :create, {:town => { "name" => "invalid value" }}
+        post :create, town: FactoryGirl.attributes_for(:town, name: nil)
         assigns(:town).should be_a_new(Town)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Town.any_instance.stub(:save).and_return(false)
-        post :create, {:town => { "name" => "invalid value" }}
+        post :create, town: FactoryGirl.attributes_for(:town, name: nil)
         response.should render_template("new")
       end
     end
@@ -105,59 +105,63 @@ describe TownsController do
 
   describe "PUT update" do
     describe "with valid params" do
+    before :each do
+      @town = FactoryGirl.create(:town)
+    end
+
       it "updates the requested town" do
-        town = Town.create! valid_attributes
         # Assuming there are no other towns in the database, this
         # specifies that the Town created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Town.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
-        put :update, {:id => town.to_param, :town => { "name" => "MyString" }}
+        put :update, {:id => @town.to_param, :town => { "name" => "MyString" }}
       end
 
       it "assigns the requested town as @town" do
-        town = Town.create! valid_attributes
-        put :update, {:id => town.to_param, :town => valid_attributes}
-        assigns(:town).should eq(town)
+        put :update, {:id => @town.to_param, town: FactoryGirl.attributes_for(:town)}
+        assigns(:town).should eq(@town)
       end
 
       it "redirects to the town" do
-        town = Town.create! valid_attributes
-        put :update, {:id => town.to_param, :town => valid_attributes}
-        response.should redirect_to(town)
+        put :update, {:id => @town.to_param, town: FactoryGirl.attributes_for(:town)}
+        response.should redirect_to(@town)
       end
     end
 
     describe "with invalid params" do
+      before :each do
+        @town = FactoryGirl.create(:town)
+      end
       it "assigns the town as @town" do
-        town = Town.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Town.any_instance.stub(:save).and_return(false)
-        put :update, {:id => town.to_param, :town => { "name" => "invalid value" }}
-        assigns(:town).should eq(town)
+        put :update, {:id => @town, town: FactoryGirl.attributes_for(:town, name: nil)}
+        assigns(:town).should eq(@town)
       end
 
       it "re-renders the 'edit' template" do
-        town = Town.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Town.any_instance.stub(:save).and_return(false)
-        put :update, {:id => town.to_param, :town => { "name" => "invalid value" }}
-        response.should render_template("edit")
+        put :update, {:id => @town, town: FactoryGirl.attributes_for(:town, name: nil)}
+        response.should render_template(:edit)
       end
     end
   end
 
   describe "DELETE destroy" do
+    before :each do
+      @town = FactoryGirl.create(:town)
+    end
+
     it "destroys the requested town" do
-      town = Town.create! valid_attributes
       expect {
-        delete :destroy, {:id => town.to_param}
+        delete :destroy, {:id => @town.to_param}
       }.to change(Town, :count).by(-1)
     end
 
     it "redirects to the towns list" do
-      town = Town.create! valid_attributes
-      delete :destroy, {:id => town.to_param}
+      delete :destroy, {:id => @town.to_param}
       response.should redirect_to(towns_url)
     end
   end
