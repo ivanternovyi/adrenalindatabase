@@ -70,5 +70,21 @@ describe User do
         ph_ids.each { |id| Phone.find_by_id(id).should be_nil }
       end
     end
+
+    describe "contact" do
+      it "should has one valid record" do
+        usr_cont = FactoryGirl.create(:contact)
+        usr = FactoryGirl.create(:user, contact: usr_cont)
+        usr.contact.should eql(usr_cont)
+      end
+
+      it "should destroy belonging record" do
+        usr_cont = FactoryGirl.create(:contact)
+        usr_cont_id = usr_cont.id
+        usr = FactoryGirl.create(:user, contact: usr_cont)
+        usr.destroy
+        Contact.find_by_id(usr_cont_id).should be_nil
+      end
+    end
   end
 end
