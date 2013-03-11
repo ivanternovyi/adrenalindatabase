@@ -13,7 +13,8 @@ describe Phone do
     FactoryGirl.build(:phone, phone_number: '10').should_not be_valid
     FactoryGirl.build(:phone, phone_number: '2357a83021').should_not be_valid
     FactoryGirl.build(:phone, phone_number: '274926592').should_not be_valid
-    FactoryGirl.build(:phone, phone_number: '+3832165204322').should_not be_valid
+    FactoryGirl.build(:phone, phone_number: '+383216520432231').should_not be_valid
+    FactoryGirl.build(:phone, phone_number: '38321652043231').should_not be_valid
     FactoryGirl.build(:phone, phone_number: '+38321652a322').should_not be_valid
   end
 end
