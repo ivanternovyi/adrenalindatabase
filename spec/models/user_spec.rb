@@ -23,16 +23,44 @@ describe User do
   end
 
   describe "associated models" do
-    it "should have one user detail" do
-      usr_det = FactoryGirl.create(:user_detail)
-      usr = FactoryGirl.create(:user, user_detail: usr_det)
-      usr.user_detail.should eql(usr_det)
+    describe "user_detail" do
+      it "should have one user detail" do
+        usr_det = FactoryGirl.create(:user_detail)
+        usr = FactoryGirl.create(:user, user_detail: usr_det)
+        usr.user_detail.should eql(usr_det)
+      end
+
+      it "shoud destroy belinging user_detail" do
+        usr_det = FactoryGirl.create(:user_detail)
+        usr_det_id = usr_det.id
+        usr = FactoryGirl.create(:user, user_detail: usr_det)
+        usr.destroy
+        UserDetail.find_by_id(usr_det_id).should be_nil
+      end
     end
 
-    it "should have many card_infos" do
-      usr = FactoryGirl.create(:user)
-      3.times{ usr.card_infos << FactoryGirl.create(:card_info) }
-      usr.card_infos.count.should be(3)
+    describe "card_infos" do
+      it "should have many card_infos" do
+        usr = FactoryGirl.create(:user)
+        3.times{ usr.card_infos << FactoryGirl.create(:card_info) }
+        usr.card_infos.count.should be(3)
+      end
+    end
+
+    describe "phones" do
+      it "should have many phones" do
+        usr = FactoryGirl.create(:user)
+        3.times{ usr.phones << FactoryGirl.create(:phone) }
+        usr.phones.count.should be(3)
+      end    
+
+      it "should delete belonging phones" do
+        usr = FactoryGirl.create(:user)
+        3.times{ usr.phones << FactoryGirl.create(:phone) }
+        ph_ids = usr.phones.collect { |ph_id| ph_id.id }
+        usr.destroy
+        ph_ids.each { |id| Phone.find_by_id(id).should be_nil }
+      end
     end
   end
 end
