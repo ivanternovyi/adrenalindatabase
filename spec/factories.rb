@@ -50,6 +50,15 @@ FactoryGirl.define do
     main                      false
   end
 
+  factory :contact do
+    by_email    true
+    by_icq      false
+    by_phone    true
+    by_skype    true
+    icq_number  { |n| "452343#{n}".to_i }
+    skype_name  { |n| "skypeName#{n}" }
+  end
+
   sequence(:telephone) { |n|
     length=n.to_s.length
     if length >= 11 then

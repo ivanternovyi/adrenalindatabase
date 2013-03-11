@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 describe Contact do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should be valid" do
+    FactoryGirl.build(:contact).should be_valid
+  end
+
+  it "should be invalid" do
+    FactoryGirl.build(:contact, icq_number: 'sdssd').should_not be_valid
+  end
 end
