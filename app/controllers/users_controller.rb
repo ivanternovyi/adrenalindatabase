@@ -2,10 +2,20 @@ class UsersController < ApplicationController
   load_and_authorize_resource
   def index
     if current_user.role? :super_admin_user
-      @users = User.sort_by_town_office_asc.paginate(per_page: 40, page: params[:page])
+      users = User
     elsif current_user.role? :region_admin_user
-      @users = User.find_by_offices(current_user.towns).paginate(per_page: 40, page: params[:page])
+      users = User.find_by_offices(current_user.towns)
     end
+
+    if params[:sort] == 'surname'
+      users = users.sort_by_surname(params[:direction])
+    elsif params[:sort] == 'birthday'
+      users = users.sort_by_birthday(params[:direction])
+    elsif params[:sort] == 'town_office'
+      users = users.sort_by_town_office(params[:direction])
+    end
+  
+    @users = users.paginate(per_page: 40, page: params[:page])
   end
 
   def new

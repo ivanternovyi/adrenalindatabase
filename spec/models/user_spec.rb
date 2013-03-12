@@ -31,14 +31,14 @@ describe User do
     usr_a = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail, surname: 'Albar'))
     usr_b = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail, surname: 'Almar'))
     usr_c = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail, surname: 'Aamar'))
-    User.sort_by_surname_asc.should eq([usr_c, usr_a, usr_b])
+    User.sort_by_surname(:asc).should eq([usr_c, usr_a, usr_b])
   end
 
   it "should be sorted by birthdate asc" do
     usr_a = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail, birthday: 30.years.ago))
     usr_b = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail, birthday: 25.years.ago))
     usr_c = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail, birthday: 42.years.ago))
-    User.sort_by_birthday_asc.should eq([usr_c, usr_a, usr_b])
+    User.sort_by_birthday(:asc).should eq([usr_c, usr_a, usr_b])
 
   end
 
@@ -46,7 +46,7 @@ describe User do
     usr_a = FactoryGirl.create(:user, town_office_id: 6)
     usr_b = FactoryGirl.create(:user, town_office_id: 8)
     usr_c = FactoryGirl.create(:user, town_office_id: 3)
-    User.sort_by_town_office_asc.should eq([usr_c, usr_a, usr_b])
+    User.sort_by_town_office(:asc).should eq([usr_c, usr_a, usr_b])
   end
 
   describe "associated models" do

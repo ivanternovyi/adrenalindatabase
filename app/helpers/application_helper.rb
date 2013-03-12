@@ -7,4 +7,10 @@ module ApplicationHelper
 		end
 		link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
 	end
+
+  def sortable(column, title = nil)
+    direction = (column == params[:sort] && params[:direction] == 'asc') ? 'desc' : 'asc'
+    puts "#{direction}!!!!!!!!!!!!!!!!!!!!!!!!"
+    link_to title, sort: column, direction: direction
+  end
 end

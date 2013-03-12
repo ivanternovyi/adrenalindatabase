@@ -4,10 +4,10 @@
 </div>
 <div class="clear"></div>
 <div class="grid_16 heading">
-  <div class="grid_5 alpha fio"><%= link_to 'Прізвище Ім\'я По-Батькові', sort: :surname %></div>
+  <div class="grid_5 alpha fio"><%= sortable 'surname', 'Прізвище Ім\'я По-Батькові' %></div>
   <div class="grid_2"> № карти</div>
-  <div class="grid_3"><%= link_to 'Дата народження', sort: :birthday %></div>
-  <div class="grid_3"><%= link_to 'Представництво у місті', sort: :town_office %></div>
+  <div class="grid_3"><%= sortable 'birthday', 'Дата народження' %></div>
+  <div class="grid_3"><%= sortable 'town_office', 'Представництво у місті' %></div>
   <div class="grid_3 omega">&nbsp;</div>
   <div class="clear"></div>
 </div>
