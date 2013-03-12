@@ -78,6 +78,11 @@ namespace :adrenalin do
 				val
 			end
 		end
+
+		def show_err(user, show_txt, fill_txt)
+			puts show_txt
+			return fill_txt
+		end
 		
 		def parse_name(fullname)
 			if chf(fullname).nil?
@@ -160,35 +165,42 @@ namespace :adrenalin do
 			end
 		end
 		# headers: true - becouse CSV have first header row
+			iterator = 0
 		CSV.foreach(ENV['FILEPATH'], headers: true) do |row|
+			iterator += 1
 			passrand = Random.new
 			passwd = passrand.rand(10000000..99999999)
-			town_office_id = get_town(chf(row[office_town]))
+			town_office_id = get_town(chf(row[office_town])) || show_err(row[username], "Помилкове або відсутнє місто з офісом!", 1)
 			usr = User.new(
 										email: chf(row[email]), 
 										password: passwd,
 										password_confirmation: passwd, 
 										town_office_id: town_office_id
 										)
+			if !usr.valid?
+				usr.email = show_err(row[username], "Помилковий або відсутній email!", "nil#{iterator}@nil.nil")
+			end
 			name_ary = parse_name(row[username])
 			user_detail = UserDetail.new(
-																	surname: 								name_ary[0], 
-																	name: 									name_ary[1], 
-																	mid_name: 							name_ary[2],
-																	post_address: 					chf(row[post_address]), 
-																	birthday: 							set_date(row[birthday]),
+																	surname: 								name_ary[0] || show_err(row[username], "Відсутнє прізвище!", "nil#{iterator}"), 
+																	name: 									name_ary[1] || show_err(row[username], "Відсутнє ім'я!", "nil#{iterator}"), 
+																	mid_name: 							name_ary[2] || show_err(row[username], "Відсутнє по-Батькові!", "nil#{iterator}"),
+																	post_address: 					chf(row[post_address]) || show_err(row[username], "Відсутня поштова адреса!", "nil#{iterator}"), 
+																	birthday: 							set_date(row[birthday]) || show_err(row[username], "Відсутня дата народження", 70.years.ago),
 																	registration_timestamp: set_datetime(row[register_timestamp]),
 																	comment: 								chf(row[user_comment])
 																	)
 			usr.user_detail = user_detail
-			puts "Warning: Офіс у #{chf(row[office_town])} - не існує! (#{name_ary[0]} #{name_ary[1]} #{name_ary[2]})" if town_office_id.nil?
 
 			if !chf(row[phone_one]).nil?
 				sms = true
 				ph_one = Phone.new(
 													main: 					sms,
-													phone_number: 	row[phone_one]
+													phone_number: 	row[phone_one].gsub(/\D|\s|\W/, '')
 													)
+				if !ph_one.valid?
+					ph_one.phone_number = show_err(row[username], "Помилковий номер телефону!", ('+' + iterator.to_s.ljust(12, '0')))
+				end
 				usr.phones << ph_one
 			end
 			
@@ -196,8 +208,11 @@ namespace :adrenalin do
 				sms = false
 				ph_two = Phone.new(
 													main: 					sms,
-													phone_number: 	row[phone_two]
+													phone_number: 	row[phone_two].gsub(/\D|\s|\W/, '')
 													)
+				if !ph_two.valid?
+					ph_two.phone_number = show_err(row[username], "Помилковий номер телефону!", ('+' + iterator.to_s.ljust(12, '0')))
+				end
 				usr.phones << ph_two
 			end
 			
@@ -230,6 +245,9 @@ namespace :adrenalin do
 																	valid_unlimit: 			unlimit,
 																	valid_until: 				val_until
 																	)
+				if !card_info.valid?
+					card_info.card_number = show_err(row[username], "Помилковий номер карти!", iterator.to_s.ljust(4, '9'))
+				end
 				usr.card_infos << card_info
 			
 				if !chf(row[payment_o]).nil? && !chf(row[payment_date_o]).nil?
