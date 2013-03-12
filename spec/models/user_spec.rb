@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe User do
+  before :each do
+    # revove default admin user
+    User.find(1).delete
+  end
+
   it "should not add user to database if new" do
     usr = FactoryGirl.build(:user)
     usr.id.should be_nil
@@ -20,6 +25,28 @@ describe User do
     usr_count = User.all.count
     FactoryGirl.create(:user)
     User.all.count.should be(usr_count + 1)
+  end
+
+  it "should be sorted by surname asc" do
+    usr_a = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail, surname: 'Albar'))
+    usr_b = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail, surname: 'Almar'))
+    usr_c = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail, surname: 'Aamar'))
+    User.sort_by_surname_asc.should eq([usr_c, usr_a, usr_b])
+  end
+
+  it "should be sorted by birthdate asc" do
+    usr_a = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail, birthday: 30.years.ago))
+    usr_b = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail, birthday: 25.years.ago))
+    usr_c = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail, birthday: 42.years.ago))
+    User.sort_by_birthday_asc.should eq([usr_c, usr_a, usr_b])
+
+  end
+
+  it "should be sorted by town office asc" do
+    usr_a = FactoryGirl.create(:user, town_office_id: 6)
+    usr_b = FactoryGirl.create(:user, town_office_id: 8)
+    usr_c = FactoryGirl.create(:user, town_office_id: 3)
+    User.sort_by_town_office_asc.should eq([usr_c, usr_a, usr_b])
   end
 
   describe "associated models" do

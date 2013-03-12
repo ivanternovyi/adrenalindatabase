@@ -1,15 +1,15 @@
+<%= link_to 'Добавить учасника', new_user_path %>
 <div class="grid_16">
-	<h1>Список членів організації</h1>
+  <h1>Список членів організації</h1>
 </div>
 <div class="clear"></div>
 <div class="grid_16 heading">
-	<div class="grid_5 alpha fio">Прізвище Ім'я По-Батькові</div>
- 	<div class="grid_2"> № карти</div>
- 	<div class="grid_3">Дата народження</div>
- 	<div class="grid_3">Представництво у місті</div>
- 	<div class="grid_3 omega">&nbsp;</div>
- 	<div class="clear"></div>
+  <div class="grid_5 alpha fio"><%= link_to 'Прізвище Ім\'я По-Батькові', sort: :surname %></div>
+  <div class="grid_2"> № карти</div>
+  <div class="grid_3"><%= link_to 'Дата народження', sort: :birthday %></div>
+  <div class="grid_3"><%= link_to 'Представництво у місті', sort: :town_office %></div>
+  <div class="grid_3 omega">&nbsp;</div>
+  <div class="clear"></div>
 </div>
 <%= render @users %>
-
-<%= link_to 'Добавить учасника', new_user_path %>
+<%= will_paginate @users %>

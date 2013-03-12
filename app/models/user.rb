@@ -32,6 +32,11 @@ class User < ActiveRecord::Base
   has_many :card_infos, dependent: :destroy
   accepts_nested_attributes_for :card_infos
 
+  scope :sort_by_surname_asc, joins: 'left join user_details on users.id = user_details.user_id', order: 'user_details.surname asc'
+  scope :sort_by_birthday_asc, joins: 'left join user_details on users.id = user_details.user_id', order: 'user_details.birthday asc'
+  scope :sort_by_town_office_asc, order: 'town_office_id asc'
+  scope :find_by_offices, lambda { |town_offises| User.where(town_office_id: town_offises.collect{|admin_towns| admin_towns.id}) }
+
   def role?(role)
     return Role.find_by_name(role.to_s.camelize).id == self.role_id
   end

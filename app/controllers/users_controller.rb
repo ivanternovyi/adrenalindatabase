@@ -2,9 +2,9 @@ class UsersController < ApplicationController
   load_and_authorize_resource
   def index
     if current_user.role? :super_admin_user
-      @users = User.all
+      @users = User.sort_by_town_office_asc.paginate(per_page: 40, page: params[:page])
     elsif current_user.role? :region_admin_user
-      @users = User.where(town_office_id: current_user.towns.collect{|admin_towns| admin_towns.id})
+      @users = User.find_by_offices(current_user.towns).paginate(per_page: 40, page: params[:page])
     end
   end
 
