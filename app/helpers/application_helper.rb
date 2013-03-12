@@ -1,3 +1,4 @@
+# encoding: utf-8
 module ApplicationHelper
 	def link_to_add_fields(name, f, association)
 		new_object = f.object.send(association).klass.new
@@ -10,7 +11,13 @@ module ApplicationHelper
 
   def sortable(column, title = nil)
     direction = (column == params[:sort] && params[:direction] == 'asc') ? 'desc' : 'asc'
-    puts "#{direction}!!!!!!!!!!!!!!!!!!!!!!!!"
     link_to title, sort: column, direction: direction
+  end
+
+  def ua_date_short(date)
+    day_str = date.day.to_s.rjust(2, '0')
+    mon_str = %w(Січ Лют Бер Квіт Трав Черв Лип Серп Вер Жовт Лист Груд)[date.month - 1]
+    year_str = date.year.to_s
+    raw "#{day_str}&nbsp;#{mon_str.ljust(4, ' ')}&nbsp;#{year_str}"
   end
 end

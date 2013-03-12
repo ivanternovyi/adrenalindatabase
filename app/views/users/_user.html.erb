@@ -12,7 +12,7 @@
  	<div class="grid_3">
     <% if !user.user_detail.nil? %>
    		<%= raw '&nbsp;' if user.user_detail.birthday.blank? %>
-   		<%= user.user_detail.birthday %>
+   		<%= ua_date_short(user.user_detail.birthday) %>
     <% else %>
       &nbsp;
     <% end %>

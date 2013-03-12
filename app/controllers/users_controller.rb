@@ -1,20 +1,21 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
+
   def index
     if current_user.role? :super_admin_user
       users = User
     elsif current_user.role? :region_admin_user
       users = User.find_by_offices(current_user.towns)
     end
-
     if params[:sort] == 'surname'
-      users = users.sort_by_surname(params[:direction])
+      users = users.sort_by_surname(sort_direction)
     elsif params[:sort] == 'birthday'
-      users = users.sort_by_birthday(params[:direction])
+      users = users.sort_by_birthday(sort_direction)
     elsif params[:sort] == 'town_office'
-      users = users.sort_by_town_office(params[:direction])
+      users = users.sort_by_town_office(sort_direction)
+    else
+      users = users.sort_by_surname('asc')
     end
-  
     @users = users.paginate(per_page: 40, page: params[:page])
   end
 
@@ -60,5 +61,10 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
   	@user.destroy
   	redirect_to root_path
+  end
+
+  private
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 end
