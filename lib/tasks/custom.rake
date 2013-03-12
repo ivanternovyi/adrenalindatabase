@@ -235,7 +235,7 @@ namespace :adrenalin do
 			card_num = chf(row[card_number]).nil? ? nil : chf(row[card_number]).delete('_')
 			unlimit = !chf(row[valid_until_date]).nil? && !(row[valid_until_date].index 'unlim').nil? ? true : false
 			val_until = !unlimit && !chf(row[valid_until_date]).nil? ? set_date(row[valid_until_date]) : nil
-			if !card_num.nil?
+			if !card_num.nil? 
 				card_info = CardInfo.new(
 																	card_number: 				card_num,
 																	barcode: 						code_to_barcode(card_num),
@@ -247,7 +247,10 @@ namespace :adrenalin do
 																	)
 				if !card_info.valid?
 					card_info.card_number = show_err(row[username], "Помилковий номер карти!", iterator.to_s.ljust(4, '9'))
+				elsif CardInfo.where(card_number: card_num).nil?
+					card_info.card_number = show_err(row[username], "Дублюється номер карти!", iterator.to_s.ljust(4, '9'))
 				end
+					
 				usr.card_infos << card_info
 			
 				if !chf(row[payment_o]).nil? && !chf(row[payment_date_o]).nil?
