@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     if current_user.role? :super_admin_user
       users = User
     elsif current_user.role? :region_admin_user
-      users = User.find_by_offices(current_user.towns)
+      users = User.get_by_offices(current_user.towns)
     end
     if params[:sort] == 'surname'
       users = users.sort_by_surname(sort_direction)

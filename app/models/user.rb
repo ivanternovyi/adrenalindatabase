@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   scope :sort_by_surname, lambda { |opt| joins('left join user_details on users.id = user_details.user_id').order("user_details.surname #{opt}") }
   scope :sort_by_birthday, lambda { |opt| joins('left join user_details on users.id = user_details.user_id').order("user_details.birthday #{opt}") }
   scope :sort_by_town_office, lambda { |opt| order("town_office_id #{opt}") }
-  scope :find_by_offices, lambda { |town_offises| User.where(town_office_id: town_offises.collect{|admin_towns| admin_towns.id}) }
+  scope :get_by_offices, lambda { |town_offises| User.where(town_office_id: town_offises.collect{|admin_towns| admin_towns.id}) }
 
   def role?(role)
     return Role.find_by_name(role.to_s.camelize).id == self.role_id
