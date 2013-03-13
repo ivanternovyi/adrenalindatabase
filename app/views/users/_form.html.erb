@@ -10,40 +10,24 @@
       </ul>
     </div>
   <% end %>
-
-	<div class="grid_8 alpha">
-		<%= f.fields_for :user_detail do |ud| %>
-			Користувач зареєстрований <%= @user.user_detail.registration_timestamp %>
-			<% if @user.not_revised %>
+  <div class="grid_16">
+  	<% if @user.not_revised %>
 				<p class="validation-error">
 					Помилки у профілі користувача:<br />
 					<%= @user.error_message %>
 				</p>
-			<% end %>
-			<p>
-				<%= ud.label :surname, 'Прізвище' %><br />
-				<%= ud.text_field :surname %>
-			</p>			
-			<p>
-				<%= ud.label :name, 'Ім\'я' %><br />
-				<%= ud.text_field :name %>
-			</p>
-			<p>
-				<%= ud.label :mid_name, 'По-Батькові' %><br />
-				<%= ud.text_field :mid_name %>
-			</p>			
-			<p>
-				<%= ud.label :birthday, 'Дата народження' %><br />
-				<%= ud.date_select :birthday, {order: [:day, :month, :year], start_year: Date.today.year - 70, end_year: Date.today.year - 14, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
-			</p>			
-			<p>
-				<%= ud.label :post_address, 'Поштова адреса для отримання повідомлень від ВГО «Адреналін», в т.ч. картки «I`m Adrenalin»' %><br />
-				<%= ud.text_area :post_address, cols: 40, rows: 2 %>
-			</p>			
-			<p>
-				<%= ud.label :comment, 'Коментар' %><br />
-				<%= ud.text_area :comment, cols: 40, rows: 2 %>
-			</p>
+		<% end %>
+  </div>
+  <div class="clear"></div>
+  <% if !@user.user_detail.nil? %>
+	  <div class="grid_16">
+		  Користувач зареєстрований <%= @user.user_detail.registration_timestamp %>
+		</div>
+		<div class="clear"></div>
+	<% end %>
+	<div class="grid_8 alpha">
+		<%= f.fields_for :user_detail do |builder| %>
+			<%= render 'user_detail_fields', f: builder %>
 		<% end %>
 	</div>
 	<div class="grid_8 omega">
