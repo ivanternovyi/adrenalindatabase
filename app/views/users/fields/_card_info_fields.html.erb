@@ -1,0 +1,42 @@
+<fieldset>
+	<p>
+		<%= f.label :card_number %><br />
+		<%= f.text_field :card_number %>
+	</p>
+	<p>
+		<%= f.label :barcode, 'Штрихкод' %><br />
+		<%= f.text_field :barcode %>
+	</p>
+	<p>
+		<%= f.label :valid_unlimit, 'Безлімітна картка' %><br />
+		<%= f.check_box :valid_unlimit %>
+	</p>
+	<p>
+		<%= f.label :discard, 'Карту аннульовано' %><br />
+		<%= f.check_box :discard %>
+	</p>
+	<p>
+		<%= f.label :send_date, 'Дата відправки карти' %><br />
+		<%= f.date_select :send_date, {order: [:day, :month, :year], start_year: Date.today.year - 5, end_year: Date.today.year, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
+	</p>
+	<p>
+		<%= f.label :reminder_date, 'Дата листа нагадування' %><br />
+		<%= f.date_select :reminder_date, {order: [:day, :month, :year], start_year: Date.today.year - 5, end_year: Date.today.year, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
+	</p>
+		<p>
+		<%= f.label :valid_until, 'Дійсна до' %><br />
+		<%= f.date_select :valid_until, {order: [:day, :month, :year], start_year: Date.today.year - 5, end_year: Date.today.year, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
+	</p>
+	<p>
+		<%= f.label :payment_reward, 'Комиссия' %><br />
+		<%= f.text_field :payment_reward %>
+	</p>
+	<p>
+		<%= f.label :comment, 'Коментар' %><br />
+		<%= f.text_area :comment, cols: 40, rows: 2 %>
+	</p>
+	<%= f.fields_for :payment_infos do |build| %>
+		<%= render 'users/fields/payment_info_fields', f: build %>
+	<% end %>
+	<%= link_to_add_fields 'Додати проплату', f, :payment_infos %>
+</fieldset>

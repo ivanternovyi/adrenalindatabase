@@ -27,7 +27,7 @@
 	<% end %>
 	<div class="grid_8 alpha">
 		<%= f.fields_for :user_detail do |builder| %>
-			<%= render 'user_detail_fields', f: builder %>
+			<%= render 'users/fields/user_detail_fields', f: builder %>
 		<% end %>
 	</div>
 	<div class="grid_8 omega">
@@ -53,7 +53,7 @@
 		<% if !current_user.nil? && (current_user.role?(:super_admin_user) || current_user.role?(:region_admin_user)) %>
 			<p>
 				<%= f.fields_for :card_infos do |builder| %>
-					<%= render 'card_info_fields', f: builder %>
+					<%= render 'users/fields/card_info_fields', f: builder %>
 				<% end %>
 				<%= link_to_add_fields 'Додати карту', f, :card_infos %>
 			</p>
@@ -61,10 +61,10 @@
 	</div>
 	<div class="grid_8 omega">
 		<%= f.fields_for :contact do |builder| %>
-			<%= render 'contact_fields', f: builder %>
+			<%= render 'users/fields/contact_fields', f: builder %>
 		<% end %>
 		<%= f.fields_for :phones do |phon| %>
-			<%= render 'phone_fields', f: phon %>
+			<%= render 'users/fields/phone_fields', f: phon %>
 		<% end %>
 		<%= link_to_add_fields 'Додати телефонний номер', f, :phones %>
 	</div>
