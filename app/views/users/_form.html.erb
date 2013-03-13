@@ -66,12 +66,14 @@
 			<%= f.label :town_office, 'Зручне для Вас місто з офісом Адреналіну' %><br />
 			<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id, include_blank: true %>
 		</p>
-		<p>
-			<%= f.fields_for :card_infos do |builder| %>
-				<%= render 'card_info_fields', f: builder %>
-			<% end %>
-			<%= link_to_add_fields 'Додати карту', f, :card_infos %>
-		</p>
+		<% if !current_user.nil? && (current_user.role?(:super_admin_user) || current_user.role?(:region_admin_user)) %>
+			<p>
+				<%= f.fields_for :card_infos do |builder| %>
+					<%= render 'card_info_fields', f: builder %>
+				<% end %>
+				<%= link_to_add_fields 'Додати карту', f, :card_infos %>
+			</p>
+		<% end %>
 	</div>
 	<div class="grid_8 omega">
 		<%= f.fields_for :contact do |builder| %>
@@ -83,6 +85,7 @@
 		<%= link_to_add_fields 'Додати телефонний номер', f, :phones %>
 	</div>
 	<div class="clear"></div>
+
 	<% if !current_user.nil? && current_user.role?(:super_admin_user) %>
 		<div class="grid_16 alpha omega">
 			<div class="grid_3 alpha">
