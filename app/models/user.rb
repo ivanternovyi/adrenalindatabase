@@ -11,8 +11,8 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :auth_field, :password, :password_confirmation, 
-          :remember_me, :role_id, :town_office_id, :towns, :town_ids, 
-          :user_detail, :user_detail_attributes, :phones, :phones_attributes,
+          :remember_me, :role_id, :town_office_id, :towns, :town_ids, :not_revised,
+          :user_detail, :user_detail_attributes, :phones, :phones_attributes, :error_message,
           :contact, :contact_attributes, :card_infos, :card_infos_attributes
 
   # attr_accessible :title, :body

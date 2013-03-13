@@ -1,5 +1,7 @@
 <div class="grid_16 record">
 	<div class="grid_5 alpha fio">
+    <% revised = user.not_revised ? 'not_revised' : 'revised' %>
+    <div class=<%= revised %>></div>
 		<% if !user.user_detail.nil? %>
   		<%= link_to "#{user.user_detail.surname} #{user.user_detail.name} #{user.user_detail.mid_name}", edit_user_path(user) %>
 		<% else %>

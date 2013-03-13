@@ -79,8 +79,14 @@ namespace :adrenalin do
 			end
 		end
 
-		def show_err(user, show_txt, fill_txt)
+		def show_err(user, show_txt, fill_txt, usr)
 			puts show_txt
+			usr.not_revised = true
+			if usr.error_message.nil?
+				usr.error_message = show_txt
+			else
+				usr.error_message += "; #{show_txt} "
+			end
 			return fill_txt
 		end
 		
@@ -170,23 +176,23 @@ namespace :adrenalin do
 			iterator += 1
 			passrand = Random.new
 			passwd = passrand.rand(10000000..99999999)
-			town_office_id = get_town(chf(row[office_town])) || show_err(row[username], "Помилкове або відсутнє місто з офісом!", 1)
 			usr = User.new(
 										email: chf(row[email]), 
 										password: passwd,
 										password_confirmation: passwd, 
-										town_office_id: town_office_id
+										not_revised: false
 										)
+			usr.town_office_id = get_town(chf(row[office_town])) || show_err(row[username], "Помилкове або відсутнє місто з офісом!", 1, usr)
 			if !usr.valid?
-				usr.email = show_err(row[username], "Помилковий або відсутній email!", "nil#{iterator}@nil.nil")
+				usr.email = show_err(row[username], "Помилковий або відсутній email!", "nil#{iterator}@nil.nil", usr)
 			end
 			name_ary = parse_name(row[username])
 			user_detail = UserDetail.new(
-																	surname: 								name_ary[0] || show_err(row[username], "Відсутнє прізвище!", "nil#{iterator}"), 
-																	name: 									name_ary[1] || show_err(row[username], "Відсутнє ім'я!", "nil#{iterator}"), 
-																	mid_name: 							name_ary[2] || show_err(row[username], "Відсутнє по-Батькові!", "nil#{iterator}"),
-																	post_address: 					chf(row[post_address]) || show_err(row[username], "Відсутня поштова адреса!", "nil#{iterator}"), 
-																	birthday: 							set_date(row[birthday]) || show_err(row[username], "Відсутня дата народження", 70.years.ago),
+																	surname: 								name_ary[0] || show_err(row[username], "Відсутнє прізвище!", "nil#{iterator}", usr), 
+																	name: 									name_ary[1] || show_err(row[username], "Відсутнє ім'я!", "nil#{iterator}", usr), 
+																	mid_name: 							name_ary[2] || show_err(row[username], "Відсутнє по-Батькові!", "nil#{iterator}", usr),
+																	post_address: 					chf(row[post_address]) || show_err(row[username], "Відсутня поштова адреса!", "nil#{iterator}", usr), 
+																	birthday: 							set_date(row[birthday]) || show_err(row[username], "Відсутня дата народження", 70.years.ago, usr),
 																	registration_timestamp: set_datetime(row[register_timestamp]),
 																	comment: 								chf(row[user_comment])
 																	)
@@ -199,7 +205,7 @@ namespace :adrenalin do
 													phone_number: 	row[phone_one].gsub(/\D|\s|\W/, '')
 													)
 				if !ph_one.valid?
-					ph_one.phone_number = show_err(row[username], "Помилковий номер телефону!", ('+' + iterator.to_s.ljust(12, '0')))
+					ph_one.phone_number = show_err(row[username], "Помилковий номер телефону!", ('+' + iterator.to_s.ljust(12, '0')), usr)
 				end
 				usr.phones << ph_one
 			end
@@ -211,7 +217,7 @@ namespace :adrenalin do
 													phone_number: 	row[phone_two].gsub(/\D|\s|\W/, '')
 													)
 				if !ph_two.valid?
-					ph_two.phone_number = show_err(row[username], "Помилковий номер телефону!", ('+' + iterator.to_s.ljust(12, '0')))
+					ph_two.phone_number = show_err(row[username], "Помилковий номер телефону!", ('+' + iterator.to_s.ljust(12, '0')), usr)
 				end
 				usr.phones << ph_two
 			end
@@ -246,9 +252,9 @@ namespace :adrenalin do
 																	valid_until: 				val_until
 																	)
 				if !card_info.valid?
-					card_info.card_number = show_err(row[username], "Помилковий номер карти!", iterator.to_s.ljust(4, '9'))
+					card_info.card_number = show_err(row[username], "Помилковий номер карти!", iterator.to_s.ljust(4, '9'), usr)
 				elsif CardInfo.where(card_number: card_num).nil?
-					card_info.card_number = show_err(row[username], "Дублюється номер карти!", iterator.to_s.ljust(4, '9'))
+					card_info.card_number = show_err(row[username], "Дублюється номер карти!", iterator.to_s.ljust(4, '9'), usr)
 				end
 					
 				usr.card_infos << card_info
@@ -273,7 +279,7 @@ namespace :adrenalin do
 			begin
 				usr.save!
 			rescue => error
-				puts "Error to save #{row[username]}: #{error.message}"
+				puts "Error, can`t save #{row[username]}: #{error.message}"
 				puts '------------------------------------------------------'
 			end
 		end

@@ -14,6 +14,12 @@
 	<div class="grid_8 alpha">
 		<%= f.fields_for :user_detail do |ud| %>
 			Користувач зареєстрований <%= @user.user_detail.registration_timestamp %>
+			<% if @user.not_revised %>
+				<p class="validation-error">
+					Помилки у профілі користувача:<br />
+					<%= @user.error_message %>
+				</p>
+			<% end %>
 			<p>
 				<%= ud.label :surname, 'Прізвище' %><br />
 				<%= ud.text_field :surname %>

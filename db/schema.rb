@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130304180224) do
+ActiveRecord::Schema.define(:version => 20130313084035) do
 
   create_table "admin_user_to_towns", :force => true do |t|
     t.integer  "user_id"
@@ -119,8 +119,8 @@ ActiveRecord::Schema.define(:version => 20130304180224) do
   add_index "user_details", ["user_id"], :name => "index_user_details_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",   :null => false
+    t.string   "encrypted_password",     :default => "",   :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -129,13 +129,16 @@ ActiveRecord::Schema.define(:version => 20130304180224) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "town_office_id"
     t.integer  "role_id",                :default => 4
+    t.boolean  "not_revised",            :default => true
+    t.text     "error_message"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["not_revised"], :name => "index_users_on_not_revised"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["role_id"], :name => "index_users_on_role_id"
   add_index "users", ["town_office_id"], :name => "index_users_on_town_office_id"
