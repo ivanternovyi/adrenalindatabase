@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
+  after_create :default_role
+
   devise :database_authenticatable,
           # :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -40,8 +42,14 @@ class User < ActiveRecord::Base
   def role?(role)
     return Role.find_by_name(role.to_s.camelize).id == self.role_id
   end
+
   def self.find_for_database_authentication(conditions={})
     self.includes(:card_infos).where(card_infos: {discard: false}).where(card_infos: {card_number: conditions[:auth_field]}).limit(1).first ||
     self.where(email: conditions[:auth_field]).limit(1).first
+  end
+
+  private
+  def default_role
+    self.role_id = Role.find_by_name('RegularUser').id
   end
 end

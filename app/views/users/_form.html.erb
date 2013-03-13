@@ -83,7 +83,7 @@
 		<%= link_to_add_fields 'Додати телефонний номер', f, :phones %>
 	</div>
 	<div class="clear"></div>
-	<% if current_user.role? :super_admin_user %>
+	<% if !current_user.nil? && current_user.role?(:super_admin_user) %>
 		<div class="grid_16 alpha omega">
 			<div class="grid_3 alpha">
 				<%= f.label :role_id, 'Права доступу' %>

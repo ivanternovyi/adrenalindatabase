@@ -4,16 +4,17 @@ class Ability
   def initialize(user)
     user ||= User.new
     if user.role? :super_admin_user
-        can :manage, :all
+      can :manage, :all
     elsif user.role? :region_admin_user
-        can :manage, User
+      can :manage, User
     elsif user.role? :regular_user
-        if user.id.blank?
-           raise CanCan::AccessDenied.new('Not authorized!')
-        end
-        can :show, User, id: user.id
+      if user.id.blank?
+        can :create, User
+      end
+      can :show, User, id: user.id
     end
-        
+  
+
 
     # Define abilities for the passed in user here. For example:
     #
