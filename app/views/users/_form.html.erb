@@ -19,12 +19,17 @@
 		<% end %>
   </div>
   <div class="clear"></div>
+  <div class="grid_16">
+  	<%= f.label :not_revised, 'Не підтверджені дані' %>
+  	<%= f.check_box :not_revised %>
+  </div>
   <% if !@user.user_detail.nil? %>
 	  <div class="grid_16">
 		  Користувач зареєстрований <%= @user.user_detail.registration_timestamp %>
 		</div>
 		<div class="clear"></div>
 	<% end %>
+
 	<div class="grid_8 alpha">
 		<%= f.fields_for :user_detail do |builder| %>
 			<%= render 'users/fields/user_detail_fields', f: builder %>
