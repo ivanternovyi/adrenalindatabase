@@ -19,10 +19,15 @@
 		<% end %>
   </div>
   <div class="clear"></div>
-  <div class="grid_16">
-  	<%= f.label :not_revised, 'Не підтверджені дані' %>
-  	<%= f.check_box :not_revised %>
-  </div>
+  
+	<% if !current_user.nil? && (current_user.role?(:super_admin_user) || current_user.role?(:region_admin_user)) %>  
+	  <div class="grid_16">
+	  	<%= f.label :not_revised, 'Не підтверджені дані' %>
+	  	<%= f.check_box :not_revised %>
+	  </div>
+	  <div class="clear"></div>
+  <% end %>
+
   <% if !@user.user_detail.nil? %>
 	  <div class="grid_16">
 		  Користувач зареєстрований <%= @user.user_detail.registration_timestamp %>
