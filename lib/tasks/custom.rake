@@ -9,6 +9,36 @@ namespace :adrenalin do
 		end
 	end
 
+	desc "Parse data"
+	task :reg_dat, :dtime do |t, arg|
+		def chf(val)
+			val.gsub! "\r", "" if !val.nil?
+			if val == '-' || val == '' || val == '- ' || val == ' -' || val == ' - '
+				nil
+			else
+				val
+			end
+		end
+
+		def set_datetime(var)
+			if !var.nil?
+				date = var.split(" ")[0]
+				date_y, date_m, date_d = date.split(".")[2], date.split(".")[1], date.split(".")[0]
+				time = var.split(" ")[1]
+				if !time.empty?
+					time_h, time_m, time_s = time.split(":")[0], time.split(":")[1], time.split(":")[3]
+					DateTime.new(date_y.to_i, date_m.to_i, date_d.to_i, time_h.to_i, time_m.to_i, time_s.to_i)
+				else
+					DateTime.new(date_y.to_i, date_m.to_i, date_d.to_i, 0, 0, 0)
+				end
+			else
+				p 'value is NIL!'
+				nil
+			end
+		end
+		p set_datetime arg[:dtime]
+	end
+
 	desc "Barcode generator based on card code XXXX (X - is digit)"
 	task :barcode, :code do |t, args|
 		def is_digit(var)
@@ -42,32 +72,33 @@ namespace :adrenalin do
 
 	desc "Import csv data to database set path to file: rake adrenalin:import FILEPATH=path_to_file"
 	task :import => :environment do
-		register_timestamp = 	0,
-		username = 						1,
-		post_address = 				2,
-		birthday = 						3,
-		email =								4,
-		phone_one =						5,
-		phone_two =						6,
-		skype = 							7,
-		contact_by = 					8,
-		user_comment = 			 	9,
-		office_town = 				10,
 
-		payment_date_o = 			11,
-		payment_method_o = 		12,
-		payment_o = 					13,
+		reg_timest = 					0
+		username = 						1
+		post_address = 				2
+		birthday = 						3
+		email =								4
+		phone_one =						5
+		phone_two =						6
+		skype = 							7
+		contact_by = 					8
+		user_comment = 			 	9
+		office_town = 				10
 
-		card_send_date = 			14,
-		date_answer_mail = 		15,
-		date_reminder = 			16,
-		card_number = 				17,
+		payment_date_o = 			11
+		payment_method_o = 		12
+		payment_o = 					13
 
-		payment_date_s = 			18,
-		payment_method_s = 		19,
-		payment_s = 					20,
+		card_send_date = 			14
+		date_answer_mail = 		15
+		date_reminder = 			16
+		card_number = 				17
 
-		payment_reward_s = 		21,
+		payment_date_s = 			18
+		payment_method_s = 		19
+		payment_s = 					20
+
+		payment_reward_s = 		21
 		valid_until_date = 		22
 
 		def chf(val)
@@ -116,11 +147,11 @@ namespace :adrenalin do
 				date = var.split(" ")[0]
 				date_y, date_m, date_d = date.split(".")[2], date.split(".")[1], date.split(".")[0]
 				time = var.split(" ")[1]
-				if !time.empty?
+				if !time.nil? && !time.empty?
 					time_h, time_m, time_s = time.split(":")[0], time.split(":")[1], time.split(":")[3]
-					Datetime.new(date_y.to_i, date_m.to_i, date_d.to_i, time_h.to_i, time_m.to_i, time_s.to_i)
+					DateTime.new(date_y.to_i, date_m.to_i, date_d.to_i, time_h.to_i, time_m.to_i, time_s.to_i)
 				else
-					Datetime.new(date_y.to_i, date_m.to_i, date_d.to_i, 0, 0, 0)
+					DateTime.new(date_y.to_i, date_m.to_i, date_d.to_i, 0, 0, 0)
 				end
 			end
 		end
@@ -172,7 +203,7 @@ namespace :adrenalin do
 		end
 		# headers: true - becouse CSV have first header row
 			iterator = 0
-		CSV.foreach(ENV['FILEPATH'], headers: true) do |row|
+		CSV.foreach(ENV['FILEPATH']) do |row|
 			iterator += 1
 			passrand = Random.new
 			passwd = passrand.rand(10000000..99999999)
@@ -193,7 +224,7 @@ namespace :adrenalin do
 																	mid_name: 							name_ary[2] || show_err(row[username], "Відсутнє по-Батькові!", "nil#{iterator}", usr),
 																	post_address: 					chf(row[post_address]) || show_err(row[username], "Відсутня поштова адреса!", "nil#{iterator}", usr), 
 																	birthday: 							set_date(row[birthday]) || show_err(row[username], "Відсутня дата народження", 70.years.ago, usr),
-																	registration_timestamp: set_datetime(row[register_timestamp]),
+																	registration_timestamp: set_datetime(row[reg_timest]),
 																	comment: 								chf(row[user_comment])
 																	)
 			usr.user_detail = user_detail
