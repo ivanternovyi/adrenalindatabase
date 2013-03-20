@@ -7,31 +7,31 @@ ua:
       send_instructions: "You will receive an email with instructions about how to confirm your account in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions about how to confirm your account in a few minutes."
     failure:
-      already_authenticated: "You are already signed in."
+      already_authenticated: "Ви не увійшли."
       inactive: "Your account was not activated yet."
-      invalid: "Invalid email or password."
-      invalid_token: "Invalid authentication token."
-      locked: "Your account is locked."
-      not_found_in_database: "Invalid email or password."
-      timeout: "Your session expired, please sign in again to continue."
-      unauthenticated: "You need to sign in or sign up before continuing."
-      unconfirmed: "You have to confirm your account before continuing."
+      invalid: "Неправильна електронна поштова адреса або номер картки, або пароль."
+      invalid_token: "Невірний код аутентифікації."
+      locked: "Ваш аккаунт заблоковано."
+      not_found_in_database: "Неправильна електронна поштова адреса або номер картки, або пароль."
+      timeout: "Вашу сесію вичерпано, будьласка зійдіть заново у систему щоби продовжити."
+      unauthenticated: "Ви маєте залогінитись або зареєструватись щоби продовжити."
+      unconfirmed: "Вам треба підтвердити свій аккаунт перед тим як продовжити."
     mailer:
       confirmation_instructions:
-        subject: "Confirmation instructions"
+        subject: "Інструкції щодо підтвердження"
       reset_password_instructions:
-        subject: "Reset password instructions"
+        subject: "Інструкції щодо зміни пароля"
       unlock_instructions:
-        subject: "Unlock Instructions"
+        subject: Інструкції щодо розблокування"
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
     passwords:
-      no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
-      send_instructions: "You will receive an email with instructions about how to reset your password in a few minutes."
-      send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
-      updated: "Your password was changed successfully. You are now signed in."
-      updated_not_active: "Your password was changed successfully."
+      no_token: "Немає доступу. Ви можете перейти на цю сторінку тільки за посиланням з електронного листа. Якщо Ви перейшли за посиланням з електронного листа змінити пароль, будь-ласка переконайтесь що Ви використали повний URL."
+      send_instructions: "На протязі декількох хвилин Ви отримаєте листа з інструкцєю щодо зміни пароля."
+      send_paranoid_instructions: "Якщо адреса Вашої електронної скриньки існує у базі даних, Ви отримаєте електронний лист з посиланням на відновлення паролю протягом декількох хвилин."
+      updated: "Ви успішно змінили пароль і увійшли у свій аккаунт."
+      updated_not_active: "Ви успішно змінили свій пароль."
     registrations:
       destroyed: "Bye! Your account was successfully cancelled. We hope to see you again soon."
       signed_up: "Welcome! You have signed up successfully."
@@ -41,12 +41,12 @@ ua:
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
       updated: "You updated your account successfully."
     sessions:
-      signed_in: "Signed in successfully."
-      signed_out: "Signed out successfully."
+      signed_in: "Ви успішно увійшли."
+      signed_out: "Ви вийшли."
     unlocks:
-      send_instructions: "You will receive an email with instructions about how to unlock your account in a few minutes."
-      send_paranoid_instructions: "If your account exists, you will receive an email with instructions about how to unlock it in a few minutes."
-      unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+      send_instructions: "Ви отримаєте електронного листа з інструкціями щодо відновлення доступу до Вашого аккаунту за декілка хвилин."
+      send_paranoid_instructions: "Якщо Ваш аккаунт існує, Ви отримаєте електронного листа з інструкціями щодо розблокування аккаунта впродовж декількох хвилин."
+      unlocked: "Ваш аккаутн було успішно розблоковано. Будь-ласка увійдіть щоб продовжити."
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"
