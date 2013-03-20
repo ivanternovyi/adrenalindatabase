@@ -3,12 +3,12 @@
 ua:
   devise:
     confirmations:
-      confirmed: "Your account was successfully confirmed. You are now signed in."
-      send_instructions: "You will receive an email with instructions about how to confirm your account in a few minutes."
-      send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions about how to confirm your account in a few minutes."
+      confirmed: "Ваш аккаунт успішно підтверджений. Ви увійшли."
+      send_instructions: "Ви получите електронного листа з інструкциями щодо підтвердження протягом декількох хвилин."
+      send_paranoid_instructions: "Якщо Ваша електронна адреса існує у базі даних, Ви получите електронного листа з інструкциями як підтвердити Ваш аккаунт на протязі декількох хвилин."
     failure:
       already_authenticated: "Ви не увійшли."
-      inactive: "Your account was not activated yet."
+      inactive: "Ваш аккаунт ще не активовано."
       invalid: "Неправильна електронна поштова адреса або номер картки, або пароль."
       invalid_token: "Невірний код аутентифікації."
       locked: "Ваш аккаунт заблоковано."
@@ -24,8 +24,8 @@ ua:
       unlock_instructions:
         subject: Інструкції щодо розблокування"
     omniauth_callbacks:
-      failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
-      success: "Successfully authenticated from %{kind} account."
+      failure: "Не можу аутентифікувати Вас з %{kind} томущо \"%{reason}\"."
+      success: "Успішно аутентифіковано з %{kind} аккаунту."
     passwords:
       no_token: "Немає доступу. Ви можете перейти на цю сторінку тільки за посиланням з електронного листа. Якщо Ви перейшли за посиланням з електронного листа змінити пароль, будь-ласка переконайтесь що Ви використали повний URL."
       send_instructions: "На протязі декількох хвилин Ви отримаєте листа з інструкцєю щодо зміни пароля."
@@ -33,13 +33,13 @@ ua:
       updated: "Ви успішно змінили пароль і увійшли у свій аккаунт."
       updated_not_active: "Ви успішно змінили свій пароль."
     registrations:
-      destroyed: "Bye! Your account was successfully cancelled. We hope to see you again soon."
-      signed_up: "Welcome! You have signed up successfully."
-      signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
-      signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
-      signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please open the link to activate your account."
-      update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
-      updated: "You updated your account successfully."
+      destroyed: "Бувайте! Ваш аккаунт видалено. Ми сподіваємось знову вас побачити."
+      signed_up: "Привіт! Ві увійшли у свій аккаунт."
+      signed_up_but_inactive: "Ви успішно зареєструвались. Однак Ви ще не можете увійти томущо Ваш аккаунт ще не активовано."
+      signed_up_but_locked: "Ви успішно зареєструвались. Однак Ви не можете увійти томущо Ваш аккаунт заблоковано."
+      signed_up_but_unconfirmed: "Повідомлення з посиланням на підтвердження було відправлено на Вашу електрону адресу. Будь-ласка перейдіть по посиланню щоб активувати свій аккаунт."
+      update_needs_confirmation: "Ви оновили свій аккаунт, однак нам необхідно перевірити Вашу електронну адресу. Перевірте Вашу електронну скриньку і натисніть посиланні підтвердити, будь-ласка, щоб підтвердити Вашу нову електронну адресу."
+      updated: "Оновлення успішне."
     sessions:
       signed_in: "Ви успішно увійшли."
       signed_out: "Ви вийшли."
@@ -49,11 +49,11 @@ ua:
       unlocked: "Ваш аккаутн було успішно розблоковано. Будь-ласка увійдіть щоб продовжити."
   errors:
     messages:
-      already_confirmed: "was already confirmed, please try signing in"
-      confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
-      expired: "has expired, please request a new one"
-      not_found: "not found"
-      not_locked: "was not locked"
+      already_confirmed: "було підтверджено, буль-ласку спробуйте увійти ще раз"
+      confirmation_period_expired: "потребує підтвердження у %{period}, будь-ласка запросіть ще раз"
+      expired: "було вичерпано, будь-ласка запросіть ще раз"
+      not_found: "не знайдено"
+      not_locked: "заблоковано"
       not_saved:
-        one: "1 error prohibited this %{resource} from being saved:"
-        other: "%{count} errors prohibited this %{resource} from being saved:"
+        one: "1 помилка у %{resource} намагались зберегти:"
+        other: "%{count} помилок у %{resource} намагались зберегти:"
