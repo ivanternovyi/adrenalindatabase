@@ -19,3 +19,17 @@ a {
 		color: $adr_color;
 	}
 }
+
+.good-button {
+	padding: 2px 4px 2px 4px;
+	border: 1px solid #555;
+	text-decoration: none;
+	background-color: #DDD;
+	@include uni-box-shadow(1px, 1px, 2px, #DDD);
+
+	&:hover {
+	border: 1px solid $adr_color;
+	@include uni-box-shadow(1px, 1px, 8px, #999);
+	background-color: #EEE;
+	}
+}

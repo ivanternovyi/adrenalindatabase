@@ -17,6 +17,7 @@ class UsersController < ApplicationController
       users = users.sort_by_surname('asc')
     end
     @users = users.paginate(per_page: 40, page: params[:page])
+    @current_page = params[:page]
   end
 
   def new
@@ -33,6 +34,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @current_page = params[:current_page]
   	@user = User.find(params[:id])
     # @user.user_detail =   UserDetail.new  if @user.user_detail.nil?
     # @user.phones      <<  Phone.new       if @user.phones.empty?
@@ -45,13 +47,18 @@ class UsersController < ApplicationController
   end
 
   def update
+    @current_page = params[:user].delete(:current_page)
   	@user = User.find(params[:id])
   	if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
 	    params[:user].delete(:password)
 	    params[:user].delete(:password_confirmation)
 		end
   	if @user.update_attributes(params[:user])
-  		redirect_to root_path
+      if @current_page == ''
+        redirect_to( controller: :users, action: :index) 
+      else
+        redirect_to controller: :users, action: :index, page: @current_page.to_s
+      end
   	else
   		render action: 'edit'
   	end

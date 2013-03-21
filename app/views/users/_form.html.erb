@@ -1,4 +1,5 @@
 <%= form_for @user do |f| %>
+	<%= f.hidden_field :current_page, value: @current_page %>
 	<% if @user.errors.any? %>
     <div id="error_explanation">
       <h3><%= pluralize(@user.errors.count, "error") %> prohibited this town from being saved:</h3>
@@ -81,7 +82,7 @@
 			</fieldset>
 		</div>
 		<div class="clear"></div>
-							<%= link_to_add_fields 'Додати карту', f, :card_infos %>
+		<%= link_to_add_fields 'Додати карту', f, :card_infos %>
 	</div>
 
 	<% if !current_user.nil? && current_user.role?(:super_admin_user) %>
