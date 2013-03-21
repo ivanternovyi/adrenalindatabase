@@ -31,7 +31,7 @@
 
   <% if !@user.user_detail.nil? %>
 	  <div class="grid_16">
-		  Користувач зареєстрований <%= @user.user_detail.registration_timestamp %>
+		  Користувача зареєстровано <%= @user.user_detail.registration_timestamp %>
 		</div>
 		<div class="clear"></div>
 	<% end %>
@@ -42,18 +42,23 @@
 		<% end %>
 	</div>
 	<div class="grid_8 omega">
-		<p>
-			<%= f.label :email %><br />
+		<div class="grid_8 alpha omega">
+			<%= f.label :email, 'Адреса електронної скриньки' %><br />
 			<%= f.email_field :email %>
-		</p>
-		<p>
-			<%= f.label :password %><br />
-			<%= f.password_field :password %>
-		</p>
-		<p>
-			<%= f.label :password_confirmation %><br />
-			<%= f.password_field :password_confirmation %>
-		</p>
+			<%= input_hint_text 'Електронна пошта потрібна, якщо Ви самі хочете контролювати абонплату та інформацию про себе.' %>
+			<%= f.email_field :special_email_confirmation, value: '', class: 'special_confirmation' %>
+		</div>
+		<div class="grid_8 alpha omega">
+			<div class="grid_4 alpha">
+				<%= f.label :password, 'Пароль' %><br />
+				<%= f.password_field :password %>
+			</div>
+			<div class="grid_4 omega">
+				<%= f.label :password_confirmation, 'Підтвердження паролю' %><br />
+				<%= f.password_field :password_confirmation %>
+			</div>
+			<%= input_hint_text 'Має бути не меньше 8 символів. Якшо не хочете змінювати, залишайте поля порожніми.' %>
+		</div>
 		<%= f.fields_for :contact do |builder| %>
 			<%= render 'users/fields/contact_fields', f: builder %>
 		<% end %>
@@ -69,8 +74,9 @@
 			<fieldset>
 				<legend>Картки</legend>
 				<p>
-					<%= f.label :town_office, 'Зручне для Вас місто з офісом Адреналіну' %><br />
+					<%= f.label :town_office, raw('Найближчий до Вас осередок &laquo;Адреналіну&raquo;') %><br />
 					<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id, include_blank: true %>
+					<%= input_hint_text 'Найзручніше для Вас місто з офісом &laquo;Адреналіну&raquo;' %>
 				</p>
 					<% if !current_user.nil? && (current_user.role?(:super_admin_user) || current_user.role?(:region_admin_user)) %>
 						<p>

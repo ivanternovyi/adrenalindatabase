@@ -21,6 +21,10 @@ module ApplicationHelper
     raw "#{day_str}&nbsp;#{mon_str.ljust(4, ' ')}&nbsp;#{year_str}"
   end
 
+  def input_hint_text(txt)
+    raw "<br /><span class=\"hint-text\">#{txt}</span>"
+  end
+
   def date_begin_cards
     return Date.today.year - 5
   end

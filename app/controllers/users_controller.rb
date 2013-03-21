@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
   def create
   	@user = User.new(params[:user])
-  	if @user.save
+  	if params[:user].delete(:special_email_confirmation) == '' && @user.save
   		redirect_to root_path
   	else
   		render action: 'new'
@@ -36,10 +36,6 @@ class UsersController < ApplicationController
   def edit
     @current_page = params[:current_page]
   	@user = User.find(params[:id])
-    # @user.user_detail =   UserDetail.new  if @user.user_detail.nil?
-    # @user.phones      <<  Phone.new       if @user.phones.empty?
-    # @user.contact     =   Contact.new     if @user.contact.nil?
-    # @user.card_infos  <<  CardInfo.new    if @user.card_infos.empty?
   end
 
   def show
@@ -53,7 +49,7 @@ class UsersController < ApplicationController
 	    params[:user].delete(:password)
 	    params[:user].delete(:password_confirmation)
 		end
-  	if @user.update_attributes(params[:user])
+  	if params[:user].delete(:special_email_confirmation) == '' && @user.update_attributes(params[:user])
       if @current_page == ''
         redirect_to( controller: :users, action: :index) 
       else
