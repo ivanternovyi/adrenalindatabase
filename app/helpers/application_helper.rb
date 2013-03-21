@@ -20,4 +20,12 @@ module ApplicationHelper
     year_str = date.year.to_s
     raw "#{day_str}&nbsp;#{mon_str.ljust(4, ' ')}&nbsp;#{year_str}"
   end
+
+  def date_begin_cards
+    return Date.today.year - 5
+  end
+
+  def date_end_cards
+    return Date.today.year + 10
+  end
 end
