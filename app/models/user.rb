@@ -48,6 +48,10 @@ class User < ActiveRecord::Base
     self.where(email: conditions[:auth_field]).limit(1).first
   end
 
+  def email_required?
+    false
+  end
+  
   private
   def default_role
     self.role_id = Role.find_by_name('RegularUser').id

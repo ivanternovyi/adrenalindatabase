@@ -17,8 +17,8 @@ describe User do
     usr_b.should_not be_valid
   end
 
-  it "should not be valid without email" do
-    FactoryGirl.build(:user, email: '').should_not be_valid
+  it "should be valid without email" do
+    FactoryGirl.build(:user, email: '').should be_valid
   end
 
   it "should add user to db with valid data" do
