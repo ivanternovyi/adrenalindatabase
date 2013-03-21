@@ -46,42 +46,48 @@
 			<%= f.email_field :email %>
 		</p>
 		<p>
-		<%= f.label :password %><br />
-		<%= f.password_field :password %>
-	</p>
-	<p>
-		<%= f.label :password_confirmation %><br />
-		<%= f.password_field :password_confirmation %>
-	</p>
-	</div>
-	<div class="clear"></div>
-	<div class="grid_8 alpha">
-		<p>
-			<%= f.label :town_office, 'Зручне для Вас місто з офісом Адреналіну' %><br />
-			<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id, include_blank: true %>
+			<%= f.label :password %><br />
+			<%= f.password_field :password %>
 		</p>
-		<% if !current_user.nil? && (current_user.role?(:super_admin_user) || current_user.role?(:region_admin_user)) %>
-			<p>
-				<%= f.fields_for :card_infos do |builder| %>
-					<%= render 'users/fields/card_info_fields', f: builder %>
-				<% end %>
-				<%= link_to_add_fields 'Додати карту', f, :card_infos %>
-			</p>
-		<% end %>
-	</div>
-	<div class="grid_8 omega">
+		<p>
+			<%= f.label :password_confirmation %><br />
+			<%= f.password_field :password_confirmation %>
+		</p>
 		<%= f.fields_for :contact do |builder| %>
 			<%= render 'users/fields/contact_fields', f: builder %>
 		<% end %>
 		<%= f.fields_for :phones do |phon| %>
 			<%= render 'users/fields/phone_fields', f: phon %>
 		<% end %>
-		<%= link_to_add_fields 'Додати телефонний номер', f, :phones %>
+		<%= link_to_add_fields 'Додати телефон', f, :phones %>
 	</div>
 	<div class="clear"></div>
 
+	<div class="grid_16 alpha">
+		<div class="grid_8 alpha">
+			<fieldset>
+				<legend>Картки</legend>
+				<p>
+					<%= f.label :town_office, 'Зручне для Вас місто з офісом Адреналіну' %><br />
+					<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id, include_blank: true %>
+				</p>
+					<% if !current_user.nil? && (current_user.role?(:super_admin_user) || current_user.role?(:region_admin_user)) %>
+						<p>
+							<%= f.fields_for :card_infos do |builder| %>
+								<%= render 'users/fields/card_info_fields', f: builder %>
+							<% end %>
+						</p>
+					<% end %>
+			</fieldset>
+		</div>
+		<div class="clear"></div>
+							<%= link_to_add_fields 'Додати карту', f, :card_infos %>
+	</div>
+
 	<% if !current_user.nil? && current_user.role?(:super_admin_user) %>
 		<div class="grid_16 alpha omega">
+			<fieldset>
+				<legend>Права і доступи</legend>
 			<div class="grid_3 alpha">
 				<%= f.label :role_id, 'Права доступу' %>
 				<%= f.select :role_id, Role.all.collect{ |role| [role.name, role.id]}, selected: @user.role_id %>
@@ -91,8 +97,10 @@
 					<%= check_box_tag 'user[town_ids][]', office.id, @user.towns.include?(office)  %><%= office.name %><br />
 				<% end %>
 			</div>
+			</fieldset>
 		</div>
 	<% end %>
+	<div class="clear"></div>
 	<%= f.submit 'Зберегти' %>
 <% end %>
 
