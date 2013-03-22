@@ -9,7 +9,7 @@
 </head>
 <body>
 	<%= render 'layouts/header' %>
-	<%= render 'layouts/main_nav' %>
+	<%= admins_access { render 'layouts/main_nav' } %>
 	<%= render 'layouts/alert_notice' %>
 	<div class="container_16">
 	  <%= yield %>

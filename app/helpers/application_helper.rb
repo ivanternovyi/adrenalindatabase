@@ -9,6 +9,14 @@ module ApplicationHelper
 		link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
 	end
 
+  def admins_access
+    if !current_user.nil? && ((current_user.role? :super_admin_user) || (current_user.role? :region_admin_user))
+      yield
+    else
+      ''
+    end
+  end
+
   def sortable(column, title = nil)
     direction = (column == params[:sort] && params[:direction] == 'asc') ? 'desc' : 'asc'
     link_to title, sort: column, direction: direction

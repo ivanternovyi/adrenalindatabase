@@ -11,30 +11,31 @@
       </ul>
     </div>
   <% end %>
-  <div class="grid_16">
-  	<% if @user.not_revised %>
-				<p class="validation-error">
-					Помилки у профілі користувача:<br />
-					<%= @user.error_message %>
-				</p>
-		<% end %>
-  </div>
-  <div class="clear"></div>
+
+	<% admins_access do %>  
+	  <div class="grid_16">
+	  	<% if @user.not_revised %>
+					<p class="validation-error">
+						Помилки у профілі користувача:<br />
+						<%= @user.error_message %>
+					</p>
+			<% end %>
+	  </div>
+	  <div class="clear"></div>
   
-	<% if !current_user.nil? && (current_user.role?(:super_admin_user) || current_user.role?(:region_admin_user)) %>  
 	  <div class="grid_16">
 	  	<%= f.label :not_revised, 'Не підтверджені дані' %>
 	  	<%= f.check_box :not_revised %>
 	  </div>
 	  <div class="clear"></div>
+ 
+	  <% if !@user.user_detail.nil? %>
+		  <div class="grid_16">
+			  Користувача зареєстровано <%= @user.user_detail.registration_timestamp %>
+			</div>
+			<div class="clear"></div>
+		<% end %>
   <% end %>
-
-  <% if !@user.user_detail.nil? %>
-	  <div class="grid_16">
-		  Користувача зареєстровано <%= @user.user_detail.registration_timestamp %>
-		</div>
-		<div class="clear"></div>
-	<% end %>
 
 	<div class="grid_8 alpha">
 		<%= f.fields_for :user_detail do |builder| %>
@@ -88,7 +89,7 @@
 			</fieldset>
 		</div>
 		<div class="clear"></div>
-		<%= link_to_add_fields 'Додати карту', f, :card_infos %>
+		<%= admins_access { link_to_add_fields 'Додати карту', f, :card_infos } %>
 	</div>
 
 	<% if !current_user.nil? && current_user.role?(:super_admin_user) %>

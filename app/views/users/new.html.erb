@@ -1,9 +1,9 @@
 <div class="grid_16">
-  <%= link_to 'Назад', :back %>
+  <%= admins_access { link_to 'Назад', :back } %>
 	<h1>Новый учасник</h1>
 </div>
 <div class="clear"></div>
 <div class="grid_16">
 	<%= render 'form' %>
 </div>
-<p><%= link_to 'Назад', :back %></p>
+<p><%= admins_access { link_to 'Назад', :back } %></p>
