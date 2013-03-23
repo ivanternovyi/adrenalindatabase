@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
   		super
   	end	
   end
+
+  def down_case(txt)
+    txt.mb_chars.downcase.to_s
+  end
 end

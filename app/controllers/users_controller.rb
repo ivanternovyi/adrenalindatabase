@@ -16,6 +16,9 @@ class UsersController < ApplicationController
     else
       users = users.sort_by_surname('asc')
     end
+
+      users = users.where("lower(surname) LIKE ?", "%#{down_case(params[:search])}%") if !params[:search].nil?
+
     @users = users.paginate(per_page: 40, page: params[:page])
     @current_page = params[:page]
   end
