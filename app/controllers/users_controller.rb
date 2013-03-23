@@ -17,7 +17,9 @@ class UsersController < ApplicationController
       users = users.sort_by_surname('asc')
     end
 
-      users = users.where("lower(surname) LIKE ?", "%#{down_case(params[:search])}%") if !params[:search].nil?
+      users = users.where("lower(surname) LIKE ?", "%#{down_case(params[:s_surname])}%") if !params[:s_surname].nil?
+      users = users.where("not_revised = ?", true) if !params[:s_not_revised].nil? && params[:s_not_revised] == 'true'
+      users = users.where("not_revised = ?", false) if !params[:s_not_revised].nil? && params[:s_not_revised] == 'false'
 
     @users = users.paginate(per_page: 40, page: params[:page])
     @current_page = params[:page]
