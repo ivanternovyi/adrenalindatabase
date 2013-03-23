@@ -1,18 +1,20 @@
-<%= link_to 'Добавить учасника', new_user_path %>
-<div class="grid_16">
+<div class="grid_5 filters">
+  <h2>Фільтри</h2>
+</div>
+<div class="grid_11 content_list">
+  <%= link_to 'Добавить учасника', new_user_path, class: 'good-button' %>
   <h1>Список членів організації</h1>
-</div>
-<div class="clear"></div>
-<div class="grid_16 heading">
-  <div class="grid_5 alpha fio"><%= sortable 'surname', 'Прізвище Ім\'я По-Батькові' %></div>
-  <div class="grid_2"> № карти</div>
-  <div class="grid_3"><%= sortable 'birthday', 'Дата народження' %></div>
-  <div class="grid_3"><%= sortable 'town_office', 'Представництво у місті' %></div>
-  <div class="grid_3 omega">&nbsp;</div>
   <div class="clear"></div>
+  <div class="grid_11 alpha omega heading">
+    <div class="grid_5 alpha fio"><%= sortable 'surname', 'Прізвище Ім\'я По-Батькові' %></div>
+    <div class="grid_1"> № карти</div>
+    <div class="grid_2"><%= sortable 'birthday', 'Дата нар.' %></div>
+    <div class="grid_3 omega"><%= sortable 'town_office', 'Представництво' %></div>
+    <div class="clear"></div>
+  </div>
+  <%= render @users %>
+  <div class="clear"></div>
+  <div class='paginator'>
+    <%= will_paginate @users, previous_label: '<- Попередні', next_label: 'Наступні ->' %>
 </div>
-<%= render @users %>
-<div class="clear"></div>
-<div class='paginator'>
-  <%= will_paginate @users %>
 </div>
