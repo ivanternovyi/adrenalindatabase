@@ -1,8 +1,8 @@
-<fieldset>
+<div class="grid_8 alpha omega dynamic_container">
 	<%= f.label :phone_number, 'Номер телефону' %><br />
 	<%= f.text_field :phone_number %>
 	<%= f.label :main, "Для зв\'язку" %>
 	<%= f.check_box :main %> |
 	<%= f.hidden_field :_destroy %>
-	<%= link_to 'Забрати', '#', class: "remove_fields" %>
-</fieldset>
+	<%= link_to '[X]', '#', class: "remove_fields" %>
+</div>

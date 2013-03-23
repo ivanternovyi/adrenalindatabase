@@ -1,4 +1,4 @@
-<div class="grid_8 alpha omega tst">
+<div class="grid_8 alpha omega tst dynamic_container">
 	<fieldset>
 		<div class="grid_3 alpha">
 			<%= f.label :payment_date, 'Дата оплати' %><br />
@@ -8,12 +8,14 @@
 			<%= f.label :payment, 'Сумма платежу' %><br />
 			<%= f.text_field :payment, size: 10 %>
 		</div>
-		<div class="grid_2 omega">
+		<div class="grid_2">
 			<%= f.label :paying_method, 'Метод проплати' %><br />
 			<%= f.text_field :paying_method, size: 10 %>
 		</div>
+		<div class="grid_1 omega">
+			<%= link_to '[X]', '#', class: "remove_fields" %>
+		</div>
 		<div class="clear"></div>
 		<%= f.hidden_field :_destroy %>
-		<%= link_to 'Видалити проплату', '#', class: "remove_fields" %>
 	</fieldset>
 </div>
