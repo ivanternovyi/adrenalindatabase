@@ -4,10 +4,13 @@
     <%= text_field_tag :s_surname, params[:s_surname] %>
   </p>
   <p>
-    <%= radio_button_tag :s_not_revised, true, (!params[:s_not_revised].nil? && params[:s_not_revised] == 'true') %>
+    <%= radio_button_tag :s_not_revised, 'all', params[:s_not_revised].nil? || params[:s_not_revised] == 'all' %>
+    <%= label_tag :s_not_revised_all, 'Всі дані' %>
+    <br />
+     <%= radio_button_tag :s_not_revised, 'true', (!params[:s_not_revised].nil? && params[:s_not_revised] == 'true') %>
     <%= label_tag :s_not_revised_true, 'Неперевірені дані' %>
     <br />
-    <%= radio_button_tag :s_not_revised, false, (!params[:s_not_revised].nil? && params[:s_not_revised] == 'false') %>
+    <%= radio_button_tag :s_not_revised, 'false', (!params[:s_not_revised].nil? && params[:s_not_revised] == 'false') %>
     <%= label_tag :s_not_revised_false, 'Перевірені дані' %>
   </p>
 
