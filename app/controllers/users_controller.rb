@@ -26,12 +26,13 @@ class UsersController < ApplicationController
   end
 
   def new
+    @current_page = params[:current_page]
   	@user = User.new(user_detail: UserDetail.new, phones: [Phone.new], contact: Contact.new)
   end
 
   def create
-  	@user = User.new(params[:user])
-  	if params[:user].delete(:special_email_confirmation) == '' && @user.save
+    @user = User.new(params[:user])
+  	if @user.save
   		redirect_to root_path
   	else
   		render action: 'new'
@@ -54,7 +55,7 @@ class UsersController < ApplicationController
 	    params[:user].delete(:password)
 	    params[:user].delete(:password_confirmation)
 		end
-  	if params[:user].delete(:special_email_confirmation) == '' && @user.update_attributes(params[:user])
+  	if @user.update_attributes(params[:user])
       if @current_page == ''
         redirect_to( controller: :users, action: :index) 
       else

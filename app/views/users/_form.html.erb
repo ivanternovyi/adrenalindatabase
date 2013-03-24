@@ -1,5 +1,5 @@
 <%= form_for @user do |f| %>
-	<%= f.hidden_field :current_page, value: @current_page %>
+	<%= f.hidden_field(:current_page, value: @current_page) if params[:action].include?('edit') %>
 	<% if @user.errors.any? %>
     <div id="error_explanation">
       <h3><%= pluralize(@user.errors.count, "error") %> prohibited this town from being saved:</h3>
@@ -47,16 +47,15 @@
 			<%= f.label :email, 'Адреса електронної скриньки' %><br />
 			<%= f.email_field :email %>
 			<%= input_hint_text 'Електронна пошта потрібна, якщо Ви самі хочете контролювати абонплату та інформацию про себе.' %>
-			<%= f.email_field :special_email_confirmation, value: '', class: 'special_confirmation' %>
 		</div>
 		<div class="grid_8 alpha omega">
 			<div class="grid_4 alpha">
 				<%= f.label :password, 'Пароль' %><br />
-				<%= f.password_field :password %>
+				<%= f.password_field :password, autocomplete: :off %>
 			</div>
 			<div class="grid_4 omega">
 				<%= f.label :password_confirmation, 'Підтвердження паролю' %><br />
-				<%= f.password_field :password_confirmation %>
+				<%= f.password_field :password_confirmation, autocomplete: :off %>
 			</div>
 			<%= input_hint_text 'Має бути не меньше 8 символів. Якшо не хочете змінювати, залишайте поля порожніми.' %>
 		</div>
