@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   scope :sort_by_birthday, lambda { |opt| include_user_detail.order("user_details.birthday #{opt}") }
   scope :sort_by_town_office, lambda { |opt| order("town_office_id #{opt}") }
   scope :get_by_offices, lambda { |town_offises| User.where(town_office_id: town_offises.collect{|admin_towns| admin_towns.id}) }
-  scope :get_by_surname, lambda { |opt| include_user_detail.where("lower(surname) LIKE ?", "%#{opt.mb_chars.downcase.to_s}%") }
+  scope :get_by_surname, lambda { |opt| include_user_detail.where("lower(user_details.surname) LIKE ?", "%#{opt.mb_chars.downcase.to_s}%") }
   scope :get_revised, where(not_revised: false)
   scope :get_not_revised, where(not_revised: true)
 
