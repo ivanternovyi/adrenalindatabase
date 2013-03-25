@@ -49,6 +49,33 @@ describe User do
     User.sort_by_town_office(:asc).should eq([usr_c, usr_a, usr_b])
   end
 
+  describe "get and search users" do
+    it "should return users that have defined letters" do
+      10.times{ FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail)) }
+      user1 = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail, surname: "Defesd"))
+      user2 = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail, surname: "Dofesd"))
+      user3 = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail, surname: "Deferd"))
+      User.get_by_surname('Fe').should include(user1, user2, user3)
+    end
+
+    describe "revised users" do
+      before(:each) do
+        @user1 = FactoryGirl.create(:user)
+        @user2 = FactoryGirl.create(:user, not_revised: false)
+        @user3 = FactoryGirl.create(:user)
+        @user4 = FactoryGirl.create(:user, not_revised: false)
+      end
+
+      it "should return revised users" do
+        User.get_revised.should include(@user2, @user4)
+      end
+
+      it "should return not revised users" do
+        User.get_not_revised.should include(@user1, @user3)
+      end
+    end
+  end
+
   describe "associated models" do
     describe "user_detail" do
       it "should have one record" do

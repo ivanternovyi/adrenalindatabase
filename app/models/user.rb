@@ -34,10 +34,14 @@ class User < ActiveRecord::Base
   has_many :card_infos, dependent: :destroy
   accepts_nested_attributes_for :card_infos
 
-  scope :sort_by_surname, lambda { |opt| joins('left join user_details on users.id = user_details.user_id').order("user_details.surname #{opt}") }
-  scope :sort_by_birthday, lambda { |opt| joins('left join user_details on users.id = user_details.user_id').order("user_details.birthday #{opt}") }
+  scope :include_user_detail, joins('left join user_details on users.id = user_details.user_id')
+  scope :sort_by_surname, lambda { |opt| include_user_detail.order("user_details.surname #{opt}") }
+  scope :sort_by_birthday, lambda { |opt| include_user_detail.order("user_details.birthday #{opt}") }
   scope :sort_by_town_office, lambda { |opt| order("town_office_id #{opt}") }
   scope :get_by_offices, lambda { |town_offises| User.where(town_office_id: town_offises.collect{|admin_towns| admin_towns.id}) }
+  scope :get_by_surname, lambda { |opt| include_user_detail.where("lower(surname) LIKE ?", "%#{opt.mb_chars.downcase.to_s}%") }
+  scope :get_revised, where(not_revised: false)
+  scope :get_not_revised, where(not_revised: true)
 
   def role?(role)
     return Role.find_by_name(role.to_s.camelize).id == self.role_id
