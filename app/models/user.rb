@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :contact
 
   has_many :card_infos, dependent: :destroy
-  accepts_nested_attributes_for :card_infos
+  accepts_nested_attributes_for :card_infos, allow_destroy: true, reject_if: lambda {|attrs| attrs.all? {|key, value| value.blank?}}
 
   scope :include_user_detail, joins('left join user_details on users.id = user_details.user_id')
   scope :sort_by_surname, lambda { |opt| include_user_detail.order("user_details.surname #{opt}") }

@@ -13,9 +13,9 @@
 			<%= f.text_field :paying_method, size: 10 %>
 		</div>
 		<div class="grid_1 omega">
+			<%= f.hidden_field :_destroy %>
 			<%= link_to '[X]', '#', class: "remove_fields" %>
 		</div>
 		<div class="clear"></div>
-		<%= f.hidden_field :_destroy %>
 	</fieldset>
 </div>

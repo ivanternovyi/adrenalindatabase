@@ -35,6 +35,7 @@
 			<%= f.label :comment, 'Коментар' %><br />
 			<%= f.text_area :comment, cols: 40, rows: 2 %>
 		</p>
+	<%= f.hidden_field :_destroy %>
 	<%= link_to 'Видалити карту', '#', class: "remove_fields" %>
 	</div>
 	<div class="grid_8 alpha omega allpays">
