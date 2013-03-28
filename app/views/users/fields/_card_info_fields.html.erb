@@ -1,12 +1,14 @@
 <div class="grid_16 alpha omega dynamic_container">
 	<div class="grid_8 alpha">
 		<p>
-			<%= f.label :card_number %><br />
+			<%= f.label :card_number, 'Номер карти' %><br />
 			<%= f.text_field :card_number, size: 5 %>
+			<%= input_hint_text '4-значне число з карти' %>
 		</p>
 		<p>
 			<%= f.label :barcode, 'Штрихкод' %><br />
-			<%= f.text_field :barcode, size: 10 %>
+			<%= f.text_field :barcode, size: 10, readonly: true %>
+			<%= input_hint_text 'Буде згенеровано автоматично після збереження даних' %>
 		</p>
 		<p>
 			<%= f.check_box :valid_unlimit %>

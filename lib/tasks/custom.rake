@@ -60,7 +60,11 @@ namespace :adrenalin do
 				full_dig_array.each_with_index{ |val, index| even_num_dig_sum += val.to_i if (index + 1).even? }
 
 				odd_num_dig_sum *= 3
-				check_digit = 10 - ((even_num_dig_sum + odd_num_dig_sum) % 10)
+				substruction = ((even_num_dig_sum + odd_num_dig_sum) % 10)
+	      if substruction == 0
+	        substruction = 10
+	      end
+	      check_digit = 10 - substruction
 				const_prefix + code + check_digit.to_s
 			else
 				puts "Помилковий код карти #{code} !"

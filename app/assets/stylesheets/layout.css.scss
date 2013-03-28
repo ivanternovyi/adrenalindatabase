@@ -55,6 +55,10 @@ input[type='text'], input[type='email'], input[type='password'] {
 	height: 20px;
 	font-size: 14px;
 	background-color: #ffffcc;
+
+	&[readonly="readonly"] {
+		background-color: #ffffee;
+	}
 }
 
 legend {
