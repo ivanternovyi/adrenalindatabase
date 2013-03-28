@@ -15,7 +15,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :auth_field, :password, :password_confirmation, 
           :remember_me, :role_id, :town_office_id, :towns, :town_ids, :not_revised,
           :user_detail, :user_detail_attributes, :phones, :phones_attributes, :error_message,
-          :contact, :contact_attributes, :card_infos, :card_infos_attributes
+          :contact, :contact_attributes, :card_infos, :card_infos_attributes, :accept_rule
+
+  validates :accept_rule, acceptance: true
 
   # attr_accessible :title, :body
   has_many :admin_user_to_towns, dependent: :destroy

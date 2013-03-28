@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   before :each do
-    # revove default admin user
+    # remove default admin user
     User.find(1).delete
   end
 

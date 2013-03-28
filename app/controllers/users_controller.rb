@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     users = users.get_not_revised if !params[:s_not_revised].nil? && params[:s_not_revised] == 'true'
     users = users.get_revised if !params[:s_not_revised].nil? && params[:s_not_revised] == 'false'
 
-    params[:page] = params[:page] || 1
+    params[:page] = params[:page] == '' ? 1 : params[:page]
     @users = users.paginate(per_page: 40, page: params[:page])
     @current_page = params[:page]
   end
