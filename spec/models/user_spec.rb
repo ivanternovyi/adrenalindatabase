@@ -1,11 +1,6 @@
 require 'spec_helper'
 
 describe User do
-  before :each do
-    # remove default admin user
-    User.find(1).delete
-  end
-
   it "should not add user to database if new" do
     usr = FactoryGirl.build(:user)
     usr.id.should be_nil
