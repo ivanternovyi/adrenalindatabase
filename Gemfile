@@ -27,11 +27,11 @@ gem 'will_paginate', '~> 3.0.0'
 
 gem 'mysql2'
 
-group :test, :development do
+group :test do
   gem 'rspec-rails'
   gem 'factory_girl'
   gem 'capybara'
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
 end
 

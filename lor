@@ -1,0 +1,354 @@
+...FFFF...FFF.F....F..FFFF.....FFFFFFFFFFFFFFFF.......FFFFFFFFFFFFFFFFFF..........FF......
+
+Failures:
+
+  1) Towns for RegularUser should not allow to visit page
+     Failure/Error: adm = FactoryGirl.create(:user, role_id: Role.find_by_name('RegularUser').id, password: 'qwertyui')
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/requests/towns_spec.rb:41:in `login_as_regular_user'
+     # ./spec/requests/towns_spec.rb:25:in `block (3 levels) in <top (required)>'
+
+  2) Towns for SuperAdminUser should allow visit page
+     Failure/Error: @adm = FactoryGirl.create(:user, role_id: Role.find_by_name('SuperAdminUser').id, password: 'qwertyui')
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/requests/towns_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+  3) AdminUserToTown should be add user to towns
+     Failure/Error: user1 = FactoryGirl.create(:user)
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/models/admin_user_to_town_spec.rb:11:in `block (2 levels) in <top (required)>'
+
+  4) AdminUserToTown should be add towns to user
+     Failure/Error: user = FactoryGirl.create(:user)
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/models/admin_user_to_town_spec.rb:5:in `block (2 levels) in <top (required)>'
+
+  5) UsersHelper check card_number_text should return nil if no cards
+     Failure/Error: card_number_text(FactoryGirl.create(:user)).should be_nil
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/helpers/users_helper_spec.rb:16:in `block (3 levels) in <top (required)>'
+
+  6) UsersHelper check card_number_text should return active card number
+     Failure/Error: active_card = FactoryGirl.create(:card_info, discard: false)
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Card number Помилка: Дублюється номер карти!
+     # ./spec/helpers/users_helper_spec.rb:24:in `block (3 levels) in <top (required)>'
+
+  7) UsersHelper check card_number_text should return nil if no active card
+     Failure/Error: card_number_text(FactoryGirl.create(:user, card_infos: [FactoryGirl.create(:card_info, discard: true)])).should be_nil
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Card number Помилка: Дублюється номер карти!
+     # ./spec/helpers/users_helper_spec.rb:20:in `block (3 levels) in <top (required)>'
+
+  8) Role should be uniquenes name
+     Failure/Error: role = FactoryGirl.create(:role)
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Name Назва прав доступу повинна бути унікальною!
+     # ./spec/models/role_spec.rb:15:in `block (2 levels) in <top (required)>'
+
+  9) Role should add valid record to database
+     Failure/Error: FactoryGirl.create(:role)
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Name Назва прав доступу повинна бути унікальною!
+     # ./spec/models/role_spec.rb:10:in `block (2 levels) in <top (required)>'
+
+  10) CardInfo card number should get only active cards
+     Failure/Error: inactive = FactoryGirl.create(:card_info, discard: true)
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Card number Помилка: Дублюється номер карти!
+     # ./spec/models/card_info_spec.rb:31:in `block (3 levels) in <top (required)>'
+
+  11) CardInfo card number should be save with valid data
+     Failure/Error: FactoryGirl.create(:card_info)
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Card number Помилка: Дублюється номер карти!
+     # ./spec/models/card_info_spec.rb:26:in `block (3 levels) in <top (required)>'
+
+  12) CardInfo card number should be unique
+     Failure/Error: card_num = FactoryGirl.create(:card_info).card_number
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Card number Помилка: Дублюється номер карти!
+     # ./spec/models/card_info_spec.rb:20:in `block (3 levels) in <top (required)>'
+
+  13) CardInfo card number should be valid with right data
+     Failure/Error: FactoryGirl.build(:card_info).should be_valid
+       expected #<CardInfo id: nil, user_id: nil, barcode: "3006", send_date: "2013-03-09 13:48:18", created_at: nil, updated_at: nil, comment: "Два дня после этого Ростов не видал Долохова у свои...", valid_until: "2013-04-03 13:48:18", valid_unlimit: false, discard: false, card_number: "3006", reminder_date: "2013-04-08 13:48:18", payment_reward: 20> to be valid, but got errors: Card number Помилка: Дублюється номер карти!
+     # ./spec/models/card_info_spec.rb:16:in `block (3 levels) in <top (required)>'
+
+  14) TownsController GET new assigns a new town as @town
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  15) TownsController PUT update with invalid params re-renders the 'edit' template
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  16) TownsController PUT update with invalid params assigns the town as @town
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  17) TownsController PUT update with valid params updates the requested town
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  18) TownsController PUT update with valid params redirects to the town
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  19) TownsController PUT update with valid params assigns the requested town as @town
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  20) TownsController POST create with invalid params re-renders the 'new' template
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  21) TownsController POST create with invalid params assigns a newly created but unsaved town as @town
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  22) TownsController POST create with valid params creates a new Town
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  23) TownsController POST create with valid params redirects to the created town
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  24) TownsController POST create with valid params assigns a newly created town as @town
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  25) TownsController GET index assigns all towns as @towns
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  26) TownsController GET edit assigns the requested town as @town
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  27) TownsController GET show assigns the requested town as @town
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  28) TownsController DELETE destroy redirects to the towns list
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  29) TownsController DELETE destroy destroys the requested town
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/support.rb:5:in `block in login_admin'
+
+  30) User should be valid without email
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  31) User should be sorted by birthdate asc
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  32) User should be sorted by surname asc
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  33) User should not add user to database if new
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  34) User should add user to db with valid data
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  35) User should have unique email
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  36) User should be sorted by town office asc
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  37) User associated models card_infos should destroy when user destroy
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  38) User associated models card_infos should have many records
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  39) User associated models contact should destroy belonging record
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  40) User associated models contact should has one valid record
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  41) User associated models phones should destroy when user destroy
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  42) User associated models phones should have many records
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  43) User associated models user_detail shoud destroy belonging user_detail
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  44) User associated models user_detail should have one record
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  45) User get and search users should return users that have defined letters
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  46) User get and search users revised users should return not revised users
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  47) User get and search users revised users should return revised users
+     Failure/Error: User.find(1).delete
+     ActiveRecord::RecordNotFound:
+       Couldn't find User with id=1
+     # ./spec/models/user_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  48) Users Regular should redirect to user profile if regular user exist and login
+     Failure/Error: @user_reg = FactoryGirl.create(:user, role_id: Role.find_by_name('RegularUser').id)
+     ActiveRecord::RecordInvalid:
+       Виникли помилки: Email вже існує
+     # ./spec/requests/users_spec.rb:49:in `block (3 levels) in <top (required)>'
+
+  49) Users Unlogged should cause log in user
+     Failure/Error: page.should have_content "You are not authorized to access this page."
+       expected there to be text "You are not authorized to access this page." in "Ви не можете бачити цю сторінку. Увійдіть будь-ласка. Вхід Номер карти або e-mail Пароль Запам'ятати мене Нагадати пароль?"
+     # ./spec/requests/users_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+Finished in 3.89 seconds
+90 examples, 49 failures
+
+Failed examples:
+
+rspec ./spec/requests/towns_spec.rb:24 # Towns for RegularUser should not allow to visit page
+rspec ./spec/requests/towns_spec.rb:17 # Towns for SuperAdminUser should allow visit page
+rspec ./spec/models/admin_user_to_town_spec.rb:10 # AdminUserToTown should be add user to towns
+rspec ./spec/models/admin_user_to_town_spec.rb:4 # AdminUserToTown should be add towns to user
+rspec ./spec/helpers/users_helper_spec.rb:15 # UsersHelper check card_number_text should return nil if no cards
+rspec ./spec/helpers/users_helper_spec.rb:23 # UsersHelper check card_number_text should return active card number
+rspec ./spec/helpers/users_helper_spec.rb:19 # UsersHelper check card_number_text should return nil if no active card
+rspec ./spec/models/role_spec.rb:14 # Role should be uniquenes name
+rspec ./spec/models/role_spec.rb:8 # Role should add valid record to database
+rspec ./spec/models/card_info_spec.rb:30 # CardInfo card number should get only active cards
+rspec ./spec/models/card_info_spec.rb:24 # CardInfo card number should be save with valid data
+rspec ./spec/models/card_info_spec.rb:19 # CardInfo card number should be unique
+rspec ./spec/models/card_info_spec.rb:15 # CardInfo card number should be valid with right data
+rspec ./spec/controllers/towns_controller_spec.rb:55 # TownsController GET new assigns a new town as @town
+rspec ./spec/controllers/towns_controller_spec.rb:143 # TownsController PUT update with invalid params re-renders the 'edit' template
+rspec ./spec/controllers/towns_controller_spec.rb:136 # TownsController PUT update with invalid params assigns the town as @town
+rspec ./spec/controllers/towns_controller_spec.rb:112 # TownsController PUT update with valid params updates the requested town
+rspec ./spec/controllers/towns_controller_spec.rb:126 # TownsController PUT update with valid params redirects to the town
+rspec ./spec/controllers/towns_controller_spec.rb:121 # TownsController PUT update with valid params assigns the requested town as @town
+rspec ./spec/controllers/towns_controller_spec.rb:97 # TownsController POST create with invalid params re-renders the 'new' template
+rspec ./spec/controllers/towns_controller_spec.rb:90 # TownsController POST create with invalid params assigns a newly created but unsaved town as @town
+rspec ./spec/controllers/towns_controller_spec.rb:71 # TownsController POST create with valid params creates a new Town
+rspec ./spec/controllers/towns_controller_spec.rb:83 # TownsController POST create with valid params redirects to the created town
+rspec ./spec/controllers/towns_controller_spec.rb:77 # TownsController POST create with valid params assigns a newly created town as @town
+rspec ./spec/controllers/towns_controller_spec.rb:39 # TownsController GET index assigns all towns as @towns
+rspec ./spec/controllers/towns_controller_spec.rb:62 # TownsController GET edit assigns the requested town as @town
+rspec ./spec/controllers/towns_controller_spec.rb:47 # TownsController GET show assigns the requested town as @town
+rspec ./spec/controllers/towns_controller_spec.rb:163 # TownsController DELETE destroy redirects to the towns list
+rspec ./spec/controllers/towns_controller_spec.rb:157 # TownsController DELETE destroy destroys the requested town
+rspec ./spec/models/user_spec.rb:20 # User should be valid without email
+rspec ./spec/models/user_spec.rb:37 # User should be sorted by birthdate asc
+rspec ./spec/models/user_spec.rb:30 # User should be sorted by surname asc
+rspec ./spec/models/user_spec.rb:9 # User should not add user to database if new
+rspec ./spec/models/user_spec.rb:24 # User should add user to db with valid data
+rspec ./spec/models/user_spec.rb:14 # User should have unique email
+rspec ./spec/models/user_spec.rb:45 # User should be sorted by town office asc
+rspec ./spec/models/user_spec.rb:103 # User associated models card_infos should destroy when user destroy
+rspec ./spec/models/user_spec.rb:97 # User associated models card_infos should have many records
+rspec ./spec/models/user_spec.rb:135 # User associated models contact should destroy belonging record
+rspec ./spec/models/user_spec.rb:129 # User associated models contact should has one valid record
+rspec ./spec/models/user_spec.rb:119 # User associated models phones should destroy when user destroy
+rspec ./spec/models/user_spec.rb:113 # User associated models phones should have many records
+rspec ./spec/models/user_spec.rb:87 # User associated models user_detail shoud destroy belonging user_detail
+rspec ./spec/models/user_spec.rb:81 # User associated models user_detail should have one record
+rspec ./spec/models/user_spec.rb:53 # User get and search users should return users that have defined letters
+rspec ./spec/models/user_spec.rb:73 # User get and search users revised users should return not revised users
+rspec ./spec/models/user_spec.rb:69 # User get and search users revised users should return revised users
+rspec ./spec/requests/users_spec.rb:52 # Users Regular should redirect to user profile if regular user exist and login
+rspec ./spec/requests/users_spec.rb:9 # Users Unlogged should cause log in user
+
+Randomized with seed 37080
+

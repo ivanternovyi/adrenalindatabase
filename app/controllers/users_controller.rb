@@ -33,6 +33,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.registration_timestamp = DateTime.now
   	if @user.save
   		redirect_to root_path
   	else

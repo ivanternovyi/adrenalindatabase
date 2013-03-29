@@ -8,7 +8,7 @@ describe "Users" do
   describe "Unlogged" do
     it "should cause log in user" do
       visit '/'
-      page.should have_content "You are not authorized to access this page."    
+      page.should have_content "Ви не можете бачити цю сторінку. Увійдіть будь-ласка. Вхід Номер карти або e-mail Пароль Запам'ятати мене Нагадати пароль?"    
     end
 
     describe "Registration" do
