@@ -30,7 +30,7 @@ module ApplicationHelper
   end
 
   def input_hint_text(txt)
-    raw "<br /><span class=\"hint-text\">#{txt}</span>"
+    raw "<div class=\"hint-text\">#{txt}</div>"
   end
 
   def date_begin_cards

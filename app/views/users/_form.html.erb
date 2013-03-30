@@ -43,9 +43,17 @@
 		<% end %>
 	</div>
 	<div class="grid_8 omega">
-		<div class="grid_8 alpha omega">
+		<div class="grid_4 alpha">
 			<%= f.label :email, 'Адреса електронної скриньки' %><br />
 			<%= f.email_field :email %>
+		</div>
+		<div class="grid_4 omega center_align">
+			<%= f.fields_for :contact do |by_email| %>
+				<%= by_email.check_box :by_email %>
+				<%= by_email.label :by_email, 'Отримувати повідомлення' %>
+			<% end %>
+		</div>
+		<div class="grid_8 alpha omega">
 			<%= input_hint_text 'Електронна пошта потрібна, якщо Ви самі хочете контролювати абонплату та інформацию про себе.' %>
 		</div>
 		<div class="grid_8 alpha omega">
@@ -71,11 +79,9 @@
 
 	<div class="grid_16 alpha omega">
 		<fieldset>
-			<legend>Картки</legend>
 			<p>
 				<%= f.label :town_office, raw('Найближчий до Вас осередок &laquo;Адреналіну&raquo;') %><br />
 				<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id, include_blank: true %>
-				<%= input_hint_text 'Найзручніше для Вас місто з офісом &laquo;Адреналіну&raquo;' %>
 			</p>
 			<% if !current_user.nil? && (current_user.role?(:super_admin_user) || current_user.role?(:region_admin_user)) %>
 					<%= f.fields_for :card_infos do |builder| %>
