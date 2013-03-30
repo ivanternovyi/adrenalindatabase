@@ -57,7 +57,7 @@
 				<%= f.label :password_confirmation, 'Підтвердження паролю' %><br />
 				<%= f.password_field :password_confirmation, autocomplete: :off %>
 			</div>
-			<%= input_hint_text 'Має бути не меньше 8 символів. Якшо не хочете змінювати, залишайте поля порожніми.' %>
+			<%= input_hint_text 'ПАРОЛЬ має містити не менше 8 символів. Якщо нехочете змінювати пароль, залишайте поля порожніми.' %>
 		</div>
 		<%= f.fields_for :contact do |builder| %>
 			<%= render 'users/fields/contact_fields', f: builder %>
