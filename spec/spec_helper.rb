@@ -43,7 +43,7 @@ RSpec.configure do |config|
   config.extend ControllerMacros, type: :controller
 
   config.before(:suite) do
-  DatabaseCleaner.strategy = :truncation, { except: %w[towns roles] }
+  DatabaseCleaner.strategy = :transaction #:truncation, { except: %w[towns roles] }
   DatabaseCleaner.clean_with(:transaction)
   end
 
