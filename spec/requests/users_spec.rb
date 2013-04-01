@@ -14,7 +14,7 @@ describe "Users" do
     describe "Registration" do
       it "should create new user" do
         visit '/users/new'
-        page.should have_content "Новый учасник"
+        page.should have_content "Заявка на членство в ВГО «Адреналін»"
       end
 
       it "should not see topmenu" do

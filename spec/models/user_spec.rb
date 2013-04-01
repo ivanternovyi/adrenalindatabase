@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe User do
+  before(:each) do
+    User.delete_all
+  end
   it "should not add user to database if new" do
     usr = FactoryGirl.build(:user)
     usr.id.should be_nil
