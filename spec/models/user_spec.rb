@@ -111,7 +111,7 @@ describe User do
       it "should have many records" do
         usr = FactoryGirl.create(:user)
         3.times{ usr.phones << FactoryGirl.create(:phone) }
-        usr.phones.count.should be(3)
+        usr.phones.length.should be(3)
       end    
 
       it "should destroy when user destroy" do

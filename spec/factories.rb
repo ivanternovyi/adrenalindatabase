@@ -46,7 +46,9 @@ FactoryGirl.define do
   end
 
   factory :phone do
-    sequence(:phone_number)   { generate(:telephone) } #phone mask /(^\+[0-9]{12,14}$)|(^[0-9]{11,12}$)/
+    sequence(:phone_number)   { |n| pn = (999999999999 - n).to_s
+      "+#{pn[0]}#{pn[1]} (#{pn[2]}#{pn[3]}#{pn[4]}) #{pn[5]}#{pn[6]}#{pn[7]}-#{pn[8]}#{pn[9]}-#{pn[10]}#{pn[11]}"
+     }
     main                      false
   end
 
@@ -58,17 +60,6 @@ FactoryGirl.define do
     icq_number  { |n| "452343#{n}".to_i }
     skype_name  { |n| "skypeName#{n}" }
   end
-
-  sequence(:telephone) { |n|
-    length=n.to_s.length
-    if length >= 11 then
-      n.to_s
-      "+3#{n}"
-    else
-      padded_id='0' * (11-length)  + n.to_s
-      "+3#{padded_id}"
-    end
-  }
 
   sequence(:random_string) {|n| "Два дня после этого Ростов не видал Долохова у своих и не заставал его дома; на третий день он получил от него записку.
 «Так как я в доме у вас бывать более не намерен по известным тебе причинам и еду в армию, то нынче вечером я даю моим приятелям прощальную пирушку — приезжай в Английскую гостиницу». Ростов в десятом часу, из театра, где он был вместе с своими и Денисовым, приехал в назначенный день в Английскую гостиницу. Его тотчас же провели в лучшее помещение гостиницы, занятое на эту ночь Долоховым.#{n}" }

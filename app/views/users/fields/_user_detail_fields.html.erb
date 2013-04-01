@@ -16,11 +16,10 @@
     <%= f.label :birthday, 'Дата народження' %><br />
     <%= f.date_select :birthday, {order: [:day, :month, :year], start_year: Date.today.year - 70, end_year: Date.today.year - 14, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
   </p>      
-  <p>
-    <%= f.label :post_address, 'Поштова адреса' %><br />
-    <%= f.text_area :post_address, cols: 40, rows: 2 %>
-    <%= input_hint_text 'Обов\'язково. Необхідно для отримання повідомлень від ВГО «Адреналін», в т.ч. картки «I`m Adrenalin»' %>
-  </p>      
+  <%= f.label :post_address, 'Поштова адреса' %><br />
+  <%= f.text_area :post_address, cols: 40, rows: 2 %>
+  <%= input_hint_text 'Обов\'язково. Необхідно для отримання повідомлень від ВГО «Адреналін», в т.ч. картки «I`m Adrenalin»' %>
+  <p></p>
   <p>
     <%= f.label :comment, 'Коментар' %><br />
     <%= f.text_area :comment, cols: 40, rows: 2 %>

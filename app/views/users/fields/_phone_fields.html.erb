@@ -3,6 +3,7 @@
 	<%= f.text_field :phone_number, class: "phone-field" %>
 	<%= f.check_box :main %>
   <%= f.label :main, "Отримувати СМС" %>
+  <%= input_hint_text "Наприклад +38 (099) 999-99-99" %>
 	<%= f.hidden_field :_destroy %>
 	<%= link_to '[X]', '#', class: "remove_fields" %>
 </div>
