@@ -9,6 +9,10 @@ When /^I am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
+When /^I go to (.+)$/ do |page_name|
+  visit path_to(page_name)
+end
+
 When /^I fill in "([^\"]*)" with "([^\"]*)"$/ do |field, value|
   fill_in(field, with: value)
 end
@@ -22,5 +26,9 @@ When /^I click "([^\"]*)"$/ do |link|
 end
 
 Then /^page should have text "([^\"]*)"$/ do |text|
+  page.should have_content(text)
+end
+
+Then /^I have to see "([^\"]*)"$/ do |text|
   page.should have_content(text)
 end

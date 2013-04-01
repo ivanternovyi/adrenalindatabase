@@ -5,6 +5,8 @@ module NavigationHelpers
       '/'
     when /login\spage/
       '/users/sign_in'
+    when /towns\spage/
+      '/towns'
     else
       begin
         page_name =~ /the (.*) page/
