@@ -1,6 +1,6 @@
 <div class="grid_8 alpha omega dynamic_container">
 	<%= f.label :phone_number, 'Номер телефону' %><br />
-	<%= f.text_field :phone_number %>
+	<%= f.text_field :phone_number, class: "phone-field" %>
 	<%= f.check_box :main %>
   <%= f.label :main, "Отримувати СМС" %>
 	<%= f.hidden_field :_destroy %>
