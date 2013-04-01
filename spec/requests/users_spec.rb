@@ -46,7 +46,7 @@ describe "Users" do
 
   describe "Regular" do
     before(:each) do
-      @user_reg = FactoryGirl.create(:user, role_id: Role.find_by_name('RegularUser').id)
+      @user_reg = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail), role_id: Role.find_by_name('RegularUser').id)
     end
 
     it "should redirect to user profile if regular user exist and login" do
@@ -54,7 +54,7 @@ describe "Users" do
       fill_in "Номер карти або e-mail", with: @user_reg.email
       fill_in "Пароль", with: @user_reg.password
       click_button 'Вхід'
-      page.should have_content "SHOW IT"
+      page.should have_content "Профіль #{@user_reg.user_detail.surname} #{@user_reg.user_detail.name} #{@user_reg.user_detail.mid_name}"
     end
   end
 end

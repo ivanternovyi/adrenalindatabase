@@ -21,26 +21,17 @@ describe "Towns" do
   end
 
   describe "for RegularUser" do
-    it "should not allow to visit page" do
-      login_as_regular_user
-      visit towns_path
-      page.should have_content 'SHOW IT'
+    before(:each) do 
+      visit '/'
+      @usr = FactoryGirl.create(:user, user_detail: FactoryGirl.create(:user_detail), role_id: Role.find_by_name('RegularUser').id, password: 'qwertyui')
+      fill_in 'Номер карти або e-mail', with: @usr.email
+      fill_in 'Пароль', with: 'qwertyui'
+      click_button 'Вхід'
     end
-  end
-
-  # def login_as_admin
-  #   visit '/'
-  #   adm = FactoryGirl.create(:user, role_id: Role.find_by_name('SuperAdminUser').id, password: 'qwertyui')
-  #   fill_in 'Номер карти або e-mail', with: adm.email
-  #   fill_in 'Пароль', with: 'qwertyui'
-  #   click_button 'Вхід'
-  # end
-
-  def login_as_regular_user
-    visit '/'
-    adm = FactoryGirl.create(:user, role_id: Role.find_by_name('RegularUser').id, password: 'qwertyui')
-    fill_in 'Номер карти або e-mail', with: adm.email
-    fill_in 'Пароль', with: 'qwertyui'
-    click_button 'Вхід'
+    
+    it "should not allow to visit page" do
+      visit towns_path
+      page.should have_content "Профіль #{@usr.user_detail.surname} #{@usr.user_detail.name} #{@usr.user_detail.mid_name}"
+    end
   end
 end
