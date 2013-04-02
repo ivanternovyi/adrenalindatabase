@@ -80,7 +80,7 @@
 	<div class="grid_16 alpha omega">
 		<fieldset>
 			<p>
-				<%= f.label :town_office, raw('Найближчий до Вас осередок &laquo;Адреналіну&raquo;') %><br />
+				<%= f.label :town_office, raw('Найближчий до Вас осередок «Адреналіну»') %><br />
 				<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id, include_blank: true %>
 			</p>
 			<% if !current_user.nil? && (current_user.role?(:super_admin_user) || current_user.role?(:region_admin_user)) %>

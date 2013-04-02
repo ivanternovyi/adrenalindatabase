@@ -2,7 +2,7 @@ Feature: Regular user can use application
   Login existing regular users
   View info about himself
   Logout regular user
-  Register
+  Restriction access
 
   Background: Existing RegularUser autorizes succesfully
     Given I am a RegularUser with name "Призв Тестимя Батьк", card number "0232" and password "1q2w3e4r"
