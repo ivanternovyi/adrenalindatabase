@@ -21,3 +21,12 @@ Feature: Regular user can use application
   Scenario: Restrict access to towns area
     When I go to towns page
     Then I have to see "Ви не можете перейти на цю сторінку."
+
+  Scenario: Deny to create new user
+    When I go to new user page
+    Then I have to see "Ви не можете перейти на цю сторінку."
+
+  Scenario: Deny to access to other user profile
+    Given existing RegularUser with name "Іванов Іван Іванович", card number "0112" and password "1qaz2wsx"
+    When I try to go to view user page with card number "0112"
+    Then I have to see "Ви не можете перейти на цю сторінку."
