@@ -11,7 +11,7 @@ module RegistrationHelpers
     case field
     when /Адреса\sелектронної\sскриньки/
       check 'user_contact_attributes_by_email'
-    when /ICQ#\s/
+    when /ICQ#/
       check 'user_contact_attributes_by_icq'
     when /Skype/
       check 'user_contact_attributes_by_skype'

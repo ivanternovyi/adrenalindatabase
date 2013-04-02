@@ -190,6 +190,7 @@ DEPENDENCIES
   rails (= 3.2.13)
   rspec-rails
   sass-rails (~> 3.2.3)
+  selenium-webdriver
   sqlite3
   uglifier (>= 1.0.3)
   will_paginate (~> 3.0.0)

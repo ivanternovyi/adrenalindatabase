@@ -13,6 +13,12 @@ When /^I fill in "(.*?)" with "(.*?)" and set checkbox "(.*?)"$/ do |field, val,
   set_checked field
 end
 
+When /^I fill jqueryfield in "(.*?)" with "(.*?)" and set checkbox "(.*?)"$/ do |field, val, box|
+  find('#' + field).click()
+  find('#' + field).native.send_keys(val)
+  set_checked field
+end
+
 When /^I set checkbox "(.*?)"$/ do |key|
   check key
 end
