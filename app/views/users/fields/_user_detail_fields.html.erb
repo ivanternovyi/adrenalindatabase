@@ -1,27 +1,26 @@
-<fieldset>
-  <legend>Особисті данні</legend>
-  <div class="grid_4 alpha">
-    <%= f.label :surname, 'Прізвище' %><br />
-    <%= f.text_field :surname %>
-  </div>      
-  <div class="grid_4 omega">
-    <%= f.label :name, 'Ім\'я' %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="grid_8 alpha omega">
-    <%= f.label :mid_name, 'По-Батькові' %><br />
-    <%= f.text_field :mid_name, size: 70 %>
-  </div>     
-  <p>
-    <%= f.label :birthday, 'Дата народження' %><br />
-    <%= f.date_select :birthday, {order: [:day, :month, :year], start_year: Date.today.year - 70, end_year: Date.today.year - 14, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
-  </p>      
+<h2>Особисті данні</h2>
+<div class="grid_4 alpha">
+  <%= f.label :surname, 'Прізвище' %><br />
+  <%= f.text_field :surname %>
+</div>      
+<div class="grid_4 omega">
+  <%= f.label :name, 'Ім\'я' %><br />
+  <%= f.text_field :name %>
+</div>
+<div class="grid_8 alpha omega">
+  <%= f.label :mid_name, 'По-Батькові' %><br />
+  <%= f.text_field :mid_name, size: 70 %>
+</div>     
+<div class="grid_8 alpha omega">
+  <%= f.label :birthday, 'Дата народження' %><br />
+  <%= f.date_select :birthday, {order: [:day, :month, :year], start_year: Date.today.year - 70, end_year: Date.today.year - 14, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
+</div>    
+<div class="grid_8 alpha omega">  
   <%= f.label :post_address, 'Поштова адреса' %><br />
   <%= f.text_area :post_address, cols: 40, rows: 2 %>
   <%= input_hint_text 'Обов\'язково. Необхідно для отримання повідомлень від ВГО «Адреналін», в т.ч. картки «I`m Adrenalin»' %>
-  <p></p>
-  <p>
-    <%= f.label :comment, 'Коментар' %><br />
-    <%= f.text_area :comment, cols: 40, rows: 2 %>
-  </p>
-</fieldset>
+</div>
+<div class="grid_8 alpha omega">
+  <%= f.label :comment, 'Коментар' %><br />
+  <%= f.text_area :comment, cols: 40, rows: 2 %>
+</div>

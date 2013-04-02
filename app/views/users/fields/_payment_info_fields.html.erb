@@ -1,21 +1,18 @@
-<div class="grid_8 alpha omega tst dynamic_container">
-	<fieldset>
-		<div class="grid_3 alpha">
-			<%= f.label :payment_date, 'Дата оплати' %><br />
-			<%= f.date_select :payment_date, { include_blank: true, order: [:day, :month, :year], start_year: date_begin_cards, end_year: date_end_cards, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
-		</div>
-		<div class="grid_2">
-			<%= f.label :payment, 'Сумма платежу' %><br />
-			<%= f.text_field :payment, size: 10 %>
-		</div>
-		<div class="grid_2">
-			<%= f.label :paying_method, 'Метод проплати' %><br />
-			<%= f.text_field :paying_method, size: 10 %>
-		</div>
-		<div class="grid_1 omega">
-			<%= f.hidden_field :_destroy %>
-			<%= link_to '[X]', '#', class: "remove_fields" %>
-		</div>
-		<div class="clear"></div>
-	</fieldset>
+<div class="grid_8 alpha omega dynamic_container input_item bottom_stroke">
+	<div class="grid_3 alpha">
+		<%= f.label :payment_date, 'Дата оплати' %><br />
+		<%= f.date_select :payment_date, { include_blank: true, order: [:day, :month, :year], start_year: date_begin_cards, end_year: date_end_cards, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
+	</div>
+	<div class="grid_2">
+		<%= f.label :payment, 'Сумма платежу' %><br />
+		<%= f.text_field :payment, size: 10 %>
+	</div>
+	<div class="grid_2">
+		<%= f.label :paying_method, 'Метод проплати' %><br />
+		<%= f.text_field :paying_method, size: 10 %>
+	</div>
+	<div class="grid_1 omega center_align">
+		<%= f.hidden_field :_destroy %>
+		<%= link_to '[X]', '#', class: "remove_fields" %>
+	</div>
 </div>

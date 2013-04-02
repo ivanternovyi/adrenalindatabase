@@ -23,80 +23,91 @@
 	  </div>
 	  <div class="clear"></div>
   
-	  <div class="grid_16">
+	  <div class="grid_16 alpha omega">
 	  	<%= f.label :not_revised, 'Не підтверджені дані' %>
 	  	<%= f.check_box :not_revised %>
 	  </div>
 	  <div class="clear"></div>
  
 	  <% if !@user.user_detail.nil? %>
-		  <div class="grid_16">
+		  <div class="grid_16 alpha omega">
 			  Користувача зареєстровано <%= @user.user_detail.registration_timestamp %>
 			</div>
 			<div class="clear"></div>
 		<% end %>
   <% end %>
 
-	<div class="grid_8 alpha">
-		<%= f.fields_for :user_detail do |builder| %>
-			<%= render 'users/fields/user_detail_fields', f: builder %>
-		<% end %>
-	</div>
-	<div class="grid_8 omega">
-		<div class="grid_4 alpha">
-			<%= f.label :email, 'Адреса електронної скриньки' %><br />
-			<%= f.email_field :email %>
-		</div>
-		<div class="grid_4 omega center_align">
-			<%= f.fields_for :contact do |by_email| %>
-				<%= by_email.check_box :by_email %>
-				<%= by_email.label :by_email, 'Отримувати повідомлення' %>
+	<div class="grid_8 alpha fieldset_shadow">
+		<div class="grid_8 alpha omega fieldset_outline">
+			<%= f.fields_for :user_detail do |builder| %>
+				<%= render 'users/fields/user_detail_fields', f: builder %>
 			<% end %>
 		</div>
-		<div class="grid_8 alpha omega">
-			<%= input_hint_text 'Електронна пошта потрібна, якщо Ви самі хочете контролювати абонплату та інформацию про себе.' %>
-		</div>
-		<div class="grid_8 alpha omega">
-			<div class="grid_4 alpha">
-				<%= f.label :password, 'Пароль' %><br />
-				<%= f.password_field :password, autocomplete: :off %>
+	</div>
+
+	<div class="grid_8 omega fieldset_shadow">
+		<div class="grid_8 alpha omega fieldset_outline">
+			<h2>Контактна інформація</h2>
+			<div class="grid_8 alpha omega input_item">
+				<div class="grid_4 alpha">
+					<%= f.label :email, 'Адреса електронної скриньки' %><br />
+					<%= f.email_field :email %>
+				</div>
+				<div class="grid_4 omega center_align">
+					<%= f.fields_for :contact do |by_email| %>
+						<%= by_email.check_box :by_email %>
+						<%= by_email.label :by_email, 'Отримувати повідомлення' %>
+					<% end %>
+				</div>
+				<div class="grid_8 alpha omega">
+					<%= input_hint_text 'Електронна пошта потрібна, якщо Ви самі хочете контролювати абонплату та інформацию про себе.' %>
+				</div>
 			</div>
-			<div class="grid_4 omega">
-				<%= f.label :password_confirmation, 'Підтвердження паролю' %><br />
-				<%= f.password_field :password_confirmation, autocomplete: :off %>
+			<div class="grid_8 alpha omega input_item">
+				<div class="grid_4 alpha">
+					<%= f.label :password, 'Пароль' %><br />
+					<%= f.password_field :password, autocomplete: :off %>
+				</div>
+				<div class="grid_4 omega">
+					<%= f.label :password_confirmation, 'Підтвердження паролю' %><br />
+					<%= f.password_field :password_confirmation, autocomplete: :off %>
+				</div>
+				<%= input_hint_text 'ПАРОЛЬ має містити не менше 8 символів. Якщо нехочете змінювати пароль, залишайте поля порожніми.' %>
 			</div>
-			<%= input_hint_text 'ПАРОЛЬ має містити не менше 8 символів. Якщо нехочете змінювати пароль, залишайте поля порожніми.' %>
+			<%= f.fields_for :contact do |builder| %>
+				<%= render 'users/fields/contact_fields', f: builder %>
+			<% end %>
+			<div>
+				<%= f.fields_for :phones do |phon| %>
+					<%= render 'users/fields/phone_fields', f: phon %>
+				<% end %>
+				<%= link_to_add_fields 'Додати телефон', f, :phones %>
+			</div>
 		</div>
-		<%= f.fields_for :contact do |builder| %>
-			<%= render 'users/fields/contact_fields', f: builder %>
-		<% end %>
-		<%= f.fields_for :phones do |phon| %>
-			<%= render 'users/fields/phone_fields', f: phon %>
-		<% end %>
-		<%= link_to_add_fields 'Додати телефон', f, :phones %>
 	</div>
 	<div class="clear"></div>
 
-	<div class="grid_16 alpha omega">
-		<fieldset>
-			<p>
+	<div class="grid_16 alpha omega fieldset_shadow">
+		<div class="grid_16 alpha omega fieldset_outline">
+			<div class="grid_16 alpha omega input_item">
 				<%= f.label :town_office, raw('Найближчий до Вас осередок «Адреналіну»') %><br />
 				<%= f.select :town_office_id, Town.with_office.collect{|town| [town.name, town.id]}, :selected => @user.town_office_id, include_blank: true %>
-			</p>
+			</div>
 			<% if !current_user.nil? && (current_user.role?(:super_admin_user) || current_user.role?(:region_admin_user)) %>
+				<div>
 					<%= f.fields_for :card_infos do |builder| %>
 						<%= render 'users/fields/card_info_fields', f: builder %>
 					<% end %>
+				</div>
 			<% end %>
 			<div class="clear"></div>
 			<%= admins_access { link_to_add_fields 'Додати карту', f, :card_infos } %>
-		</fieldset>
+		</div>
 	</div>
 
 	<% if !current_user.nil? && current_user.role?(:super_admin_user) %>
-		<div class="grid_16 alpha omega">
-			<fieldset>
-				<legend>Права і доступи</legend>
+		<div class="grid_16 alpha omega fieldset">
+				<h2>Права і доступи</h2>
 			<div class="grid_3 alpha">
 				<%= f.label :role_id, 'Права доступу' %>
 				<%= f.select :role_id, Role.all.collect{ |role| [role.name, role.id]}, selected: @user.role_id %>
@@ -106,7 +117,6 @@
 					<%= check_box_tag 'user[town_ids][]', office.id, @user.towns.include?(office)  %><%= office.name %><br />
 				<% end %>
 			</div>
-			</fieldset>
 		</div>
 	<% end %>
 	<div class="clear"></div>

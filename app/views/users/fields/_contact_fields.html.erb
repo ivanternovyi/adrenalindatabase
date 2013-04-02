@@ -1,14 +1,22 @@
-<fieldset>
-	<p>
+<div class="grid_8 alpha omega input_item">
+	<div class="grid_4 alpha">
 		<%= f.label :icq_number, 'ICQ#' %>
 		<br />
 		<%= f.text_field :icq_number %>
+	</div>
+	<div class="grid_4 omega center_align">
 		<%= f.check_box :by_icq %>
 		<%= f.label :by_icq, 'Отримувати повідомлення' %>
-	</p>
-	<%= f.label :skype_name, 'Skype' %>
-	<br />
-	<%= f.text_field :skype_name %>
-	<%= f.check_box :by_skype %>
-	<%= f.label :by_skype, 'Отримувати повідомлення' %>
-</fieldset>
+	</div>
+</div>
+<div class="grid_8 alpha omega input_item">
+	<div class="grid_4 alpha">
+		<%= f.label :skype_name, 'Skype' %>
+		<br />
+		<%= f.text_field :skype_name %>
+	</div>
+	<div class="grid_4 omega center_align">
+		<%= f.check_box :by_skype %>
+		<%= f.label :by_skype, 'Отримувати повідомлення' %>
+	</div>
+</div>
