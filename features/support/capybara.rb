@@ -1,2 +1,4 @@
+Capybara.run_server = true
 Capybara.javascript_driver = :selenium
-Capybara.app_host = "http://127.0.0.1:3000"
+Capybara.server_port = 8222
+Capybara.app_host = "http://127.0.0.1:8222"

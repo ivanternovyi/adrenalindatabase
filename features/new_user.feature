@@ -1,3 +1,4 @@
+@javascript
 Feature: New user registration
   Visit login form and registration form.
   Filling registration form from several several tries.
@@ -9,7 +10,6 @@ Feature: New user registration
     Then I have to see "Заявка на членство в ВГО «Адреналін»"
     And I have to see "Особисті данні"
 
-  @javascript
   Scenario: Register from first try
     When I fill in "Прізвище" with "Иванов"
     And I fill in "Ім'я" with "Петр"
