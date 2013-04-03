@@ -8,12 +8,24 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<%= render 'layouts/header' %>
-	<%= admins_access { render 'layouts/main_nav' } %>
-	<%= render 'layouts/alert_notice' %>
-	<div class="container_16">
-	  <%= yield %>
-	</div>
+
+  <%= render 'layouts/header' %>
+
+  <%= admins_access { render 'layouts/main_nav' } %>
+
+  <%= render 'layouts/alert_notice' %>
+
+  <div class="container_16">
+    <%= yield %>
+  </div>
+
   <%= render 'layouts/footer' %>
+
+  <% if !session[:registration_notice].nil? %>
+    <div id="registration_notice">
+      <%= "#{session[:registration_notice]}" %>
+    </div>
+    <% session[:registration_notice] = nil %>
+  <% end %>
 </body>
 </html>
