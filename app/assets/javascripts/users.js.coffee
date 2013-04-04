@@ -16,5 +16,5 @@ jQuery ->
 
   $('.phone-field').mask('+99 (999) 999-99-99')
 
-  if $('#registration_notice').length >= 1
-    alert $('#registration_notice').text()
+  # if $('#registration_notice').length >= 1
+  #   alert $('#registration_notice').text()

@@ -1,0 +1,8 @@
+<div class="container_16">
+  <div id="registration_notice" class= "grid_16 fieldset_shadow">
+    <div class="grid_16 alpha omega fieldset_outline inner_plate">
+      <p><%= "#{session[:registration_notice]}" %></p>
+      <% session[:registration_notice] = nil %>
+    </div>
+  </div>
+</div>

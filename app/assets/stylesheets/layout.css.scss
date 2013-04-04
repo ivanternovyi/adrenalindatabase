@@ -133,6 +133,15 @@ div.fieldset_shadow {
 	margin-top: 12px;
 }
 
-div#registration_notice {
-	display: none;
+#registration_notice {
+	background-color: #EFEFEF;
+	.inner_plate {
+		overflow: hidden;
+		p {
+			padding: 10px 10px;
+			font-size: 18px;
+			font-weight: bold;
+			margin: 0;
+		}
+	}
 }

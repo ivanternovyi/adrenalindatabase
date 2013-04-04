@@ -15,17 +15,14 @@
 
   <%= render 'layouts/alert_notice' %>
 
+  <% if !session[:registration_notice].nil? %>
+    <%= render 'layouts/informer' %>
+  <% end %>
+
   <div class="container_16">
     <%= yield %>
   </div>
 
   <%= render 'layouts/footer' %>
-
-  <% if !session[:registration_notice].nil? %>
-    <div id="registration_notice">
-      <%= "#{session[:registration_notice]}" %>
-    </div>
-    <% session[:registration_notice] = nil %>
-  <% end %>
 </body>
 </html>

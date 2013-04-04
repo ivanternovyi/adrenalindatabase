@@ -38,8 +38,9 @@ class UsersController < ApplicationController
   	if current_user.nil? && @user.save
       usr_det = @user.user_detail
       usr_mail = @user.email
-      session[:registration_notice] = "#{usr_det.surname} #{usr_det.name} #{usr_det.mid_name}, Ваша заявка успішнго прийнята, авторизація вашого членства у ВГО 'Адреналін', надійде на вказану вами поштову скриньку #{usr_mail}. Дякуємо за реєстрацію."
-      redirect_to "/users/sign_in", notice: "#{usr_det.surname} #{usr_det.name} #{usr_det.mid_name}, Ваша заявка успішнго прийнята, авторизація вашого членства у ВГО 'Адреналін', надійде на вказану вами поштову скриньку #{usr_mail}. Дякуємо за реєстрацію."
+      msg = "#{usr_det.surname} #{usr_det.name} #{usr_det.mid_name}, Ваша заявка успішнго прийнята, авторизація вашого членства у ВГО 'Адреналін', надійде на вказану Вами поштову скриньку #{usr_mail}. Дякуємо за реєстрацію."
+      session[:registration_notice] = msg
+      redirect_to "/users/sign_in", notice: "Реєстрація успішна."
     elsif !current_user.nil? && @user.save
   		redirect_to root_path
     else
