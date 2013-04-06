@@ -53,10 +53,6 @@ class User < ActiveRecord::Base
     self.includes(:card_infos).where(card_infos: {discard: false}).where(card_infos: {card_number: conditions[:auth_field]}).limit(1).first ||
     self.where(email: conditions[:auth_field]).limit(1).first
   end
-
-  def email_required?
-    false
-  end
   
   private
   def default_role
