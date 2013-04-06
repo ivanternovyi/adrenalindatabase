@@ -103,16 +103,18 @@
 	</div>
 
 	<% if !current_user.nil? && current_user.role?(:super_admin_user) %>
-		<div class="grid_16 alpha omega fieldset">
-				<h2>Права і доступи</h2>
-			<div class="grid_3 alpha">
-				<%= f.label :role_id, 'Права доступу' %>
-				<%= f.select :role_id, Role.all.collect{ |role| [role.name, role.id]}, selected: @user.role_id %>
-			</div>
-			<div class="grid_13 omega">
-				<% Town.with_office.each do |office| %>
-					<%= check_box_tag 'user[town_ids][]', office.id, @user.towns.include?(office)  %><%= office.name %><br />
-				<% end %>
+		<div class="grid_16 alpha omega fieldset_shadow">
+			<div class="grid_16 alpha omega fieldset_outline">
+					<h2>Права і доступи</h2>
+				<div class="grid_3 alpha">
+					<%= f.label :role_id, 'Права доступу' %>
+					<%= f.select :role_id, Role.all.collect{ |role| [role.name, role.id]}, selected: @user.role_id %>
+				</div>
+				<div class="grid_13 omega">
+					<% Town.with_office.each do |office| %>
+						<%= check_box_tag 'user[town_ids][]', office.id, @user.towns.include?(office)  %><%= office.name %><br />
+					<% end %>
+				</div>
 			</div>
 		</div>
 	<% end %>

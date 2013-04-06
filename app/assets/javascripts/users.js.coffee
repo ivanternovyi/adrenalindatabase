@@ -11,9 +11,13 @@ jQuery ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))
-    $('.phone-field').mask('+99 (999) 999-99-99')
+    setListeners()
     event.preventDefault()
 
+  setListeners()
+
+
+setListeners = ->
   $('.phone-field').mask('+99 (999) 999-99-99')
 
   $.datepicker.setDefaults($.datepicker.regional['uk'])
