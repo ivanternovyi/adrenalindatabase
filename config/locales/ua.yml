@@ -382,3 +382,6 @@ ua:
       words_connector: ", "
       two_words_connector: " і "
       last_word_connector: " та "
+
+  will_paginate:
+    page_gap: "..."
