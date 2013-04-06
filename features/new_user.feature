@@ -15,7 +15,7 @@ Feature: New user registration
     And I fill in "Ім'я" with "Петр"
     And I fill in "По-Батькові" with "Сидорович"
 
-    And I select date "25/Травень/1989" in "Дата народження"
+    And I select date "25-05-1989" in "Дата народження"
     And I fill in "Поштова адреса" with "Киев, проспект Мира, 245, 4"
     And I fill in "Коментар" with "Разнорабочий"
 

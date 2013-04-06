@@ -1,26 +1,27 @@
 <h2>Особисті данні</h2>
-<div class="grid_4 alpha">
+<div class="grid_4 alpha input_item">
   <%= f.label :surname, 'Прізвище' %><br />
   <%= f.text_field :surname %>
 </div>      
-<div class="grid_4 omega">
+<div class="grid_4 omega input_item">
   <%= f.label :name, 'Ім\'я' %><br />
   <%= f.text_field :name %>
 </div>
-<div class="grid_8 alpha omega">
+<div class="grid_8 alpha omega input_item">
   <%= f.label :mid_name, 'По-Батькові' %><br />
   <%= f.text_field :mid_name, size: 70 %>
 </div>     
-<div class="grid_8 alpha omega">
+<div class="grid_8 alpha omega input_item">
   <%= f.label :birthday, 'Дата народження' %><br />
-  <%= f.date_select :birthday, {order: [:day, :month, :year], start_year: Date.today.year - 70, end_year: Date.today.year - 14, use_month_names: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'], include_blank: true} %>
+  <%= f.text_field :birthday, value: date_to_text(f.object.birthday), class: 'datefield' %>
+  <%= input_hint_text 'Дата народження у форматі: День-Місяць-Рік. Наприклад 21-03-1980' %>
 </div>    
-<div class="grid_8 alpha omega">  
+<div class="grid_8 alpha omega input_item">  
   <%= f.label :post_address, 'Поштова адреса' %><br />
   <%= f.text_area :post_address, cols: 40, rows: 2 %>
   <%= input_hint_text 'Обов\'язково. Необхідно для отримання повідомлень від ВГО «Адреналін», в т.ч. картки «I`m Adrenalin»' %>
 </div>
-<div class="grid_8 alpha omega">
+<div class="grid_8 alpha omega input_item">
   <%= f.label :comment, 'Коментар' %><br />
   <%= f.text_area :comment, cols: 40, rows: 2 %>
 </div>

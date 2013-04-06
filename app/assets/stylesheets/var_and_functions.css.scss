@@ -39,3 +39,11 @@ h2 {
 	background-color: #EEE;
 	}
 }
+
+input[type="text"].datefield {
+	width: 8em;
+	background-image: url(image_path("db-icons-cal.png"));
+	background-position: 105% -3px;
+	background-repeat: no-repeat;
+  overflow: hidden;
+}

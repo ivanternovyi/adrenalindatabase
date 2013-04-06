@@ -311,6 +311,14 @@ ua:
       odd: "може мати лише парне значення"
       even: "може мати лише непарне значення"
       record_invalid: "Виникли помилки: %{errors}"
+      invalid_date: "неправильна дата"
+      invalid_time: "неправильний час"
+      invalid_datetime: "неправильнай формат тади та часу"
+      is_at: "має бути %{restriction}"
+      before: "має бути до %{restriction}"
+      on_or_before: "має бути %{restriction} або до цього"
+      after: "має бути після %{restriction}"
+      on_or_after: "має бути %{restriction} або після"
 
   activerecord:
     errors:

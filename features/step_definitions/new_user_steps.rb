@@ -5,7 +5,7 @@ When /^I select "([^\"]*)" to "(.*?)"$/ do |field, val|
 end
 
 When /^I select date "(.*?)" in "(.*?)"$/ do |val, field|
-  select_date field, val
+  fill_in field, with: val
 end
 
 When /^I fill in "(.*?)" with "(.*?)" and set checkbox "(.*?)"$/ do |field, val, box|

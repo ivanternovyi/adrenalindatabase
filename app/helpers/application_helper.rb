@@ -29,6 +29,14 @@ module ApplicationHelper
     raw "#{day_str}&nbsp;#{mon_str.ljust(4, ' ')}&nbsp;#{year_str}"
   end
 
+  def date_to_text(date)
+    if !date.nil?
+      date.strftime('%d-%m-%Y')
+    else
+      ''
+    end
+  end
+
   def input_hint_text(txt)
     raw "<div class=\"hint-text\">#{txt}</div>"
   end

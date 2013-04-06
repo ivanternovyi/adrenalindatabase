@@ -16,5 +16,8 @@ jQuery ->
 
   $('.phone-field').mask('+99 (999) 999-99-99')
 
-  # if $('#registration_notice').length >= 1
-  #   alert $('#registration_notice').text()
+  $.datepicker.setDefaults($.datepicker.regional['uk'])
+
+  $('#user_user_detail_attributes_birthday').datepicker
+    changeYear: true
+    dateFormat: 'dd-mm-yy'

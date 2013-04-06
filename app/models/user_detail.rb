@@ -9,4 +9,5 @@ class UserDetail < ActiveRecord::Base
   validates_presence_of :mid_name, message: 'По-Батькові не повинно бути порожнім'
   validates_presence_of :post_address, message: 'Поштова адреса не може бути порожньою'
   validates_presence_of :birthday, message: 'Дата народження не може бути порожньою'
+  validates_date :birthday
 end
