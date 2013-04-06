@@ -11,6 +11,9 @@ class CardInfo < ActiveRecord::Base
   
   validates_uniqueness_of :card_number, message: 'Помилка: Дублюється номер карти!'
   validates_format_of :card_number, with: /^[0-9]{4}$/, message: 'Помилка: Неправильний код карти!'
+  validates_date :send_date
+  validates_date :reminder_date
+  validates_date :valid_until
   
   accepts_nested_attributes_for :payment_infos, allow_destroy: true, reject_if: lambda {|attrs| attrs.all? {|key, value| value.blank?}}
 

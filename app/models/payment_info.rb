@@ -4,4 +4,5 @@ class PaymentInfo < ActiveRecord::Base
 
   validates_presence_of :payment, message: 'Сума має бути вказана.'
   validates_presence_of :payment_date, message: 'Дата платежу має бути вказана.'
+  validates_date :payment_date
 end

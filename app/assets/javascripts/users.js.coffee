@@ -18,6 +18,6 @@ jQuery ->
 
   $.datepicker.setDefaults($.datepicker.regional['uk'])
 
-  $('#user_user_detail_attributes_birthday').datepicker
+  $('input.datefield').datepicker
     changeYear: true
     dateFormat: 'dd-mm-yy'
