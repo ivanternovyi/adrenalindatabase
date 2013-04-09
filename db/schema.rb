@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130406102906) do
+ActiveRecord::Schema.define(:version => 20130409122656) do
 
   create_table "admin_user_to_towns", :force => true do |t|
     t.integer  "user_id"
@@ -98,6 +98,34 @@ ActiveRecord::Schema.define(:version => 20130406102906) do
   end
 
   add_index "towns", ["name"], :name => "index_towns_on_name"
+
+  create_table "trip_dates", :force => true do |t|
+    t.date     "date_from"
+    t.date     "date_to"
+    t.integer  "trip_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "trip_dates", ["date_from"], :name => "index_trip_dates_on_date_from"
+  add_index "trip_dates", ["date_to"], :name => "index_trip_dates_on_date_to"
+  add_index "trip_dates", ["trip_id"], :name => "index_trip_dates_on_trip_id"
+
+  create_table "trip_rules", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "trip_id"
+  end
+
+  add_index "trip_rules", ["trip_id"], :name => "index_trip_rules_on_trip_id"
+
+  create_table "trips", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "user_details", :force => true do |t|
     t.integer  "user_id"

@@ -61,6 +61,20 @@ FactoryGirl.define do
     skype_name  { |n| "skypeName#{n}" }
   end
 
+  factory :trip do
+    sequence(:name) { |n| "Test trip number #{n}" }
+    description     { generate :random_string }
+  end
+
+  factory :trip_rule do
+    sequence(:name) { |n| "trip rule #{n}" }
+  end
+
+  factory :trip_date do
+    sequence(:date_from) { |n| Date.today + n }
+    sequence(:date_to) { |n| Date.today + n + 15 }
+  end
+
   sequence(:random_string) {|n| "Два дня после этого Ростов не видал Долохова у своих и не заставал его дома; на третий день он получил от него записку.
 «Так как я в доме у вас бывать более не намерен по известным тебе причинам и еду в армию, то нынче вечером я даю моим приятелям прощальную пирушку — приезжай в Английскую гостиницу». Ростов в десятом часу, из театра, где он был вместе с своими и Денисовым, приехал в назначенный день в Английскую гостиницу. Его тотчас же провели в лучшее помещение гостиницы, занятое на эту ночь Долоховым.#{n}" }
 end

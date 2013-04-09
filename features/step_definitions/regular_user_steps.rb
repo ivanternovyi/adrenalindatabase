@@ -14,6 +14,10 @@ Given /^existing (.+) with name "([^\"]*)", card number "([^\"]*)" and password 
   usr.save
 end
 
+Given /^I was logged in$/ do
+  visit '/'
+end
+
 When /^I am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
