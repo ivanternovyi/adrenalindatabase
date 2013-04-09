@@ -9,6 +9,8 @@ module NavigationHelpers
       '/towns'
     when /new\suser\spage/
       '/users/new'
+    when /new\strip\spage/
+      '/trips/new'
     else
       begin
         page_name =~ /the (.*) page/

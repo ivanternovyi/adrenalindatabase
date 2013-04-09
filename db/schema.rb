@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409122656) do
+ActiveRecord::Schema.define(:version => 20130409132130) do
 
   create_table "admin_user_to_towns", :force => true do |t|
     t.integer  "user_id"
@@ -115,10 +115,17 @@ ActiveRecord::Schema.define(:version => 20130409122656) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "trip_id"
   end
 
-  add_index "trip_rules", ["trip_id"], :name => "index_trip_rules_on_trip_id"
+  create_table "trip_to_trip_rules", :force => true do |t|
+    t.integer  "trip_id"
+    t.integer  "trip_rule_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "trip_to_trip_rules", ["trip_id"], :name => "index_trip_to_trip_rules_on_trip_id"
+  add_index "trip_to_trip_rules", ["trip_rule_id"], :name => "index_trip_to_trip_rules_on_trip_rule_id"
 
   create_table "trips", :force => true do |t|
     t.string   "name"

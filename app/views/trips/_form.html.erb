@@ -19,6 +19,16 @@
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
+
+  <%= f.fields_for :trip_dates do |builder| %>
+    <%= render 'trips/fields/trip_date_fields', f: builder %>
+  <% end %>
+  <%= link_to_add_fields "Додати дату", f, :trip_dates %>
+
+  <%= f.fields_for :trip_rules do |builder| %>
+    <%= render 'trips/fields/trip_rule_fields', f: builder %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

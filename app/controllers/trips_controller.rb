@@ -1,4 +1,5 @@
 class TripsController < ApplicationController
+  load_and_authorize_resource
   # GET /trips
   # GET /trips.json
   def index
@@ -24,7 +25,7 @@ class TripsController < ApplicationController
   # GET /trips/new
   # GET /trips/new.json
   def new
-    @trip = Trip.new
+    @trip = Trip.new(trip_dates: [TripDate.new])
 
     respond_to do |format|
       format.html # new.html.erb
