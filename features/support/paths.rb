@@ -11,6 +11,8 @@ module NavigationHelpers
       '/users/new'
     when /new\strip\spage/
       '/trips/new'
+    when /new\strip\srule\spage/
+      '/trip_rules/new'
     else
       begin
         page_name =~ /the (.*) page/

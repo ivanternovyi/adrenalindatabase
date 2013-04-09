@@ -1,4 +1,5 @@
 Given /^trip rules:$/ do |table|
   tab = table.raw
-  tab.each{ |t| TripRule.create!(name: t) }
+  tab.each{ |t| ttr = TripRule.create(name: t[0]) 
+    ttr.save }
 end 

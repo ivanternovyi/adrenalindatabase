@@ -23,10 +23,12 @@
   <%= f.fields_for :trip_dates do |builder| %>
     <%= render 'trips/fields/trip_date_fields', f: builder %>
   <% end %>
-  <%= link_to_add_fields "Додати дату", f, :trip_dates %>
-
-  <%= f.fields_for :trip_rules do |builder| %>
-    <%= render 'trips/fields/trip_rule_fields', f: builder %>
+  <%= link_to_add_fields "Додати дату", f, :trip_dates, :trips %>
+  
+  <% if !@trip.trip_rules.nil? %>
+    <% TripRule.all.each do |trip_rule| %>
+      <%= check_box_tag 'trip[trip_rule_ids][]', trip_rule.id, @trip.trip_rules.include?(trip_rule), id: "ttr_#{trip_rule.id}" %><%= label_tag "ttr_#{trip_rule.id}", trip_rule.name %>
+    <% end %>
   <% end %>
 
   <div class="actions">

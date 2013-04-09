@@ -1,7 +1,8 @@
 <div class="dynamic_container">
   <%= f.label :date_from %>
-  <%= f.text_fields :date_from, date_to_text(f.object.date_from), class: "datepicker" %>
+  <%= f.text_field :date_from, class: "datefield" %>
   <%= f.label :date_to %>
-  <%= f.text_fields :date_to, date_to_text(f.object.date_to), class: "datepicker" %>
+  <%= f.text_field :date_to, class: "datefield" %>
+  <%= f.hidden_field :_destroy %>
   <%= link_to 'Видалити дату', '#', class: "remove_fields remove_icon" %>
 </div>

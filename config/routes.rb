@@ -6,6 +6,7 @@ Adrenalindatabase::Application.routes.draw do
   resources :towns
   resources :admins
   resources :trips
+  resources :trip_rules
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

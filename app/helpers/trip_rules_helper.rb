@@ -1,0 +1,2 @@
+module TripRulesHelper
+end

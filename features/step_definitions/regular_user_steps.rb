@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 Given /^I am a (.+) with name "([^\"]*)", card number "([^\"]*)" and password "([^\"]*)"$/ do |user_name, name, card_number, pass|
   Role.find_by_name(user_name).should_not be(nil)
   usr = FactoryGirl.create(:user, password: pass, role_id: Role.find_by_name(user_name).id)
@@ -14,8 +16,11 @@ Given /^existing (.+) with name "([^\"]*)", card number "([^\"]*)" and password 
   usr.save
 end
 
-Given /^I was logged in$/ do
+Given /^I was logged in with card number "([^\"]*)" and password "([^\"]*)"$/ do |card_number, passwd|
   visit '/'
+  fill_in('user_auth_field', with: card_number)
+  fill_in('user_password', with: passwd)
+  click_button 'Вхід'
 end
 
 When /^I am on (.+)$/ do |page_name|
