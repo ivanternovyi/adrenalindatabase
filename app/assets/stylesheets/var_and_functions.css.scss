@@ -55,7 +55,7 @@ h2 {
 }
 
 .simple_remove_icon {
-	display:block;
+	display:inline-block;
 	width:30px;
 	height:30px;
 	background-image: url(image_path("db-icons-del.png"));
@@ -64,6 +64,21 @@ h2 {
 
 	&:hover, &:focus {
 		background-image: url(image_path("db-icons-del-or.png"));
+
+		background-repeat: no-repeat;
+	}
+}
+
+.simple_edit_icon {
+	display:inline-block;
+	width:30px;
+	height:30px;
+	background-image: url(image_path("db-icons-show.png"));
+	background-position: -5px -5px;
+	background-repeat: no-repeat;
+
+	&:hover, &:focus {
+		background-image: url(image_path("db-icons-show-or.png"));
 
 		background-repeat: no-repeat;
 	}

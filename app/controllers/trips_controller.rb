@@ -4,6 +4,7 @@ class TripsController < ApplicationController
   # GET /trips.json
   def index
     @trips = Trip.all
+    @trip_rules = TripRule.all
 
     respond_to do |format|
       format.html # index.html.erb
