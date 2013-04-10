@@ -9,6 +9,36 @@ namespace :adrenalin do
 		end
 	end
 
+	desc "Check phone"
+	task :ch_ph do
+		def check_phone(phone_str, iter = 1)
+			phone = phone_str.gsub(/\D/, '')
+			if !phone.nil?
+				ph_len = phone.length
+				case ph_len
+				when ph_len = 7
+					res = '+38044' + phone.to_s
+				when ph_len = 9
+					res = '+380' + phone.to_s
+				when ph_len = 10
+					res = '+38' + phone.to_s
+				when ph_len = 11
+					res = '+3' + phone.to_s
+				when ph_len = 12
+					res = '+' + phone.to_s
+				else
+					res = ('+' + phone.to_s.rjust(12, '0'))
+				end
+			else
+				res = ('+' + iter.to_s.rjust(12, '0'))
+			end
+			arr = res.split(/^(\+){1}(\d{1,3})(\d{3})(\d{3})(\d{2})(\d{2})$/)
+			p "#{arr[1]}#{arr[2]} (#{arr[3]}) #{arr[4]}-#{arr[5]}-#{arr[6]}"
+		end
+
+		puts check_phone ENV['PH']
+	end
+
 	desc "Parse data"
 	task :reg_dat, :dtime do |t, arg|
 		def chf(val)
@@ -36,6 +66,7 @@ namespace :adrenalin do
 				nil
 			end
 		end
+
 		p set_datetime arg[:dtime]
 	end
 
@@ -174,6 +205,7 @@ namespace :adrenalin do
 				return nil if date_m.to_i > 12 || date_m.to_i < 1
 				return nil if 1 > date_d.to_i || date_d.to_i > days_in_month(date_y.to_i, date_m.to_i)
 				Date.new(date_y.to_i, date_m.to_i, date_d.to_i)
+				#{}"#{date_d.to_i}-#{date_m.to_i}-#{date_y.to_i}"
 			end
 		end
 
@@ -205,6 +237,34 @@ namespace :adrenalin do
 				'00000000'
 			end
 		end
+
+		def check_phone(usr, phone_str, iter = 1)
+			phone = phone_str.gsub(/\D/, '')
+			if !phone.nil?
+				ph_len = phone.length
+				case ph_len
+				when ph_len = 7
+					res = '+38044' + phone.to_s
+				when ph_len = 9
+					res = '+380' + phone.to_s
+				when ph_len = 10
+					res = '+38' + phone.to_s
+				when ph_len = 11
+					res = '+3' + phone.to_s
+				when ph_len = 12
+					res = '+' + phone.to_s
+				else
+					res = ('+' + phone.to_s.rjust(12, '0'))
+					puts show_err('Користувач', 'Не вказано телефону', 'Помилка телефону', usr)
+				end
+			else
+				res = ('+' + iter.to_s.rjust(12, '0'))
+				puts show_err('Користувач', 'Не вказано телефону', 'Помилка телефону', usr)
+			end
+			arr = res.split(/^(\+){1}(\d{1,3})(\d{3})(\d{3})(\d{2})(\d{2})$/)
+			"#{arr[1]}#{arr[2]} (#{arr[3]}) #{arr[4]}-#{arr[5]}-#{arr[6]}"
+		end
+
 		# headers: true - becouse CSV have first header row
 			iterator = 0
 		CSV.foreach(ENV['FILEPATH']) do |row|
@@ -219,7 +279,7 @@ namespace :adrenalin do
 										)
 			usr.town_office_id = get_town(chf(row[office_town])) || show_err(row[username], "Помилкове або відсутнє місто з офісом!", 1, usr)
 			if !usr.valid?
-				usr.email = show_err(row[username], "Помилковий або відсутній email!", "nil#{iterator}@nil.nil", usr)
+				usr.email = show_err(row[username], "Помилковий або відсутній email!", "empty_email#{iterator}@empty.em", usr)
 			end
 			name_ary = parse_name(row[username])
 			user_detail = UserDetail.new(
@@ -237,11 +297,8 @@ namespace :adrenalin do
 				sms = true
 				ph_one = Phone.new(
 													main: 					sms,
-													phone_number: 	row[phone_one].gsub(/\D|\s|\W/, '')
+													phone_number: 	check_phone(usr, row[phone_one], iterator)
 													)
-				if !ph_one.valid?
-					ph_one.phone_number = show_err(row[username], "Помилковий номер телефону!", ('+' + iterator.to_s.ljust(12, '0')), usr)
-				end
 				usr.phones << ph_one
 			end
 			
@@ -249,20 +306,18 @@ namespace :adrenalin do
 				sms = false
 				ph_two = Phone.new(
 													main: 					sms,
-													phone_number: 	row[phone_two].gsub(/\D|\s|\W/, '')
+													phone_number: 	check_phone(usr, row[phone_two], iterator)
 													)
-				if !ph_two.valid?
-					ph_two.phone_number = show_err(row[username], "Помилковий номер телефону!", ('+' + iterator.to_s.ljust(12, '0')), usr)
-				end
 				usr.phones << ph_two
 			end
 			
+
 			if chf(row[contact_by]).nil?
 				contact_on_email, contact_on_skype, contact_on_phone = false, false, false
 			else
 				contact_on_email = 	row[contact_by].include?('email') ? true : false
-				contact_on_skype = 	row[contact_by].include?('skype') || row[contact_by].include?('Skype') || !chf(row[skype]).nil? ? true : false
-				contact_on_phone =	row[contact_by].include?('SMS') || !ph_one.nil? || !ph_two.nil? ? true : false
+				contact_on_skype = 	(row[contact_by].include?('skype') || row[contact_by].include?('Skype') || !chf(row[skype]).nil?) ? true : false
+				contact_on_phone =	(row[contact_by].include?('SMS') || !ph_one.nil? || !ph_two.nil?) ? true : false
 			end
 			contact = Contact.new(
 														by_email: 	contact_on_email,
@@ -275,7 +330,7 @@ namespace :adrenalin do
 
 			card_num = chf(row[card_number]).nil? ? nil : chf(row[card_number]).delete('_')
 			unlimit = !chf(row[valid_until_date]).nil? && !(row[valid_until_date].index 'unlim').nil? ? true : false
-			val_until = !unlimit && !chf(row[valid_until_date]).nil? ? set_date(row[valid_until_date]) : nil
+			val_until = (!unlimit && !chf(row[valid_until_date]).nil?) ? set_date(row[valid_until_date]) : nil
 			if !card_num.nil? 
 				card_info = CardInfo.new(
 																	card_number: 				card_num,
@@ -290,8 +345,7 @@ namespace :adrenalin do
 					card_info.card_number = show_err(row[username], "Помилковий номер карти!", iterator.to_s.ljust(4, '9'), usr)
 				elsif CardInfo.where(card_number: card_num).nil?
 					card_info.card_number = show_err(row[username], "Дублюється номер карти!", iterator.to_s.ljust(4, '9'), usr)
-				end
-					
+				end					
 				usr.card_infos << card_info
 			
 				if !chf(row[payment_o]).nil? && !chf(row[payment_date_o]).nil?
@@ -310,7 +364,6 @@ namespace :adrenalin do
 				end
 			end
 
-
 			begin
 				usr.save!
 			rescue => error
@@ -319,5 +372,4 @@ namespace :adrenalin do
 			end
 		end
 	end
-
 end
