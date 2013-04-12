@@ -7,7 +7,7 @@
     <h1>Зареєстровано нового користувача</h1>
     <p>
       ФІО: <br />
-      <%= "#{@user.user_detail.surname} #{@user.user_detail.surname} #{@user.user_detail.surname}" %>  
+      <%= "#{@user.user_detail.surname} #{@user.user_detail.name} #{@user.user_detail.mid_name}" %>  
     </p>
     <p>
       Дата народження <%= date_to_text @user.user_detail.birthday %>
