@@ -4,7 +4,7 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Зарегистрирован новый учасник</h1>
+    <h1>Зареєстровано нового користувача</h1>
     <p>
       ФІО: <br />
       <%= "#{@user.user_detail.surname} #{@user.user_detail.surname} #{@user.user_detail.surname}" %>  
@@ -18,7 +18,10 @@
       Пошта: <%= @user.email %>
     </p>
     <p>
-      Телефон: <%= @user.phones.join(', ') %>
+      Телефон: 
+      <% @user.phones.each do |phone| %>
+        <%= phone.phone_number %> <br />
+      <% end %>
     </p>
   </body>
 </html>
