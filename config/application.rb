@@ -67,6 +67,9 @@ module Adrenalindatabase
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # Activate observers that should always be running
+    config.active_record.observers = :user_observer
+
     # Change to custom validaitions errors
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
         if html_tag.include?('<label')

@@ -19,9 +19,9 @@ Adrenalindatabase::Application.configure do
   config.action_mailer.smtp_settings = {
      :address              => "smtp.gmail.com",
      :port                 => 587,
-     :domain               => 'adrenalin-ua.com',
-     :user_name            => 'iam@adrenalin-ua.com',
-     :password             => 'XXXXXX',
+     :domain               => 'gmail.com',
+     :user_name            => ENV['MAIL'],
+     :password             => ENV['MAIL_PASSWORD'],
      :authentication       => :plain,
      :enable_starttls_auto => true  
    }
