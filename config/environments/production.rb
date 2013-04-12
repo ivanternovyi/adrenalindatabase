@@ -49,14 +49,14 @@ Adrenalindatabase::Application.configure do
   # config.assets.precompile += %w( search.js )
 
   # Disable delivery errors, bad email addresses will be ignored
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { :host => 'iam.adrenalin-ua.com' }
   config.action_mailer.smtp_settings = {
      :address              => "smtp.gmail.com",
      :port                 => 587,
      :domain               => 'adrenalin-ua.com',
-     :user_name            => 'im@adrenalin-ua.com',
-     :password             => 'XXXXXX',
+     :user_name            => ENV['MAIL'],
+     :password             => ENV['MAIL_PASSWORD'],
      :authentication       => :plain,
      :enable_starttls_auto => true  
    }

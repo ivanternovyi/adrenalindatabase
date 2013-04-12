@@ -23,8 +23,8 @@ production:
   encoding: utf8
   database: adrenalin_members_db
   host: localhost
-  username: adrenalin
-  password: adrdata097
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
   pool: 5
   timeout: 5000
 
