@@ -1,6 +1,6 @@
 # encoding: utf-8
 class NotifyMailer < ActionMailer::Base
-  default from: "info@adrenalin-ua.com"
+  default from: "registration@adrenalin-ua.com"
   helper :application
 
   def notify_register(user)
