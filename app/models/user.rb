@@ -50,8 +50,7 @@ class User < ActiveRecord::Base
   end
 
   def revised?
-    return true if self.not_revised == false
-    return false if self.not_revised == true
+    return !self.not_revised
   end
 
   def self.find_for_database_authentication(conditions={})
