@@ -1,5 +1,5 @@
 class UserObserver < ActiveRecord::Observer
   def after_commit(model)
-    NotifyMailer.notify_register(model).deliver
+    NotifyMailer.delay.notify_register(model)
   end
 end
