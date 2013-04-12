@@ -48,6 +48,8 @@ Adrenalindatabase::Application.configure do
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
 
+  config.mail_delay = true
+  
   # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { :host => 'iam.adrenalin-ua.com' }
