@@ -28,6 +28,7 @@ gem 'will_paginate', '~> 3.0.0'
 gem 'validates_timeliness'
 
 gem 'delayed_job_active_record'
+gem 'daemons'
 
 gem 'mysql2'
 
