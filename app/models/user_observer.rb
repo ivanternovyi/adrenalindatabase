@@ -1,5 +1,5 @@
 class UserObserver < ActiveRecord::Observer
-  def before_create(model)
+  def before_save(model)
     if !model.revised? && model.new_record?
       if Rails.env.production?
         NotifyMailer.delay.notify_register(model)
