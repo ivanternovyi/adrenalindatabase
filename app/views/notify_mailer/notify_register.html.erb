@@ -5,5 +5,20 @@
   </head>
   <body>
     <h1>Зарегистрирован новый учасник</h1>
+    <p>
+      ФІО: <br />
+      <%= "#{@user.user_detail.surname} #{@user.user_detail.surname} #{@user.user_detail.surname}" %>  
+    </p>
+    <p>
+      Дата народження <%= date_to_text @user.user_detail.birthday %>
+    </p>
+    
+    <h3>Контакти:</h3>
+    <p>
+      Пошта: <%= @user.email %>
+    </p>
+    <p>
+      Телефон: <%= @user.phones.join(', ') %>
+    </p>
   </body>
 </html>
