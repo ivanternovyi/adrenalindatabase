@@ -9,13 +9,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          authentication_keys: [ :auth_field ]
 
-  attr_accessor :auth_field
+  attr_accessor :auth_field, :skip_mail_on_create
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :auth_field, :password, :password_confirmation, 
           :remember_me, :role_id, :town_office_id, :towns, :town_ids, :not_revised,
           :user_detail, :user_detail_attributes, :phones, :phones_attributes, :error_message,
-          :contact, :contact_attributes, :card_infos, :card_infos_attributes, :accept_rule
+          :contact, :contact_attributes, :card_infos, :card_infos_attributes, :accept_rule,
+          :skip_mail_on_create
 
   validates :accept_rule, acceptance: true
 

@@ -1,6 +1,7 @@
 # encoding: utf-8
 FactoryGirl.define do
   factory :user do
+    skip_mail_on_create true
     sequence(:email) { |n| "example#{n}@email.com" }
     town_office_id 1
     password 'thisisdefpass'

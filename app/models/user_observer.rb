@@ -5,7 +5,7 @@ class UserObserver < ActiveRecord::Observer
   end
 
   def after_save(model)
-    if @was_a_new_record
+    if @was_a_new_record && !model.skip_mail_on_create
       if File.exist?("#{Rails.root}/tmp/pids/delayed_job.pid")
         NotifyMailer.delay.notify_register(model)
       else

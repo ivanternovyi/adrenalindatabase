@@ -272,6 +272,7 @@ namespace :adrenalin do
 			passrand = Random.new
 			passwd = passrand.rand(10000000..99999999)
 			usr = User.new(
+										skip_mail_on_create: true,
 										email: chf(row[email]), 
 										password: passwd,
 										password_confirmation: passwd, 
