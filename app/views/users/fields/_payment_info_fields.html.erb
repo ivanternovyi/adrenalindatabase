@@ -1,7 +1,7 @@
 <div class="grid_8 alpha omega dynamic_container input_item bottom_stroke">
 	<div class="grid_3 alpha">
 		<%= f.label :payment_date, 'Дата оплати' %><br />
-		<%= f.text_field :payment_date, value: date_to_text(f.object.payment_date), class: 'datefield' %>
+		<%= f.text_field :payment_date, value: date_to_text(f.object.payment_date), class: 'carddatefield' %>
 	</div>
 	<div class="grid_2">
 		<%= f.label :payment, 'Сумма платежу' %><br />

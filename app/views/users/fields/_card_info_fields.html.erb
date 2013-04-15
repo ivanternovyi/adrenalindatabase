@@ -13,15 +13,15 @@
 		<div class="grid_4 alpha">
 			<div class="grid_4 alpha omega input_item">
 				<%= f.label :send_date, 'Дата відправки карти' %><br />
-				<%= f.text_field :send_date, value: date_to_text(f.object.send_date), class: 'datefield' %>
+				<%= f.text_field :send_date, value: date_to_text(f.object.send_date), class: 'carddatefield' %>
 			</div>
 			<div class="grid_4 alpha omega input_item">
 				<%= f.label :reminder_date, 'Дата листа нагадування' %><br />
-				<%= f.text_field :reminder_date, value: date_to_text(f.object.reminder_date), class: 'datefield' %>
+				<%= f.text_field :reminder_date, value: date_to_text(f.object.reminder_date), class: 'carddatefield' %>
 			</div>
 			<div class="grid_4 alpha omega input_item">
 				<%= f.label :valid_until, 'Дійсна до' %><br />
-				<%= f.text_field :valid_until, value: date_to_text(f.object.valid_until), class: 'datefield' %>
+				<%= f.text_field :valid_until, value: date_to_text(f.object.valid_until), class: 'carddatefield' %>
 			</div>
 		</div>
 		<div class="grid_4 omega">

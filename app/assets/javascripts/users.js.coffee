@@ -26,3 +26,8 @@ setListeners = ->
     changeYear: true
     yearRange: "-100:+0"
     dateFormat: 'dd-mm-yy'
+
+  $('input.carddatefield').datepicker
+    changeYear: true
+    yearRange: "-5:+5"
+    dateFormat: 'dd-mm-yy'
