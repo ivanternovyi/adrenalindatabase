@@ -36,3 +36,4 @@ Feature: New user registration
     Then page should have text "Иванов Петр Сидорович, Ваша заявка успішнго прийнята, авторизація вашого членства у ВГО 'Адреналін', надійде на вказану Вами поштову скриньку ivanow_kreativ@mail.com. Дякуємо за реєстрацію."
     When I am on the home page
     Then I should not see "Иванов Петр Сидорович, Ваша заявка успішнго прийнята, авторизація вашого членства у ВГО 'Адреналін', надійде на вказану Вами поштову скриньку ivanow_kreativ@mail.com. Дякуємо за реєстрацію."
+    And admins should receive an email with subject "Зареєстровано нового користувача"
