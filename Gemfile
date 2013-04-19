@@ -32,6 +32,8 @@ gem 'daemons'
 
 gem 'mysql2'
 
+gem 'httparty'
+
 group :test do
   gem 'rspec-rails'
   gem 'factory_girl'
