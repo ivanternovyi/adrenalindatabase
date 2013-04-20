@@ -35,4 +35,7 @@ Adrenalindatabase::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Send SMS service environment really work only when set :production
+  config.sms_service_env = :test
 end

@@ -44,4 +44,7 @@ Adrenalindatabase::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Send SMS service environment really work only when set :production
+  config.sms_service_env = :development
 end
