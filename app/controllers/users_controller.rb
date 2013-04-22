@@ -14,8 +14,10 @@ class UsersController < ApplicationController
       users = users.sort_by_birthday(sort_direction)
     elsif params[:sort] == 'town_office'
       users = users.sort_by_town_office(sort_direction)
+    elsif params[:sort] == 'reg_timestamp'
+      users = users.sort_by_registration_timestamp(sort_direction)
     else
-      users = users.sort_by_surname('asc')
+      users = users.sort_by_registration_timestamp('desc')
     end
 
     users = users.get_by_surname(params[:s_surname]) if !params[:s_surname].nil?

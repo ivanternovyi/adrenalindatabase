@@ -1,33 +1,37 @@
 <div class="grid_11 alpha omega record">
-	<div class="grid_5 alpha fio">
-    <% revised = user.not_revised ? 'not_revised' : 'revised' %>
-    <div class=<%= revised %>></div>
-		<% if !user.user_detail.nil? %>
-  		<%= link_to "#{user.user_detail.surname} #{user.user_detail.name} #{user.user_detail.mid_name}", edit_user_path(user, current_page: @current_page) %>
-		<% else %>
-			&nbsp;
-		<% end %>
- 	</div>
- 	<div class="grid_1">
- 		<%= card_number_text(user) || raw('&nbsp;') %>
- 	</div>
- 	<div class="grid_2">
-    <% if !user.user_detail.nil? %>
-   		<%= raw '&nbsp;' if user.user_detail.birthday.blank? %>
-   		<%= ua_date_short(user.user_detail.birthday) %>
+  <div class="grid_1 alpha reg_dat">
+    <% if !user.user_detail.nil? && !user.user_detail.registration_timestamp.nil? %>
+      <%= date_to_text(user.user_detail.registration_timestamp) %>
     <% else %>
       &nbsp;
     <% end %>
- 	</div>
- 	<div class="grid_2 omega town_office">
- 		<% if !user.town_office_id.blank? %>
- 			<%= Town.find(user.town_office_id).name %>
-		<% else %>
+  </div>
+  <div class="grid_5 fio">
+    <% revised = user.not_revised ? 'not_revised' : 'revised' %>
+    <div class=<%= revised %>></div>
+    <% if !user.user_detail.nil? %>
+      <%= link_to "#{user.user_detail.surname} #{user.user_detail.name} #{user.user_detail.mid_name}", edit_user_path(user, current_page: @current_page) %>
+    <% else %>
       &nbsp;
     <% end %>
- 	</div>
-  <div class="grid_1 omega reg_dat">
-    <%= date_to_text(user.user_detail.registration_timestamp) %>
+  </div>
+  <div class="grid_1">
+    <%= card_number_text(user) || raw('&nbsp;') %>
+  </div>
+  <div class="grid_2">
+    <% if !user.user_detail.nil? %>
+      <%= raw '&nbsp;' if user.user_detail.birthday.blank? %>
+      <%= ua_date_short(user.user_detail.birthday) %>
+    <% else %>
+      &nbsp;
+    <% end %>
+  </div>
+  <div class="grid_2 omega town_office">
+    <% if !user.town_office_id.blank? %>
+      <%= Town.find(user.town_office_id).name %>
+    <% else %>
+      &nbsp;
+    <% end %>
   </div>
  	<div class="clear"></div>
 </div>

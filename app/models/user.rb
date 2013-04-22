@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
   scope :include_user_detail, joins('left join user_details on users.id = user_details.user_id')
   scope :sort_by_surname, lambda { |opt| include_user_detail.order("user_details.surname #{opt}") }
   scope :sort_by_birthday, lambda { |opt| include_user_detail.order("user_details.birthday #{opt}") }
+  scope :sort_by_registration_timestamp, lambda { |opt| include_user_detail.order("user_details.registration_timestamp #{opt}") }
   scope :sort_by_town_office, lambda { |opt| order("town_office_id #{opt}") }
   scope :get_by_offices, lambda { |town_offises| User.where(town_office_id: town_offises.collect{|admin_towns| admin_towns.id}) }
   scope :get_by_surname, lambda { |opt| include_user_detail.where("lower(user_details.surname) LIKE ?", "%#{opt.mb_chars.downcase.to_s}%") }
