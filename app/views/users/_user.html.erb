@@ -19,12 +19,15 @@
       &nbsp;
     <% end %>
  	</div>
- 	<div class="grid_3 omega town_office">
+ 	<div class="grid_2 omega town_office">
  		<% if !user.town_office_id.blank? %>
  			<%= Town.find(user.town_office_id).name %>
 		<% else %>
       &nbsp;
     <% end %>
  	</div>
+  <div class="grid_1 omega reg_dat">
+    <%= date_to_text(user.user_detail.registration_timestamp) %>
+  </div>
  	<div class="clear"></div>
 </div>
