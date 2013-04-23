@@ -6,11 +6,11 @@
   <h1>Список членів організації</h1>
   <div class="clear"></div>
   <div class="grid_11 alpha omega heading">
-    <div class="grid_1 alpha"><%= sortable 'reg_timestamp', 'Реєстр.' %></div>
-    <div class="grid_5 fio"><%= sortable 'surname', 'Прізвище Ім\'я По-Батькові' %></div>
+    <div class="grid_2 alpha"><%= sortable 'reg_timestamp', 'Реєстр.' %></div>
+    <div class="grid_4 fio"><%= sortable 'surname', 'Прізвище Ім\'я По-Батькові' %></div>
     <div class="grid_1"> № карти</div>
     <div class="grid_2"><%= sortable 'birthday', 'Дата нар.' %></div>
-    <div class="grid_2 omega"><%= sortable 'town_office', 'Пр-во' %></div>
+    <div class="grid_2 omega"><%= sortable 'town_office', 'Пр-ство' %></div>
     <div class="clear"></div>
   </div>
   <%= render @users %>

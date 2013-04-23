@@ -1,14 +1,14 @@
-<div class="grid_11 alpha omega record">
-  <div class="grid_1 alpha reg_dat">
+<div class="grid_11 alpha omega record <%= cycle('even', 'odd') %>">
+  <div class="grid_2 alpha reg_timestamp">
+    <% revised = user.not_revised ? 'not_revised' : 'revised' %>
+    <div class=<%= revised %>></div>
     <% if !user.user_detail.nil? && !user.user_detail.registration_timestamp.nil? %>
       <%= date_to_text(user.user_detail.registration_timestamp) %>
     <% else %>
       &nbsp;
     <% end %>
   </div>
-  <div class="grid_5 fio">
-    <% revised = user.not_revised ? 'not_revised' : 'revised' %>
-    <div class=<%= revised %>></div>
+  <div class="grid_4 fio">
     <% if !user.user_detail.nil? %>
       <%= link_to "#{user.user_detail.surname} #{user.user_detail.name} #{user.user_detail.mid_name}", edit_user_path(user, current_page: @current_page) %>
     <% else %>
