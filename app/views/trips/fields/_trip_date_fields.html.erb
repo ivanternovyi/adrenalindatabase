@@ -1,7 +1,7 @@
 <div class="dynamic_container">
-  <%= f.label :date_from %>
+  <%= f.label :date_from, 'Дата початку туру' %>
   <%= f.text_field :date_from, class: "datefield" %>
-  <%= f.label :date_to %>
+  <%= f.label :date_to, 'Дата завершення' %>
   <%= f.text_field :date_to, class: "datefield" %>
   <%= f.hidden_field :_destroy %>
   <%= link_to 'Видалити дату', '#', class: "remove_fields remove_icon" %>
