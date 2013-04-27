@@ -1,0 +1,6 @@
+<% trips.each do |trip| %>
+  <p>
+    &laquo;<%= trip.name %>&raquo; на дати: 
+    <%= render 'trips/trip_dates', trip_dates: trip.trip_dates %>
+  </p>
+<% end %>
