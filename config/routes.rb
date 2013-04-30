@@ -1,4 +1,8 @@
 Adrenalindatabase::Application.routes.draw do
+  get "user_trip_dates_controller/index"
+
+  get "user_trip_dates_controller/new"
+
   devise_for :users
 
   root :to => "users#index"
