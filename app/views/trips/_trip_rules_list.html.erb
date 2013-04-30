@@ -1,7 +1,0 @@
-<h3>Всі правила турів</h3>
-<%= link_to 'Створити правило туру', new_trip_rule_path %>
-<% @trip_rules.each do |trip_rule| %>
-  <div class="grid_4 alpha omega">
-    <%= trip_rule.name %><%= link_to '', edit_trip_rule_path(trip_rule), class: 'simple_edit_icon' %> <%= link_to '', trip_rule, methos: :destroy, data: {confirm: 'Видалити правило?'}, class: 'simple_remove_icon' %>
-  </div>
-<% end %>
