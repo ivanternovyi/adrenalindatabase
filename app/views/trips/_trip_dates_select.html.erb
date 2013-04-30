@@ -1,0 +1,3 @@
+<% trip_dates.each do |trd| %>
+  <%= trd.date_from %> - <%= trd.date_to %> <%= "(#{(trd.date_to - trd.date_from).to_i} днів)" %> <%= raw("<br />") if trd != trip_dates.last %>
+<% end %>

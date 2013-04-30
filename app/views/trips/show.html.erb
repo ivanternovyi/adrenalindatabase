@@ -1,15 +1,22 @@
+<% if notice %>
 <p id="notice"><%= notice %></p>
+<% end %>
+
+<h1><%= @trip.name %></h1>
 
 <p>
-  <b>Name:</b>
-  <%= @trip.name %>
-</p>
-
-<p>
-  <b>Description:</b>
   <%= @trip.description %>
 </p>
 
+<p>
+  <b>Оберіть дату:</b><br />
+  <%= render 'trips/trip_dates_select', trip_dates: @trip.trip_dates %>
+</p>
 
-<%= link_to 'Edit', edit_trip_path(@trip) %> |
-<%= link_to 'Back', trips_path %>
+<p>
+  <b>Правила:</b><br />
+  <%= render 'trips/trip_rule_accepts', rules: @trip.trip_rules %>
+</p>
+
+<%= link_to 'Редагування', edit_trip_path(@trip) %> |
+<%= link_to 'Назад', trips_path %>
