@@ -1,4 +1,8 @@
 <% trip_dates.each do |trd| %>
   <%= trd.date_from %> - <%= trd.date_to %> <%= "(#{(trd.date_to - trd.date_from).to_i} днів)" %> <%= raw("<br />") if trd != trip_dates.last %>
-  <%= button_to 'Заявка на тур', user_to_trip_dates_path(trip_date_id: trd) %>
+  <% if current_user.nil? %>
+    <%= button_to 'Увійти або зареєструватись', user_to_trip_dates_path(trip_date_id: trd, trip_id: params[:id]) %>
+  <% else %>
+    <%= button_to 'Заявка на тур', user_to_trip_dates_path(trip_date_id: trd, trip_id: params[:id]) %>
+  <% end %>
 <% end %>
