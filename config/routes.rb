@@ -1,7 +1,4 @@
 Adrenalindatabase::Application.routes.draw do
-  get "user_trip_dates_controller/index"
-
-  get "user_trip_dates_controller/new"
 
   devise_for :users
 
@@ -11,6 +8,7 @@ Adrenalindatabase::Application.routes.draw do
   resources :admins
   resources :trips
   resources :trip_rules
+  resources :user_to_trip_dates
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

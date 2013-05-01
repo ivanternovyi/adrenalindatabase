@@ -1,3 +1,4 @@
 <% trip_dates.each do |trd| %>
   <%= trd.date_from %> - <%= trd.date_to %> <%= "(#{(trd.date_to - trd.date_from).to_i} днів)" %> <%= raw("<br />") if trd != trip_dates.last %>
+  <%= button_to 'Заявка на тур', user_to_trip_dates_path(trip_date_id: trd) %>
 <% end %>

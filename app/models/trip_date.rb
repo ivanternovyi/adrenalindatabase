@@ -6,4 +6,6 @@ class TripDate < ActiveRecord::Base
   validates_datetime :date_to, after: :date_from
 
   belongs_to :trip
+
+  has_many :user_to_trip_dates, dependent: :destroy
 end
