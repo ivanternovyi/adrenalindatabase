@@ -7,7 +7,6 @@ class UserToTripDatesController < ApplicationController
     if user.nil?
       redirect_to new_user_session_path, alert: 'Щоб записатись на тур Вам необхідно увійти у систему, або зареєструватися.'
       session[:trip] = params[:trip_id]
-      puts "SAVED!!!!!!!!!!!!   #{session[:trip]}"
       return
     end
 

@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     if current_user.role? :regular_user
       if !session[:trip].nil?
-        puts "!!!!!!!!!!!!!!!!!! #{session[:trip]}"
-        puts "#{trip_path(session[:trip])}"
-        return trip_path(session[:trip])
+        trip_id = session[:trip]
+        session[:trip] = nil
+        return trip_path(trip_id)
       end
 
       flash[:alert] = "Ви не можете перейти на цю сторінку."

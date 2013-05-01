@@ -41,6 +41,7 @@ class UsersController < ApplicationController
       usr_det = @user.user_detail
       usr_mail = @user.email
       msg = "#{usr_det.surname} #{usr_det.name} #{usr_det.mid_name}, Ваша заявка успішнго прийнята, авторизація вашого членства у ВГО 'Адреналін', надійде на вказану Вами поштову скриньку #{usr_mail}. Дякуємо за реєстрацію."
+      msg = msg << ' Тепер Ви можете подати заявку на тур.' if session[:trip]
       session[:registration_notice] = msg
       redirect_to "/users/sign_in", notice: "Реєстрація успішна."
     elsif !current_user.nil? && @user.save
