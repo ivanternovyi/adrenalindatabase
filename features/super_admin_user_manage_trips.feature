@@ -22,11 +22,11 @@ Feature: Super Admin User can manage trips.
       |Я согласен с правилами поведения в автобусе           |
       |Я согласен с правилами внесения организационной оплаты|
     And I am on new trip page
-    When I fill in "Name" with "Пустынный остров"
-    And I fill in "Description" with "Сверхромантичная поездка на остров в средизеаном море с прозрачной сорской водой водой. Экзотические флора и фауна приятно скрасят Ваш досуг. Рыбалка, купание, дайвинг."
+    When I fill in "trip_name" with "Пустынный остров"
+    And I fill in "trip_description" with "Сверхромантичная поездка на остров в средизеаном море с прозрачной сорской водой водой. Экзотические флора и фауна приятно скрасят Ваш досуг. Рыбалка, купание, дайвинг."
     And I add new date, fill in new date "trip_trip_dates_attributes_0_date_from" with "10-05-2013" and "trip_trip_dates_attributes_0_date_to" with "10-06-2013"
     And I set check box "ttr_1"
     And I set check box "ttr_2"
     And I set check box "ttr_3"
-    And I press "Створити Trip"
+    And I press "Створити тур"
     Then I have to see "Trip was successfully created."
