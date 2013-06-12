@@ -176,6 +176,18 @@ ActiveRecord::Schema.define(:version => 20130501105318) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "user_trip_dates", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "trip_id"
+    t.integer  "trip_date_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "user_trip_dates", ["trip_date_id"], :name => "index_user_trip_dates_on_trip_date_id"
+  add_index "user_trip_dates", ["trip_id"], :name => "index_user_trip_dates_on_trip_id"
+  add_index "user_trip_dates", ["user_id"], :name => "index_user_trip_dates_on_user_id"
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",   :null => false
     t.string   "encrypted_password",     :default => "",   :null => false
