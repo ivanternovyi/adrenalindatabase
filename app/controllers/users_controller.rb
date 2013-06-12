@@ -20,10 +20,10 @@ class UsersController < ApplicationController
       users = users.sort_by_registration_timestamp('desc')
     end
 
-    users = users.get_by_card_number(params[:s_card_number]) if !params[:s_card_number].nil?
-    users = users.get_by_surname(params[:s_surname]) if !params[:s_surname].nil?
-    users = users.get_not_revised if !params[:s_not_revised].nil? && params[:s_not_revised] == 'true'
-    users = users.get_revised if !params[:s_not_revised].nil? && params[:s_not_revised] == 'false'
+    users = users.get_by_card_barcode(params[:s_card_barcode])  if !params[:s_card_barcode].nil? && params[:s_card_barcode] != ''
+    users = users.get_by_surname(params[:s_surname])            if !params[:s_surname].nil?
+    users = users.get_not_revised                               if !params[:s_not_revised].nil? && params[:s_not_revised] == 'true'
+    users = users.get_revised                                   if !params[:s_not_revised].nil? && params[:s_not_revised] == 'false'
 
     params[:page] = params[:page] == '' ? 1 : params[:page]
     @users = users.paginate(per_page: 40, page: params[:page])

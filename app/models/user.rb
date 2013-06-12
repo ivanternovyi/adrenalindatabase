@@ -46,10 +46,8 @@ class User < ActiveRecord::Base
   scope :sort_by_registration_timestamp, lambda { |opt| include_user_detail.order("user_details.registration_timestamp #{opt}") }
   scope :sort_by_town_office, lambda { |opt| order("town_office_id #{opt}") }
   scope :get_by_offices, lambda { |town_offises| User.where(town_office_id: town_offises.collect{|admin_towns| admin_towns.id}) }
-  scope :get_by_card_number, lambda { |card_number| 
-    clear_number = card_number.scan(/\d/).join.to_s
-    clear_number = "%#{clear_number}%" if !(clear_number == '') 
-    User.include_card_info.where("card_number LIKE ?", clear_number) }
+  scope :get_by_card_barcode, lambda { |card_barcode| 
+    include_card_info.where("barcode LIKE ?", card_barcode.scan(/\d/).join.to_s) }
   scope :get_by_surname, lambda { |opt| include_user_detail.where("lower(user_details.surname) LIKE ?", "%#{opt.mb_chars.downcase.to_s}%") }
   scope :get_revised, where(not_revised: false)
   scope :get_not_revised, where(not_revised: true)
