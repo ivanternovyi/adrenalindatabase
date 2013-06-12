@@ -40,11 +40,16 @@ class User < ActiveRecord::Base
   has_many :user_to_trip_dates, dependent: :destroy
 
   scope :include_user_detail, joins('left join user_details on users.id = user_details.user_id')
+  scope :include_card_info, joins('left join card_infos on users.id = card_infos.user_id')
   scope :sort_by_surname, lambda { |opt| include_user_detail.order("user_details.surname #{opt}") }
   scope :sort_by_birthday, lambda { |opt| include_user_detail.order("user_details.birthday #{opt}") }
   scope :sort_by_registration_timestamp, lambda { |opt| include_user_detail.order("user_details.registration_timestamp #{opt}") }
   scope :sort_by_town_office, lambda { |opt| order("town_office_id #{opt}") }
   scope :get_by_offices, lambda { |town_offises| User.where(town_office_id: town_offises.collect{|admin_towns| admin_towns.id}) }
+  scope :get_by_card_number, lambda { |card_number| 
+    clear_number = card_number.scan(/\d/).join.to_s
+    clear_number = "%#{clear_number}%" if !(clear_number == '') 
+    User.include_card_info.where("card_number LIKE ?", clear_number) }
   scope :get_by_surname, lambda { |opt| include_user_detail.where("lower(user_details.surname) LIKE ?", "%#{opt.mb_chars.downcase.to_s}%") }
   scope :get_revised, where(not_revised: false)
   scope :get_not_revised, where(not_revised: true)
@@ -55,6 +60,10 @@ class User < ActiveRecord::Base
 
   def revised?
     return !self.not_revised
+  end
+
+  def self.user_on_card_number(code)
+    User.CardInfo.where(card_number: code)
   end
 
   def self.find_for_database_authentication(conditions={})
