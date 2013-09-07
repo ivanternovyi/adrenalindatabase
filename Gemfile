@@ -39,7 +39,7 @@ group :test do
   gem 'factory_girl'
   gem 'capybara'
   gem 'cucumber-rails', require: false
-  gem 'database_cleaner'
+  gem 'database_cleaner', '<= 1.0.1'
   gem 'selenium-webdriver'
   gem 'email_spec'
 end
