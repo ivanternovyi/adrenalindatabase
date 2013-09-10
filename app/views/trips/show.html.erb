@@ -8,15 +8,11 @@
   <%= @trip.description %>
 </p>
 
-<p>
-  <b>Оберіть дату:</b><br />
-  <%= render 'trips/trip_dates_select', trip_dates: @trip.trip_dates %>
-</p>
+<b>Оберіть дату:</b><br />
+<%= render 'trips/trip_dates_select', trip_dates: @trip.trip_dates %>
 
-<p>
-  <b>Правила:</b><br />
-  <%= render 'trips/trip_rule_accepts', rules: @trip.trip_rules %>
-</p>
+<b>Правила:</b><br />
+<%= render 'trips/trip_rule_accepts', rules: @trip.trip_rules %>
 
 <%= link_to 'Редагування', edit_trip_path(@trip) %> |
 <%= link_to 'Назад', trips_path %>
