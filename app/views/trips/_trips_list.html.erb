@@ -1,6 +1,0 @@
-<% trips.each do |trip| %>
-  <p>
-    <%= link_to raw("&laquo;#{trip.name}&raquo;"), trip %> <br />
-    на дати: <%= render 'trips/trip_dates', trip_dates: trip.trip_dates %>
-  </p>
-<% end %>
