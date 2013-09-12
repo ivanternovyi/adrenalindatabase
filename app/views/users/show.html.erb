@@ -1,2 +1,6 @@
 <h1>Профіль <%= "#{@user.user_detail.surname} #{@user.user_detail.name} #{@user.user_detail.mid_name}" %></h1>
-<%= render 'trips/trips_list', trips: @trips %>
+<div>
+  <% @user.trip_dates.each do |trip| %>
+    <%= "#{trip.date_from} ... #{trip.date_to}" %><br />
+  <% end %>
+</div>

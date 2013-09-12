@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
   has_many :card_infos, dependent: :destroy
   accepts_nested_attributes_for :card_infos, allow_destroy: true, reject_if: lambda {|attrs| attrs.all? {|key, value| value.blank?}}
 
+  has_many :trip_dates, through: :user_to_trip_dates
   has_many :user_to_trip_dates, dependent: :destroy
 
   scope :include_user_detail, joins('left join user_details on users.id = user_details.user_id')
