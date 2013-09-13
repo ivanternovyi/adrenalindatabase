@@ -23,8 +23,8 @@ class UserToTripDatesController < ApplicationController
 
   def destroy
     user = current_user
-    trip_date = UserToTripDate.find_by_user_and_trip_date(params[:id], params[:trip_date_id])
-    UserToTripDate.find(trip_date).destroy
+    trip_date = user.user_to_trip_dates.find(params[:id])
+    trip_date.destroy
     redirect_to user, notice: 'Ви успішно відмовились від участі у турі.'
   end
 end

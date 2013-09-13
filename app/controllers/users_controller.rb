@@ -59,6 +59,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @user_trip_dates = @user.user_to_trip_dates
     @trips = Trip.all
   end
 

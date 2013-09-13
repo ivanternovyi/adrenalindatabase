@@ -3,7 +3,9 @@ Adrenalindatabase::Application.routes.draw do
   devise_for :users
 
   root :to => "users#index"
-  resources :users
+  resources :users do
+    resources :user_to_trip_dates
+  end
   resources :towns
   resources :admins
   resources :trips
