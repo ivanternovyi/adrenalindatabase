@@ -8,7 +8,6 @@
         <% tr.trip_dates.each do |trd| %>
           <li><%= "#{trd.date_from} ... #{trd.date_to} = price" %>
             <%= link_to("Записатись", user_to_trip_dates_path(trip_date_id: trd, trip_id: tr), method: :post) unless @user.trip_dates.include? trd %>
-            <%= link_to("Відмовитись", user_user_to_trip_date_path(@user, trd.user_to_trip_dates.first), method: :delete, data: {confirm: 'Are you sure?'}) if @user.trip_dates.include? trd %>
           </li>
         <% end %>
       </ul>
@@ -17,7 +16,9 @@
 </div>
 <div>
   <h2>Записаний на подорожі</h2>
-  <% @user.trip_dates.each do |trd| %>
-    <%= "#{trd.trip.name}  #{trd.date_from} ... #{trd.date_to} = #{trd.price}" %><br />
+  <% @user.user_to_trip_dates.each do |trd| %>
+    <% td = trd.trip_date %>
+    <%= "#{td.trip.name}  #{td.date_from} ... #{td.date_to} = #{td.price}" %>
+    <%= link_to("Відмовитись", user_user_to_trip_date_path(@user, trd), method: :delete, data: {confirm: 'Are you sure?'}) %><br />
   <% end %>
 </div>
