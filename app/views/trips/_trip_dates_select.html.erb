@@ -3,7 +3,8 @@
   <% if current_user.nil? %>
     <%= button_to 'Увійти або зареєструватись', user_to_trip_dates_path(trip_date_id: trd, trip_id: params[:id]) %>
   <% else %>
-    <%= button_to 'Заявка на тур', user_to_trip_dates_path(trip_date_id: trd, trip_id: params[:id]) %>
+    <%= link_to('Заявка на тур', user_to_trip_dates_path(trip_date_id: trd, trip_id: params[:id]), method: :post) unless current_user.trip_dates.include? trd %>
+    <%= 'Ви записані на цю дату' if current_user.trip_dates.include? trd %>
     <%= raw("<br />") if trd == trip_dates.last %>
   <% end %>
 <% end %>

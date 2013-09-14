@@ -1,24 +1,23 @@
 <h1>Профіль <%= "#{@user.user_detail.surname} #{@user.user_detail.name} #{@user.user_detail.mid_name}" %></h1>
 <div>
-  <h2>Перелік доступних подорожей</h2>
-  <% @trips.each do |tr| %>
-    <p>
-      <h4><%= tr.name %></h4>
-      <ul>
-        <% tr.trip_dates.each do |trd| %>
-          <li><%= "#{trd.date_from} ... #{trd.date_to} = price" %>
-            <%= link_to("Записатись", user_to_trip_dates_path(trip_date_id: trd, trip_id: tr), method: :post) unless @user.trip_dates.include? trd %>
-          </li>
-        <% end %>
-      </ul>
-    </p>
-  <% end %>
-</div>
-<div>
   <h2>Записаний на подорожі</h2>
+  <%= 'Ви не записались на подорожі.' if @user.user_to_trip_dates.empty? %>
   <% @user.user_to_trip_dates.each do |trd| %>
     <% td = trd.trip_date %>
     <%= "#{td.trip.name}  #{td.date_from} ... #{td.date_to} = #{td.price}" %>
     <%= link_to("Відмовитись", user_user_to_trip_date_path(@user, trd), method: :delete, data: {confirm: 'Are you sure?'}) %><br />
+  <% end %>
+</div>
+<div>
+  <h2>Перелік доступних подорожей</h2>
+  <% @trips.each do |tr| %>
+      <h4><%= tr.name %></h4>
+      <p><%= tr.description %></p>
+      <b>Дати:</b>
+      <ul>
+        <% tr.trip_dates.each do |trd| %>
+          <li><%= link_to "#{trd.date_from} ... #{trd.date_to} = #{trd.price}", tr %></li>
+        <% end %>
+      </ul>
   <% end %>
 </div>
