@@ -13,6 +13,7 @@
 
 <b>Правила:</b><br />
 <%= render 'trips/trip_rule_accepts', rules: @trip.trip_rules %>
-
-<%= link_to 'Редагування', edit_trip_path(@trip) %> |
+<% admins_access do %>
+  <%= link_to 'Редагування', edit_trip_path(@trip) %> |
+<% end %>
 <%= link_to 'Назад', trips_path %>
