@@ -12,9 +12,9 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(params[:trip])
     if @trip.save
-      redirect_to trips_path
+      redirect_to(trips_path)
     else
-      render action: :new
+      render action: :new, errors: t(:failed_create, scope: :trip)
     end
   end
 

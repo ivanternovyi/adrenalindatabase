@@ -12,11 +12,14 @@
   <% @trip.trip_dates.each do |trd| %>
     <p>
       <%= "#{trd.date_from} .. #{trd.date_to} | #{trd.price}" %>
+      <%= link_to t(:edit), edit_trip_trip_date_path(@trip, trd) %> | 
+      <%= link_to t(:delete), trip_trip_date_path(@trip, trd), method: :delete, data: {confirm: t(:sure_to_delete, scope: :trip_date)} %>
     </p>
   <% end %>
 
-  <%= link_to t(:new), new_trip_trip_date_path(@trip) %>
-
+  <%= link_to(t(:new, scope: :trip_date), new_trip_trip_date_path(@trip)) unless @trip.id.nil? %>
+  <%= t(:save_before_add_dates, scope: :trip) if @trip.id.nil? %>
+  <br />
   <%= f.submit t(:save) %>
 
 <% end %>

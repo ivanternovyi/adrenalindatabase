@@ -1,7 +1,9 @@
 class TripDatesController < ApplicationController
+  load_and_authorize_resource
+
   def new
     @trip = current_trip
-    @trip_date = TripDate.new
+    @trip_date = @trip.trip_dates.build
   end
 
   def create
@@ -26,7 +28,13 @@ class TripDatesController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
+    trip_date = current_trip.trip_dates.find(params[:id])
+    if trip_date.destroy
+      redirect_to edit_trip_path(current_trip), notice: t(:successfully_deleted, scope: :trip_date)
+    else
+      redirect_to :back, errors: t(:failed_delete, scope: :trip_date)
+    end
   end
 
   private

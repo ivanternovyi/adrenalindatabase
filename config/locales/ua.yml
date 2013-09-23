@@ -26,17 +26,25 @@ ua:
     rule: Правила поведінки
     sure_to_delete: Ви дійсно хочете видалити подорож?
     successfully_deleted: Успішно видалено подорож.
+    failed_create: Помилка при створенні подорожі.
     failed_delete: Помилка. Не вдалося видалити подорож.
     successfully_updated: Успішно відредаговано подорож.
     failed_update: Помилка при збереженні відредагованої подорожі.
     edit_trip: Редагування подорожі
+    save_before_add_dates: Збережіть перед тим як додавати дати турів.
 
   trip_date:
+    new: Створити дату для подорожі
     new_for_trip: 'Створення дати для туру:'
     success_to_create: Успішно створено дату подорожі
     failed_to_create: Помилка при створенні дати
     success_to_save: Успішно збережені зміни
     failed_to_save: Помилка при збереженні змін
+    successfully_deleted: Успішно видалено дату.
+    failed_delete: Помилка. Не вдалося видалити дату.
+    edit: Редагування дати для подорожі
+    successfully_deleted: Успішно видалено дату з подорожі.
+    sure_to_delete: Ви дійсно хочете видалити дату з подорожі?
 
   date:
     formats:

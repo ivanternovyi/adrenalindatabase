@@ -1,4 +1,4 @@
 <h1><%= "#{t(:edit_trip, scope: :trip)}: #{@trip.title}" %></h1>
 <%= render 'form' %>
 <%= link_to t(:back), trips_path %> |
-<%= link_to t(:delete), trips_path %>
+<%= link_to t(:delete), trip_path(@trip), method: :delete, data: {confirm: t(:sure_to_delete, scope: :trip)} %>
