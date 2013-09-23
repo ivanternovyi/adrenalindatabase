@@ -6,4 +6,5 @@ Adrenalindatabase::Application.routes.draw do
   resources :users
   resources :towns
   resources :admins
+  resources :trips
 end

@@ -12,8 +12,6 @@ class Ability
         can :create, User
       end
       can :show, User, id: user.id
-      can :show, Trip
-      can [:create, :destroy], UserToTripDate
     end
   
 
