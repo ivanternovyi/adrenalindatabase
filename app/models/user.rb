@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
           :remember_me, :role_id, :town_office_id, :towns, :town_ids, :not_revised,
           :user_detail, :user_detail_attributes, :phones, :phones_attributes, :error_message,
           :contact, :contact_attributes, :card_infos, :card_infos_attributes, :accept_rule,
-          :skip_mail_on_create, :user_to_trip_dates
+          :skip_mail_on_create, :user_to_trip_dates, :trip_date_ids, :all_trip_rules
 
   validates :accept_rule, acceptance: true
 
@@ -36,9 +36,6 @@ class User < ActiveRecord::Base
 
   has_many :card_infos, dependent: :destroy
   accepts_nested_attributes_for :card_infos, allow_destroy: true, reject_if: lambda {|attrs| attrs.all? {|key, value| value.blank?}}
-
-  has_many :trip_dates, through: :user_to_trip_dates
-  has_many :user_to_trip_dates, dependent: :destroy
 
   scope :include_user_detail, joins('left join user_details on users.id = user_details.user_id')
   scope :include_card_info, joins('left join card_infos on users.id = card_infos.user_id')

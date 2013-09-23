@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130910135338) do
+ActiveRecord::Schema.define(:version => 20130427155420) do
 
   create_table "admin_user_to_towns", :force => true do |t|
     t.integer  "user_id"
@@ -58,22 +58,6 @@ ActiveRecord::Schema.define(:version => 20130910135338) do
   add_index "contacts", ["skype_name"], :name => "index_contacts_on_skype_name"
   add_index "contacts", ["user_id"], :name => "index_contacts_on_user_id"
 
-  create_table "delayed_jobs", :force => true do |t|
-    t.integer  "priority",   :default => 0
-    t.integer  "attempts",   :default => 0
-    t.text     "handler"
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
-
   create_table "payment_infos", :force => true do |t|
     t.integer  "card_info_id"
     t.date     "payment_date"
@@ -115,42 +99,6 @@ ActiveRecord::Schema.define(:version => 20130910135338) do
 
   add_index "towns", ["name"], :name => "index_towns_on_name"
 
-  create_table "trip_dates", :force => true do |t|
-    t.date     "date_from"
-    t.date     "date_to"
-    t.integer  "trip_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "price"
-  end
-
-  add_index "trip_dates", ["date_from"], :name => "index_trip_dates_on_date_from"
-  add_index "trip_dates", ["date_to"], :name => "index_trip_dates_on_date_to"
-  add_index "trip_dates", ["trip_id"], :name => "index_trip_dates_on_trip_id"
-
-  create_table "trip_rules", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "trip_to_trip_rules", :force => true do |t|
-    t.integer  "trip_id"
-    t.integer  "trip_rule_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "trip_to_trip_rules", ["trip_id"], :name => "index_trip_to_trip_rules_on_trip_id"
-  add_index "trip_to_trip_rules", ["trip_rule_id"], :name => "index_trip_to_trip_rules_on_trip_rule_id"
-
-  create_table "trips", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "user_details", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -170,13 +118,6 @@ ActiveRecord::Schema.define(:version => 20130910135338) do
   add_index "user_details", ["surname"], :name => "index_user_details_on_surname"
   add_index "user_details", ["user_id"], :name => "index_user_details_on_user_id"
 
-  create_table "user_to_trip_dates", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "trip_date_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
   create_table "user_trip_dates", :force => true do |t|
     t.integer  "user_id"
     t.integer  "trip_id"
@@ -184,10 +125,6 @@ ActiveRecord::Schema.define(:version => 20130910135338) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
-
-  add_index "user_trip_dates", ["trip_date_id"], :name => "index_user_trip_dates_on_trip_date_id"
-  add_index "user_trip_dates", ["trip_id"], :name => "index_user_trip_dates_on_trip_id"
-  add_index "user_trip_dates", ["user_id"], :name => "index_user_trip_dates_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",   :null => false
