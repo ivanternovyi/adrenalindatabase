@@ -1,6 +1,0 @@
-<%= link_to 'Створити правило туру', new_trip_rule_path %>
-<% @trip_rules.each do |trip_rule| %>
-  <div>
-    <%= trip_rule.name %> <%= link_to "Edit", edit_trip_rule_path(trip_rule) %> <%= link_to "Delete", trip_rule, methos: :destroy, data: {confirm: 'Видалити правило?'} %>
-  </div>
-<% end %>
