@@ -1,2 +1,4 @@
-<h1>Trips#edit</h1>
-<p>Find me in app/views/trips/edit.html.erb</p>
+<h1><%= "#{t(:edit_trip, scope: :trip)}: #{@trip.title}" %></h1>
+<%= render 'form' %>
+<%= link_to t(:back), trips_path %> |
+<%= link_to t(:delete), trips_path %>

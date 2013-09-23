@@ -1,2 +1,8 @@
-<h1><%# i18n :trips_list %></h1>
-<p>Find me in app/views/trips/index.html.erb</p>
+<h1><%= t :trips_list %></h1>
+<%= link_to t(:new), new_trip_path %>
+<% @trips.each do |trip| %>
+  <p>
+    <%= trip.title %>
+    <%= link_to t(:edit), edit_trip_path(trip) %> | <%= link_to t(:delete), trip_path(trip), method: :delete, data: {confirm: t(:sure_to_delete, scope: :trip)} %>
+  </p>
+<% end %>
