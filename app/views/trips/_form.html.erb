@@ -16,7 +16,6 @@
       <%= link_to t(:delete), trip_trip_date_path(@trip, trd), method: :delete, data: {confirm: t(:sure_to_delete, scope: :trip_date)} %>
     </p>
   <% end %>
-
   <%= link_to(t(:new, scope: :trip_date), new_trip_trip_date_path(@trip)) unless @trip.id.nil? %>
   <%= t(:save_before_add_dates, scope: :trip) if @trip.id.nil? %>
   <br />
