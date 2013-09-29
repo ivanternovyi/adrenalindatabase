@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
       if !session[:trip].nil?
         trip_id = session[:trip]
         session[:trip] = nil
-        return trip_path(trip_id)
+        return user_trip_path(trip_id)
       end
 
       flash[:alert] = "Ви не можете перейти на цю сторінку."

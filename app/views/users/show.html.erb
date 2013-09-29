@@ -1,1 +1,9 @@
 <h1>Профіль <%= "#{@user.user_detail.surname} #{@user.user_detail.name} #{@user.user_detail.mid_name}" %></h1>
+<h3><%= t :your_booked_trips, scope: :trip %></h3>
+<% @user.trips.each do |ut| %>
+  <% @user.trip_dates.each do |utd| %>
+    <p><%= "#{ut.title}: #{l utd.date_from, format: :long} ... #{utd.date_to}, #{utd.price}" if utd.trip_id == ut.id %></p>
+  <% end %>
+<% end %>
+
+<p><%= link_to t(:show_all_trips), user_trips_path %></p>

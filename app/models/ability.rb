@@ -12,6 +12,8 @@ class Ability
         can :create, User
       end
       can :show, User, id: user.id
+      can :show, Trip
+      can [:show, :create], UserTripOrder, id: user.id
     end
   
 

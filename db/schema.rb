@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130923113541) do
+ActiveRecord::Schema.define(:version => 20130925113300) do
 
   create_table "admin_user_to_towns", :force => true do |t|
     t.integer  "user_id"
@@ -152,6 +152,19 @@ ActiveRecord::Schema.define(:version => 20130923113541) do
   add_index "user_trip_dates", ["trip_date_id"], :name => "index_user_trip_dates_on_trip_date_id"
   add_index "user_trip_dates", ["trip_id"], :name => "index_user_trip_dates_on_trip_id"
   add_index "user_trip_dates", ["user_id"], :name => "index_user_trip_dates_on_user_id"
+
+  create_table "user_trip_orders", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "trip_date_id"
+    t.integer  "trip_id"
+    t.integer  "price"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "user_trip_orders", ["trip_date_id"], :name => "index_user_trip_orders_on_trip_date_id"
+  add_index "user_trip_orders", ["trip_id"], :name => "index_user_trip_orders_on_trip_id"
+  add_index "user_trip_orders", ["user_id"], :name => "index_user_trip_orders_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",   :null => false

@@ -20,6 +20,7 @@ ua:
   save: Зберегти
   back: Назад
 
+  do_you_accept_rules: 'Ви приймаєте правила туру?'
   trip:
     title: Назва подорожі
     description: Опис подорожі
@@ -32,8 +33,10 @@ ua:
     failed_update: Помилка при збереженні відредагованої подорожі.
     edit_trip: Редагування подорожі
     save_before_add_dates: Збережіть перед тим як додавати дати турів.
+    your_booked_trips: 'Ви реєструвались на тури:'
 
   trip_date:
+    title: Дати
     new: Створити дату для подорожі
     new_for_trip: 'Створення дати для туру:'
     success_to_create: Успішно створено дату подорожі
