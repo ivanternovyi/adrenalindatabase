@@ -141,18 +141,6 @@ ActiveRecord::Schema.define(:version => 20130925113300) do
   add_index "user_details", ["surname"], :name => "index_user_details_on_surname"
   add_index "user_details", ["user_id"], :name => "index_user_details_on_user_id"
 
-  create_table "user_trip_dates", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "trip_id"
-    t.integer  "trip_date_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "user_trip_dates", ["trip_date_id"], :name => "index_user_trip_dates_on_trip_date_id"
-  add_index "user_trip_dates", ["trip_id"], :name => "index_user_trip_dates_on_trip_id"
-  add_index "user_trip_dates", ["user_id"], :name => "index_user_trip_dates_on_user_id"
-
   create_table "user_trip_orders", :force => true do |t|
     t.integer  "user_id"
     t.integer  "trip_date_id"

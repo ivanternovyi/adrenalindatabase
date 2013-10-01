@@ -5,6 +5,7 @@ class UserTripsController < ApplicationController
 
   def show
     @trip = Trip.find params[:id]
+    @trip_dates = @trip.get_unregistered_dates(current_user)
     session[:trip] = @trip.id
   end
 end

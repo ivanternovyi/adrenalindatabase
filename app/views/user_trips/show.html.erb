@@ -3,7 +3,7 @@
 <h3><%= t :title, scope: :trip_date %></h3>
 
 <% unless current_user.nil? %>
-  <% @trip.trip_dates.each do |trd| %>
+  <% @trip_dates.each do |trd| %>
     <%= button_to "#{trd.date_from} .. #{trd.date_to} - #{trd.price}", user_trip_orders_path(trip_id: @trip.id, trip_date_id: trd.id), data: {confirm: "#{t(:do_you_accept_rules)} \n #{@trip.rule}"} %><br />
   <% end %>
 <% else %>
