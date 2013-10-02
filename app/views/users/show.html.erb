@@ -1,7 +1,7 @@
 <h1>Профіль <%= "#{@user.user_detail.surname} #{@user.user_detail.name} #{@user.user_detail.mid_name}" %></h1>
 <h3><%= t :your_booked_trips, scope: :trip %></h3>
 <% @user.trip_dates.each do |utd| %>
-  <p><%= "#{utd.trip.title}: #{l utd.date_from, format: :long} ... #{utd.date_to}, #{utd.price}" %></p>
+  <p><%= "#{utd.trip.title}: #{l utd.date_f} ... #{l utd.date_t} = #{utd.price} #{t :valute}" %></p>
 <% end %>
 
 <p><%= link_to t(:show_all, scope: :trip), user_trips_path %></p>

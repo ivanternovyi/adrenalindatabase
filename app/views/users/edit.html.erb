@@ -5,6 +5,6 @@
 <div class="clear"></div>
 <div class="grid_16">
 	<%= render 'form' %>
-  <%= link_to t(:show_registered_users_trips), user_admin_user_trip_orders_path(@user) %>
+  <%= link_to t(:show_ordered_user_trips, scope: :trip), user_admin_user_trip_orders_path(@user) %>
 </div>
 <p><%= link_to "<- Назад" , :back, class: 'good-button' %> | <%= link_to '[X] Видалити', user_path(@user), class: 'good-button', method: :delete, data: {confirm: 'Are you sure?'} %></p>

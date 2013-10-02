@@ -37,6 +37,7 @@ ua:
     save_before_add_dates: Збережіть перед тим як додавати дати турів.
     your_booked_trips: 'Ви реєструвались на тури:'
     show_all: 'Показати всі тури'
+    show_ordered_user_trips: Показати замовлені тури
 
   trip_date:
     title: Дати
@@ -51,6 +52,7 @@ ua:
     edit: Редагування дати для подорожі
     successfully_deleted: Успішно видалено дату з подорожі.
     sure_to_delete: Ви дійсно хочете видалити дату з подорожі?
+    sure_to_unsign_user: Відписати від туру?
 
   date:
     formats:
