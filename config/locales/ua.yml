@@ -18,10 +18,12 @@ ua:
   new: Створити
   delete: Видалити
   save: Зберегти
+  valute: грн.
   back: Назад
 
   do_you_accept_rules: 'Ви приймаєте правила туру?'
   trip:
+    user_signed: Записаний на подорожі
     title: Назва подорожі
     description: Опис подорожі
     rule: Правила туру
