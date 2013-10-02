@@ -5,6 +5,7 @@ class NotifyMailer < ActionMailer::Base
 
   def notify_register(user)
     @user = user
-    mail(to: ENV['MAIL'], subject: 'Зареєстровано нового користувача')
+    mailto = ENV['MAIL'].nil? ? 'tst@tst.tst' : ENV['MAIL']
+    mail(to: mailto, subject: 'Зареєстровано нового користувача')
   end
 end
