@@ -24,7 +24,7 @@ ua:
   trip:
     title: Назва подорожі
     description: Опис подорожі
-    rule: Правила поведінки
+    rule: Правила туру
     sure_to_delete: Ви дійсно хочете видалити подорож?
     successfully_deleted: Успішно видалено подорож.
     failed_create: Помилка при створенні подорожі.
