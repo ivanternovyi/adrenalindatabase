@@ -34,6 +34,7 @@ ua:
     edit_trip: Редагування подорожі
     save_before_add_dates: Збережіть перед тим як додавати дати турів.
     your_booked_trips: 'Ви реєструвались на тури:'
+    show_all: 'Показати всі тури'
 
   trip_date:
     title: Дати
