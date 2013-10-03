@@ -14,8 +14,8 @@ class AdminUserTripOrdersController < ApplicationController
   end
 
   def destroy
-    trip_date = TripDate.find params[:id]
-    user_profile.trip_dates.delete trip_date 
+    user_order_trip_date = UserTripOrder.find params[:id]
+    user_order_trip_date.delete
     redirect_to user_admin_user_trip_orders_path(user_profile)
   end
 

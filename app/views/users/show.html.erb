@@ -1,7 +1,10 @@
 <h1>Профіль <%= "#{@user.user_detail.surname} #{@user.user_detail.name} #{@user.user_detail.mid_name}" %></h1>
 <h3><%= t :your_booked_trips, scope: :trip %></h3>
-<% @user.trip_dates.each do |utd| %>
-  <p><%= "#{utd.trip.title}: #{l utd.date_f} ... #{l utd.date_t} = #{utd.price} #{t :valute}" %></p>
+<% @user.user_trip_orders.each do |utd| %>
+  <p>
+    <%= "#{utd.trip.title}: #{l utd.trip_date.date_f} ... #{l utd.trip_date.date_t} = #{utd.price} #{t :valute}" unless utd.trip_date.nil? %>
+    <%= "#{utd.trip.title}: #{t :deleted_trip_date, scope: :trip_date} = #{utd.price} #{t :valute}" if utd.trip_date.nil? %>
+    </p>
 <% end %>
 
 <p><%= link_to t(:show_all, scope: :trip), user_trips_path %></p>
