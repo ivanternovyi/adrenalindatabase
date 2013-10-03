@@ -1,0 +1,7 @@
+<% if @user_trip_date.errors.any? %>
+  $('#price-field-' + <%= @user_trip_date.id %>).css('background-color', '#F00');
+  $('#price-field-' + <%= @user_trip_date.id %>).val(<%= @user_trip_date.price %>);
+<% else %>
+  $('#price-field-' + <%= @user_trip_date.id %>).css('background-color', '#0F0');
+  $('#price-field-' + <%= @user_trip_date.id %>).animate({'background-color': '#FFC'}, 2000);
+<% end %>

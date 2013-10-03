@@ -4,7 +4,7 @@
     <%= "#{trd.trip.title}: #{l(trd.trip_date.date_f)} - #{l(trd.trip_date.date_t)} = " unless trd.trip_date.nil? %> 
     <%= "#{trd.trip.title}: #{t :deleted_trip_date, scope: :trip_date} = " if trd.trip_date.nil? %> 
     <%# f.text_field :price %>
-    <%= f.text_field :price %>
+    <%= f.text_field :price, id: "price-field-#{trd.id}" %>
     <%= "#{t(:valute)}" %>
     <%= f.submit %> 
     <%= link_to t(:delete), user_admin_user_trip_order_path(@user, trd), method: :delete, data: {confirm: t(:sure_to_unsign_user, scope: :trip_date)} %>

@@ -7,8 +7,10 @@ class AdminUserTripOrdersController < ApplicationController
   end
 
   def update
-    user_trip_dates = UserTripOrder.find(params[:id])
-    user_trip_dates.update_attributes(params[:user_trip_order])
+    @user_trip_date = UserTripOrder.find(params[:id])
+    respond_to do |format|
+      format.js if @user_trip_date.update_attributes(params[:user_trip_order])
+    end
   end
 
   def destroy
