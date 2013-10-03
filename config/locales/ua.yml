@@ -23,7 +23,7 @@ ua:
 
   do_you_accept_rules: 'Ви приймаєте правила туру?'
   trip:
-    user_signed: Записаний на подорожі
+    user_signed: записаний на подорожі
     title: Назва подорожі
     description: Опис подорожі
     rule: Правила туру
@@ -53,6 +53,7 @@ ua:
     successfully_deleted: Успішно видалено дату з подорожі.
     sure_to_delete: Ви дійсно хочете видалити дату з подорожі?
     sure_to_unsign_user: Відписати від туру?
+    deleted_trip_date: цю дату було вилучено
 
   date:
     formats:
