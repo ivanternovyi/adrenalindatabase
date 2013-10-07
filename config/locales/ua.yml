@@ -38,6 +38,7 @@ ua:
     your_booked_trips: 'Ви реєструвались на тури:'
     show_all: 'Показати всі тури'
     show_ordered_user_trips: Показати замовлені тури
+    add_payment_for_trip_order: Додати проплату за тур
 
   trip_date:
     title: Дати

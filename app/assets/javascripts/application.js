@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require jquery.ui.datepicker-uk
+//= require fancybox
 //= require_tree .
