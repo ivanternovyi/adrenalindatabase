@@ -4,4 +4,5 @@ class UserTripOrder < ActiveRecord::Base
   belongs_to :user
   belongs_to :trip
   belongs_to :trip_date
+  has_many :user_payment_trip_orders, dependent: :destroy
 end
