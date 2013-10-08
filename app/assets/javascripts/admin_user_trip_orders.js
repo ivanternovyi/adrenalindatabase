@@ -5,4 +5,11 @@ $(document).ready(function(){
     $(this).closest('form').submit();
     evt.preventDefault();
   });
+
+  $('form .add_payment_fields').on('click', function(evt){
+    time = new Date().getTime();
+    regexp = new RegExp($(this).data('id'), 'g')
+    $(this).before($(this).data('fields').replace(regexp, time))
+    evt.preventDefault()
+  });
 });

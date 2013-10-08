@@ -1,0 +1,8 @@
+<div class='payment_info'>
+  <%= f.label :payment_date %>
+  <%= f.text_field :payment_date %>
+  <%= f.label :amount %>
+  <%= f.text_field :amount %>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "Remove payment", '#', class: 'remove_fields' %>
+</div>
