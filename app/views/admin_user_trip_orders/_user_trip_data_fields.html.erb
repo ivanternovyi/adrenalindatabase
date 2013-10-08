@@ -1,0 +1,12 @@
+<%= form_for trip_dat, url: admin_user_trip_order_path(trip_dat), remote: true do |f| %>
+  <%= "#{trip_dat.trip.title}: #{l(trip_dat.trip_date.date_f)} - #{l(trip_dat.trip_date.date_t)} = " unless trip_dat.trip_date.nil? %> 
+  <%= "#{trip_dat.trip.title}: #{t :deleted_trip_date, scope: :trip_date} = " if trip_dat.trip_date.nil? %> 
+  <%= f.text_field :price, id: "price-field-#{trip_dat.id}" %>
+  <%= "#{t(:valute)}" %>
+  <%= f.submit %> 
+  <%= link_to t(:delete), user_admin_user_trip_order_path(@user, trip_dat), method: :delete, data: {confirm: t(:sure_to_unsign_user, scope: :trip_date)} %>
+    <%= f.fields_for :user_payment_trip_orders do |builder| %>
+      <%= render 'payment_fields', f: builder %>
+    <% end %>
+  <%= link_to_add_payment "Add payment", f %>
+<% end %>
