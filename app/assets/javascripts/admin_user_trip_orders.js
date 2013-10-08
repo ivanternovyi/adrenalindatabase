@@ -10,6 +10,10 @@ $(document).ready(function(){
     time = new Date().getTime();
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))
+    $('input.carddatefield').datepicker({
+    changeYear: true,
+    yearRange: "-5:+5",
+    dateFormat: 'dd-mm-yy'});
     evt.preventDefault()
   });
 });

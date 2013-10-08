@@ -1,6 +1,6 @@
 <div class='payment_info'>
   <%= f.label :payment_date %>
-  <%= f.text_field :payment_date %>
+  <%= f.text_field :payment_date, value: date_to_text(f.object.payment_date), class: 'carddatefield'%>
   <%= f.label :amount %>
   <%= f.text_field :amount %>
   <%= f.hidden_field :_destroy %>
