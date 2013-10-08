@@ -1,5 +1,0 @@
-<%= form_for [@user_payment_trip, @trip_order], url: new_admin_user_trip_order_admin_payment_trip_order_path(@user_payment_trip, @trip_order), remote: true do |fp| %>
-  <%= fp.label :payment_date %>
-  <%= fp.date_field :payment_date %>
-  <%= fp.submit %>
-<% end %>

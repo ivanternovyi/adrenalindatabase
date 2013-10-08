@@ -9,7 +9,16 @@
       <%= "#{t(:valute)}" %>
       <%= f.submit %> 
       <%= link_to t(:delete), user_admin_user_trip_order_path(@user, trd), method: :delete, data: {confirm: t(:sure_to_unsign_user, scope: :trip_date)} %>
-      <%= link_to t(:add_payment_for_trip_order, scope: :trip), new_admin_user_trip_order_admin_payment_trip_order_path(trd), remote: true %>
+        <%= f.fields_for :user_payment_trip_orders do |builder| %>
+          <div class='payment_info'>
+            <%= builder.label :payment_date %>
+            <%= builder.text_field :payment_date %>
+            <%= builder.label :amount %>
+            <%= builder.text_field :amount %>
+            <%= builder.hidden_field :_destroy %>
+            <%= link_to "Remove payment", '#', class: 'remove_fields' %>
+          </div>
+        <% end %>
     </div>
   <% end %>
 <% end %>
