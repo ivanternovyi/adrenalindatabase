@@ -1,0 +1,2 @@
+class AdminTripOrderPaymentsController < ApplicationController
+end

@@ -1,26 +1,40 @@
 class AdminUserTripOrdersController < ApplicationController
   authorize_resource class: false
-
+  before_filter :set_user
   def index
-    @user = user_profile
-    @user_trip_dates = user_profile.user_trip_orders
+    @trip_orders = get_user.user_trip_orders
+  end
+
+  def show
+    @trip_orders = get_user.user_trip_orders
+    @trip_order = get_user.user_trip_orders.find params[:id]
+    @trip_order_payments = UserTripOrder.find(@trip_order.id).user_payment_trip_orders
+  end
+
+  def edit
+    @trip_orders = get_user.user_trip_orders
+    @trip_order = get_user.user_trip_orders.find params[:id]
   end
 
   def update
-    @user_trip_date = UserTripOrder.find(params[:id])
-    respond_to do |format|
-      format.js if @user_trip_date.update_attributes(params[:user_trip_order])
+    @trip_order = get_user.user_trip_orders.find params[:id]
+    if @trip_order.update_attributes(params[:user_trip_order])
+      @trip_orders = get_user.user_trip_orders
     end
   end
 
   def destroy
-    user_order_trip_date = UserTripOrder.find params[:id]
-    user_order_trip_date.delete
-    redirect_to user_admin_user_trip_orders_path(user_profile)
+    @trip_order = get_user.user_trip_orders.find params[:id]
+    @trip_order.delete
+    @trip_orders = get_user.user_trip_orders
   end
 
   private
-  def user_profile
+  def get_user
     User.find params[:user_id]    
+  end
+
+  def set_user
+    @user = get_user
   end
 end

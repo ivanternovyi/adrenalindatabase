@@ -1,0 +1,5 @@
+<%= form_for @trip_order, url: user_admin_user_trip_order_path(@user, @trip_order), remote:true do |f| %>
+  <%= f.label :price, "#{@trip_order.trip.title}: #{l @trip_order.trip_date.date_from, format: :long} - #{l @trip_order.trip_date.date_to, format: :long} = " %>
+  <%= f.text_field :price %>
+  <%= f.submit %>
+<% end %>

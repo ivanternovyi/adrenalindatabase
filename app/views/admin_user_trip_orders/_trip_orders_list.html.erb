@@ -1,0 +1,9 @@
+<% @trip_orders.each do |trip_order| %>
+  <div id=<%= "trip-date-order-#{trip_order.id}" %>>
+    <%= "#{trip_order.trip.title}: #{l trip_order.trip_date.date_from, format: :long} - #{l trip_order.trip_date.date_to, format: :long} = #{trip_order.price}" %>
+    <%= link_to :edit_trip_order, edit_user_admin_user_trip_order_path(@user, trip_order), remote: true %>
+    <%= link_to :delete, user_admin_user_trip_order_path(@user, trip_order), remote: true, method: :delete, data: {confirm: :are_you_sure} %>
+    <%= link_to :show_payments, user_admin_user_trip_order_path(@user, trip_order), remote: true %>
+    <div id="payments-list"></div>
+  </div>
+<% end %>

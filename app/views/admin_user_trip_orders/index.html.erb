@@ -1,7 +1,5 @@
 <%= link_to "Sign user to new trip", '#', id: 'create-trip-for-user' %>
 <h1><%= "#{@user.user_detail.surname} #{@user.user_detail.name} #{@user.user_detail.mid_name} #{t :user_signed, scope: :trip}" %></h1>
-<% @user_trip_dates.each do |trd| %>
-  <div id=<%= "trip-date-order-#{trd.id}" %>>
-    <%= render 'user_trip_data_fields', trip_dat: trd %>
-  </div>
-<% end %>
+<div id="trip-orders-list">
+  <%= render 'trip_orders_list' %>
+</div>
