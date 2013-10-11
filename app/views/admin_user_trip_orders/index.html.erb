@@ -1,4 +1,4 @@
-<%= link_to "Sign user to new trip", '#', id: 'create-trip-for-user' %>
+<%= link_to "Sign user to new trip", '#', id: 'create-trip-for-user', remote: true %>
 <h1><%= "#{@user.user_detail.surname} #{@user.user_detail.name} #{@user.user_detail.mid_name} #{t :user_signed, scope: :trip}" %></h1>
 <div id="trip-orders-list">
   <%= render 'trip_orders_list' %>
