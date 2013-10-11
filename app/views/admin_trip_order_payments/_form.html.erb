@@ -1,4 +1,6 @@
-<%= form_for @payment, url: admin_user_trip_order_admin_trip_order_payment_path(@order, @payment), remote: true do |pf| %>
+<%= form_for @payment, url: (@payment.new_record? ?
+                              admin_user_trip_order_admin_trip_order_payments_path(@order, @payment) :
+                              admin_user_trip_order_admin_trip_order_payment_path(@order, @payment)), remote: true do |pf| %>
   <%= pf.label :payment_date %>
   <%= pf.text_field :payment_date %>
   <%= pf.label :amount %>
