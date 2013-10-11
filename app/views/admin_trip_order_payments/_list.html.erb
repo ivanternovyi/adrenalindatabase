@@ -1,0 +1,7 @@
+<% @payments.each do |top| %>
+  <div id=<%= "payment-#{top.id}" %>>
+    <%= "#{top.payment_date} = #{top.amount}" %>
+    <%= link_to :edit_payment, '#' %>
+    <%= link_to :delete_payment, '#', method: :delete, data: {confirm: :are_you_sure_to_delere_payment} %>
+  </div>
+<% end %>

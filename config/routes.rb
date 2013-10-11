@@ -6,9 +6,8 @@ Adrenalindatabase::Application.routes.draw do
     resources :admin_user_trip_orders
   end
   resources :admin_user_trip_orders do
-    resources :admin_payment_trip_orders
+    resources :admin_trip_order_payments
   end
-  resources :admin_payment_trip_orders
   resources :towns
   resources :admins
   resources :trips do

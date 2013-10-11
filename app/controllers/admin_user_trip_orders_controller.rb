@@ -1,14 +1,14 @@
 class AdminUserTripOrdersController < ApplicationController
   authorize_resource class: false
   before_filter :set_user
+
   def index
     @trip_orders = get_user.user_trip_orders
   end
 
   def show
-    @trip_orders = get_user.user_trip_orders
     @trip_order = get_user.user_trip_orders.find params[:id]
-    @trip_order_payments = UserTripOrder.find(@trip_order.id).user_payment_trip_orders
+    redirect_to admin_user_trip_order_admin_trip_order_payments_path(@trip_order), format: :js
   end
 
   def edit
