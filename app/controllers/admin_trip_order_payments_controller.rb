@@ -3,6 +3,8 @@ class AdminTripOrderPaymentsController < ApplicationController
   before_filter :set_order
 
   def index
+    @user = get_user
+    @trip_orders = get_orders
     @payments = get_order.user_payment_trip_orders
     @payment = get_order.user_payment_trip_orders.build
   end
@@ -36,6 +38,14 @@ class AdminTripOrderPaymentsController < ApplicationController
   end
 
   private
+  def get_user
+    get_order.user
+  end
+
+  def get_orders
+    get_order.user.user_trip_orders
+  end
+
   def get_order
     UserTripOrder.find params[:admin_user_trip_order_id]
   end
