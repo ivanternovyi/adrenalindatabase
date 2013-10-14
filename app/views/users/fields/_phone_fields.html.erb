@@ -1,17 +1,17 @@
-<div class="grid_8 alpha omega dynamic_container input_item bottom_stroke">
-  <div class="grid_4 alpha">
-  	<%= f.label :phone_number, 'Номер телефону' %><br />
+<div class="row dynamic_container">
+  <div class="large-6 columns">
+  	<%= f.label :phone_number, 'Номер телефону' %>
   	<%= f.text_field :phone_number, class: "phone-field" %>
   </div>
-  <div class="grid_8 alpha omega">
-    <%= input_hint_text "Наприклад +38 (099) 999-99-99" %>
+  <div class="large-2 columns">
+    <%= link_to :remove, '#', class: "remove_fields" %>
   </div>
-  <div class="grid_3 center_align">
+  <div class="row">
+  <div class="large-8 columns">
+    <%= input_hint_text "Наприклад +38 (099) 999-99-99" %>
     <%= f.check_box :main %>
     <%= f.label :main, "Отримувати повід.", class: 'checkbox-label-inline' %>
   </div>
-  <div class="grid_1 omega center_align">
-    <%= link_to 'ewewe', '#', class: "remove_fields" %>
   </div>
   <%= f.hidden_field :_destroy %>
 </div>

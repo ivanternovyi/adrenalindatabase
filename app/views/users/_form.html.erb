@@ -51,29 +51,28 @@
 		<div class="small-6 columns">
 			<fieldset>
 				<legend>Контактна інформація</legend>
-						<%= f.label :email, 'Адреса електронної скриньки' %>
-						<%= f.email_field :email %>
+				<%= f.label :email, 'Адреса електронної скриньки' %>
+				<%= f.email_field :email %>
 
-						<%= f.fields_for :contact do |by_email| %>
-							<%= by_email.check_box :by_email %>
-							<%= by_email.label :by_email, 'Отримувати повідомлення', class: 'checkbox-label-inline' %>
-						<% end %>
-						
-						<%= f.label :password, 'Пароль' %>
-						<%= f.password_field :password, autocomplete: :off %>
-						<%= f.label :password_confirmation, 'Підтвердження паролю' %>
-						<%= f.password_field :password_confirmation, autocomplete: :off %>
-					<%= input_hint_text 'ПАРОЛЬ має містити не менше 8 символів. Якщо нехочете змінювати пароль, залишайте поля порожніми.' %>
+				<%= f.fields_for :contact do |by_email| %>
+					<%= by_email.check_box :by_email %>
+					<%= by_email.label :by_email, 'Отримувати повідомлення', class: 'checkbox-label-inline' %>
+				<% end %>
+					
+				<%= f.label :password, 'Пароль' %>
+				<%= f.password_field :password, autocomplete: :off %>
+				<%= f.label :password_confirmation, 'Підтвердження паролю' %>
+				<%= f.password_field :password_confirmation, autocomplete: :off %>
+				<%= input_hint_text 'ПАРОЛЬ має містити не менше 8 символів. Якщо нехочете змінювати пароль, залишайте поля порожніми.' %>
 
 				<%= f.fields_for :contact do |builder| %>
 					<%= render 'users/fields/contact_fields', f: builder %>
 				<% end %>
 
-					<%= f.fields_for :phones do |phon| %>
-						<%= render 'users/fields/phone_fields', f: phon %>
-					<% end %>
-					<%= link_to_add_fields 'Додати телефон', f, :phones %>
-
+				<%= f.fields_for :phones do |phon| %>
+					<%= render 'users/fields/phone_fields', f: phon %>
+				<% end %>
+				<%= link_to_add_fields 'Додати телефон', f, :phones %>
 			</fieldset>
 		</div>
 	</div>
