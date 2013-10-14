@@ -1,9 +1,12 @@
-<div class="grid_16">
-  <%= admins_access { link_to 'Назад', :back } %>
-	<h1>Заявка на членство в ВГО &laquo;Адреналін&raquo;</h1>
+<div class="row">
+  <div class="large-12 columns">
+    <%= admins_access { link_to 'Назад', :back } %>
+    <h1>Заявка на членство в ВГО &laquo;Адреналін&raquo;</h1>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+    	<%= render 'form' %>
+      <p><%= admins_access { link_to 'Назад', :back } %></p>
+    </div>
+  </div>
 </div>
-<div class="clear"></div>
-<div class="grid_16">
-	<%= render 'form' %>
-</div>
-<p><%= admins_access { link_to 'Назад', :back } %></p>

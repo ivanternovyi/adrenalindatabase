@@ -10,7 +10,7 @@
 			  <%= f.password_field :password %></div>
 
 			  <% if devise_mapping.rememberable? -%>
-			    <div><%= f.check_box :remember_me %> <%= f.label :remember_me, 'Запам\'ятати мене', id: 'label-remember-me' %></div>
+			    <div><%= f.check_box :remember_me %> <%= f.label :remember_me, 'Запам\'ятати мене', class: 'checkbox-label-inline' %></div>
 			  <% end -%>
 
 			  <div><%= f.submit "Вхід" %></div>

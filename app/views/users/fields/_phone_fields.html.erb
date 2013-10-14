@@ -3,15 +3,15 @@
   	<%= f.label :phone_number, 'Номер телефону' %><br />
   	<%= f.text_field :phone_number, class: "phone-field" %>
   </div>
-  <div class="grid_3 center_align">
-  	<%= f.check_box :main %>
-    <%= f.label :main, "Отримувати повід." %>
-  </div>
-  <div class="grid_1 omega center_align">
-  	<%= link_to '', '#', class: "remove_fields simple_remove_icon" %>
-  </div>
   <div class="grid_8 alpha omega">
     <%= input_hint_text "Наприклад +38 (099) 999-99-99" %>
+  </div>
+  <div class="grid_3 center_align">
+    <%= f.check_box :main %>
+    <%= f.label :main, "Отримувати повід.", class: 'checkbox-label-inline' %>
+  </div>
+  <div class="grid_1 omega center_align">
+    <%= link_to 'ewewe', '#', class: "remove_fields" %>
   </div>
   <%= f.hidden_field :_destroy %>
 </div>

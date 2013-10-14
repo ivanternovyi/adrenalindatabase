@@ -1,27 +1,20 @@
-<h2>Особисті данні</h2>
-<div class="grid_4 alpha input_item">
-  <%= f.label :surname, 'Прізвище' %><br />
+<legend>Особисті данні</legend>
+  <%= f.label :surname, 'Прізвище' %>
   <%= f.text_field :surname %>
-</div>      
-<div class="grid_4 omega input_item">
-  <%= f.label :name, 'Ім\'я' %><br />
+
+  <%= f.label :name, 'Ім\'я' %>
   <%= f.text_field :name %>
-</div>
-<div class="grid_8 alpha omega input_item">
-  <%= f.label :mid_name, 'По-Батькові' %><br />
+
+  <%= f.label :mid_name, 'По-Батькові' %>
   <%= f.text_field :mid_name, size: 70 %>
-</div>     
-<div class="grid_8 alpha omega input_item">
-  <%= f.label :birthday, 'Дата народження' %><br />
+
+  <%= f.label :birthday, 'Дата народження' %>
   <%= f.text_field :birthday, value: date_to_text(f.object.birthday), class: 'datefield' %>
   <%= input_hint_text 'Дата народження у форматі: День-Місяць-Рік. Наприклад 21-03-1980' %>
-</div>    
-<div class="grid_8 alpha omega input_item">  
-  <%= f.label :post_address, 'Поштова адреса' %><br />
+
+  <%= f.label :post_address, 'Поштова адреса' %>
   <%= f.text_area :post_address, cols: 40, rows: 2 %>
   <%= input_hint_text 'Обов\'язково. Необхідно для отримання повідомлень від ВГО «Адреналін», в т.ч. картки «I`m Adrenalin»' %>
-</div>
-<div class="grid_8 alpha omega input_item">
-  <%= f.label :comment, 'Коментар' %><br />
+
+  <%= f.label :comment, 'Коментар' %>
   <%= f.text_area :comment, cols: 40, rows: 2 %>
-</div>

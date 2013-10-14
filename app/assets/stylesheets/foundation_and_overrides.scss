@@ -1352,13 +1352,6 @@ $topbar-bg: $topbar-bg-color;
   h2.title-center {
     text-align: center;
   }
-
-  #label-remember-me {
-    display: inline;
-    line-height: 1em;
-    vertical-align: middle;
-    padding-left: .5em;
-  }
 }
 
 .footer-area {
@@ -1368,4 +1361,23 @@ $topbar-bg: $topbar-bg-color;
   #footer {
     height: 1.5em;
   }
+}
+
+.hint-text {
+  font-size: .75em;
+  font-style: italic;
+  color: #777;
+  margin-top: -1.15em;
+  margin-bottom: 1.25em;
+}
+
+.checkbox-label-inline {
+  display: inline;
+  line-height: 1em;
+  vertical-align: middle;
+  padding-left: .5em;
+}
+
+#user_accept_rule {
+  margin-bottom: 0em;
 }

@@ -1,22 +1,11 @@
-<div class="grid_8 alpha omega input_item">
-	<div class="grid_4 alpha">
 		<%= f.label :icq_number, 'ICQ#' %>
-		<br />
 		<%= f.text_field :icq_number %>
-	</div>
-	<div class="grid_4 omega center_align">
+
 		<%= f.check_box :by_icq %>
-		<%= f.label :by_icq, 'Отримувати повідомлення' %>
-	</div>
-</div>
-<div class="grid_8 alpha omega input_item">
-	<div class="grid_4 alpha">
+		<%= f.label :by_icq, 'Отримувати повідомлення', title: 'Отримувати повідомлення на ICQ', data: {tooltip: true}, class: 'checkbox-label-inline' %>
+
 		<%= f.label :skype_name, 'Skype' %>
-		<br />
 		<%= f.text_field :skype_name %>
-	</div>
-	<div class="grid_4 omega center_align">
+
 		<%= f.check_box :by_skype %>
-		<%= f.label :by_skype, 'Отримувати повідомлення' %>
-	</div>
-</div>
+		<%= f.label :by_skype, 'Отримувати повідомлення', class: 'checkbox-label-inline' %>

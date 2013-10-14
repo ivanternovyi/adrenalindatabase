@@ -3,7 +3,6 @@
 	<% if @user.errors.any? %>
     <div id="error_explanation">
       <h3><%= pluralize(@user.errors.count, "error") %> prohibited this town from being saved:</h3>
-
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -13,76 +12,71 @@
   <% end %>
 
 	<% admins_access do %>  
-	  <div class="grid_16">
-	  	<% if @user.not_revised %>
-					<p class="validation-error">
-						Помилки у профілі користувача:<br />
-						<%= @user.error_message %>
-					</p>
-			<% end %>
+	  <div class="row">
+		  <div class="large-12 columns">
+		  	<% if @user.not_revised %>
+						<p class="validation-error">
+							Помилки у профілі користувача:<br />
+							<%= @user.error_message %>
+						</p>
+				<% end %>
+		  </div>
 	  </div>
-	  <div class="clear"></div>
-  
-	  <div class="grid_16 alpha omega">
-	  	<%= f.label :not_revised, 'Не підтверджені дані' %>
-	  	<%= f.check_box :not_revised %>
+  	
+	  <div class="row">
+		  <div class="large-12 columns">  	
+		  	<%= f.label :not_revised, 'Не підтверджені дані' %>
+		  	<%= f.check_box :not_revised %>
+		  </div>
 	  </div>
-	  <div class="clear"></div>
  
 	  <% if !@user.user_detail.nil? %>
-		  <div class="grid_16 alpha omega">
-			  Користувача зареєстровано <%= @user.user_detail.registration_timestamp %>
+  	  <div class="row">
+			  <div class="large-12 columns">
+				  Користувача зареєстровано <%= @user.user_detail.registration_timestamp %>
+				</div>
 			</div>
-			<div class="clear"></div>
 		<% end %>
   <% end %>
 
-	<div class="grid_8 alpha fieldset_shadow">
-		<div class="grid_8 alpha omega fieldset_outline">
-			<%= f.fields_for :user_detail do |builder| %>
-				<%= render 'users/fields/user_detail_fields', f: builder %>
-			<% end %>
-		</div>
-	</div>
-
-	<div class="grid_8 omega fieldset_shadow">
-		<div class="grid_8 alpha omega fieldset_outline">
-			<h2>Контактна інформація</h2>
-			<div class="grid_8 alpha omega input_item">
-				<div class="grid_4 alpha">
-					<%= f.label :email, 'Адреса електронної скриньки' %><br />
-					<%= f.email_field :email %>
-				</div>
-				<div class="grid_4 omega center_align">
-					<%= f.fields_for :contact do |by_email| %>
-						<%= by_email.check_box :by_email %>
-						<%= by_email.label :by_email, 'Отримувати повідомлення' %>
-					<% end %>
-				</div>
-			</div>
-			<div class="grid_8 alpha omega input_item">
-				<div class="grid_4 alpha">
-					<%= f.label :password, 'Пароль' %><br />
-					<%= f.password_field :password, autocomplete: :off %>
-				</div>
-				<div class="grid_4 omega">
-					<%= f.label :password_confirmation, 'Підтвердження паролю' %><br />
-					<%= f.password_field :password_confirmation, autocomplete: :off %>
-				</div>
-				<%= input_hint_text 'ПАРОЛЬ має містити не менше 8 символів. Якщо нехочете змінювати пароль, залишайте поля порожніми.' %>
-			</div>
-			<%= f.fields_for :contact do |builder| %>
-				<%= render 'users/fields/contact_fields', f: builder %>
-			<% end %>
-			<div>
-				<%= f.fields_for :phones do |phon| %>
-					<%= render 'users/fields/phone_fields', f: phon %>
+	<div class="row">
+		<div class="small-6 columns">
+			<fieldset>
+				<%= f.fields_for :user_detail do |builder| %>
+					<%= render 'users/fields/user_detail_fields', f: builder %>
 				<% end %>
-				<%= link_to_add_fields 'Додати телефон', f, :phones %>
-			</div>
+			</fieldset>
+		</div>
+
+		<div class="small-6 columns">
+			<fieldset>
+				<legend>Контактна інформація</legend>
+						<%= f.label :email, 'Адреса електронної скриньки' %>
+						<%= f.email_field :email %>
+
+						<%= f.fields_for :contact do |by_email| %>
+							<%= by_email.check_box :by_email %>
+							<%= by_email.label :by_email, 'Отримувати повідомлення', class: 'checkbox-label-inline' %>
+						<% end %>
+						
+						<%= f.label :password, 'Пароль' %>
+						<%= f.password_field :password, autocomplete: :off %>
+						<%= f.label :password_confirmation, 'Підтвердження паролю' %>
+						<%= f.password_field :password_confirmation, autocomplete: :off %>
+					<%= input_hint_text 'ПАРОЛЬ має містити не менше 8 символів. Якщо нехочете змінювати пароль, залишайте поля порожніми.' %>
+
+				<%= f.fields_for :contact do |builder| %>
+					<%= render 'users/fields/contact_fields', f: builder %>
+				<% end %>
+
+					<%= f.fields_for :phones do |phon| %>
+						<%= render 'users/fields/phone_fields', f: phon %>
+					<% end %>
+					<%= link_to_add_fields 'Додати телефон', f, :phones %>
+
+			</fieldset>
 		</div>
 	</div>
-	<div class="clear"></div>
 
 	<div class="grid_16 alpha omega fieldset_shadow">
 		<div class="grid_16 alpha omega fieldset_outline">
@@ -122,7 +116,7 @@
 	<% if current_user.nil? %>
 		<p>
 			<%= f.check_box :accept_rule %>
-			<%= f.label :accept_rule, 'Я, що заповнив анкету, Громадянин України, прошу прийняти мене до членів Всеукраїнської громадської організації «Адреналін». Мені відомо, що інформація, що буде надіслано даним повідомленням, є конфіденційною та використовуватиметься лише для заповнення документів Всеукраїнської громадської організації «Адреналін», пов\'язаних з моєю участю в ВГО «Адреналін» або в турі чи іншому заході, організованому ВГО «Адреналін». Я ознайомлений із статутом Всеукраїнської громадської організації «Адреналін» та добровільно погоджуюсь на збір наданої мною інформації, її зберігання і використання. Погоджуюсь з правилами користування карткою «I`m Adrenalin».' %>
+			<%= f.label :accept_rule, 'Я, що заповнив анкету, Громадянин України, прошу прийняти мене до членів Всеукраїнської громадської організації «Адреналін». Мені відомо, що інформація, що буде надіслано даним повідомленням, є конфіденційною та використовуватиметься лише для заповнення документів Всеукраїнської громадської організації «Адреналін», пов\'язаних з моєю участю в ВГО «Адреналін» або в турі чи іншому заході, організованому ВГО «Адреналін». Я ознайомлений із статутом Всеукраїнської громадської організації «Адреналін» та добровільно погоджуюсь на збір наданої мною інформації, її зберігання і використання. Погоджуюсь з правилами користування карткою «I`m Adrenalin».', class: 'checkbox-label-inline' %>
 		</p>
 	<% end %>
 	<%= f.submit 'Зберегти' %>
