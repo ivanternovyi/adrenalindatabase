@@ -1,11 +1,20 @@
-<div class="main_nav">
-	<div class="container_16">
-		<ul>
-			<li><%= link_to 'Головна', root_path %></li>
-      <li><%= link_to 'Додати нового члена', new_user_path %></li>
-      <li><%= link_to 'Подорожі', trips_path %></li>
-      <li><%= link_to 'Мій профіль', user_path(current_user) %></li>
-			<li><%= link_to 'Міста', towns_path %></li>
-		</ul>
+<div class="full-width navigation-area">
+	<div class="row">
+    <div class="large-12 columns">
+      <nav class="top-bar">
+        <ul class='title-area'>
+          <li class="name"></li>
+        </ul>    		
+        <section class="top-bar-section">
+          <ul class='left'>
+      			<li><%= link_to 'Головна', root_path %></li>
+            <li><%= link_to 'Додати нового члена', new_user_path %></li>
+            <li><%= link_to 'Подорожі', trips_path %></li>
+            <li><%= link_to 'Мій профіль', user_path(current_user) %></li>
+      			<li><%= link_to 'Міста', towns_path %></li>
+      		</ul>
+        </section>
+      </nav>
+    </div>
 	</div>
 </div>

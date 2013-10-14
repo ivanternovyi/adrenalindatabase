@@ -1255,8 +1255,8 @@ $default-float: left;
 
 // Background color for the top bar
 
-// $topbar-bg-color: #111;
-// $topbar-bg: $topbar-bg-color;
+$topbar-bg-color: #444;
+$topbar-bg: $topbar-bg-color;
 
 // Height and margin
 
@@ -1325,3 +1325,47 @@ $default-float: left;
 // $topbar-arrows: true; //Set false to remove the triangle icon from the menu item
 
 @import 'foundation';
+
+.header-area {
+  background-color: #EEE;
+  padding: .5em 0 .5em 0;
+
+  #header-contacts {
+    font-size: .9em;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  #sign-out-button {
+    vertical-align: middle;
+  }
+}
+
+.navigation-area {
+  background-color: $topbar-bg-color;
+  margin-bottom: 1em;
+}
+
+.login-area {
+  margin-top: 2.5em;
+
+  h2.title-center {
+    text-align: center;
+  }
+
+  #label-remember-me {
+    display: inline;
+    line-height: 1em;
+    vertical-align: middle;
+    padding-left: .5em;
+  }
+}
+
+.footer-area {
+  background-color: $topbar-bg-color;
+  margin-top: 1em;
+
+  #footer {
+    height: 1.5em;
+  }
+}

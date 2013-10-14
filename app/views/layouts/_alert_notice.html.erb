@@ -1,4 +1,12 @@
-<div class="container_16">
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
-</div>
+<% if notice || alert %>
+  <div class="row">
+    <div class="large-12 columns">
+      <% if notice %>
+      	<div class="alert-box raduis"><%= notice %></div>
+      <% end %>
+      <% if alert %>
+      	<div class="alert-box alert radius"><%= alert %></div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
