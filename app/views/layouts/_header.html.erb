@@ -1,16 +1,18 @@
-<div class="header">
-	<div class="container_16">
-		<div class="grid_5 logo">
+<nav class="top-bar">
+	<ul class="title-area">
+		<li class="name">
 			<%= link_to (image_tag 'adrenalin-logo.png'), root_path %>
-		</div>
-    <div class="grid_8">
-      Якщо у Вас виникли питання:<br />
-      тел.: (044) 232-77-04, (093) 466-3999<br />
-      e-mail: im@adrenalin-ua.com
-    </div>
-		<div class="grid_2 prefix_1">
-			<%= link_to 'Вийти', destroy_user_session_path, method: :delete if !current_user.nil? %>
-		</div>
-		<div class="clear"></div>
-	</div>
-</div>
+		</li>
+  </ul>
+  <section class="top-bar-section">
+    <ul class="left">
+      <li class="">
+        Якщо у Вас виникли питання:<br />
+        тел.: (044) 232-77-04, (093) 466-3999, e-mail: im@adrenalin-ua.com
+      </li>
+  		<li class="">
+  			<%= link_to 'Вийти', destroy_user_session_path, method: :delete if !current_user.nil? %>
+  		</li>
+  	</ul>
+  </section>
+</nav>

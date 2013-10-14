@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require jquery-ui
 //= require jquery.ui.datepicker-uk
 //= require_tree .
+$(function(){ $(document).foundation(); });
