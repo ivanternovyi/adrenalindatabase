@@ -21,6 +21,7 @@ ua:
   valute: грн.
   back: Назад
 
+  card_information: Інформація по карті
   do_you_accept_rules: 'Ви приймаєте правила туру?'
   trip:
     user_signed: записаний на подорожі

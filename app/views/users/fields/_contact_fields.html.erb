@@ -1,11 +1,15 @@
-		<%= f.label :icq_number, 'ICQ#' %>
-		<%= f.text_field :icq_number %>
+<div class="row">
+  <div class="large-6 columns check-box">
+    <%= f.label :icq_number, 'ICQ#' %>
+    <%= f.text_field :icq_number, class: 'no-bottom-gap' %>
+    <%= f.check_box :by_icq %>
+    <%= f.label :by_icq, 'Отримувати повідомлення', title: 'Отримувати повідомлення на ICQ', data: {tooltip: true}, class: 'checkbox-label-inline' %>
+  </div>
 
-		<%= f.check_box :by_icq %>
-		<%= f.label :by_icq, 'Отримувати повідомлення', title: 'Отримувати повідомлення на ICQ', data: {tooltip: true}, class: 'checkbox-label-inline' %>
-
-		<%= f.label :skype_name, 'Skype' %>
-		<%= f.text_field :skype_name %>
-
-		<%= f.check_box :by_skype %>
-		<%= f.label :by_skype, 'Отримувати повідомлення', class: 'checkbox-label-inline' %>
+  <div class="large-6 columns check-box">
+  	<%= f.label :skype_name, 'Skype' %>
+  	<%= f.text_field :skype_name %>
+  	<%= f.check_box :by_skype %>
+  	<%= f.label :by_skype, 'Отримувати повідомлення', title: 'Отримувати повідомлення на Skype', data: {tooltip: true}, class: 'checkbox-label-inline' %>
+  </div>
+</div>

@@ -1378,6 +1378,30 @@ $topbar-bg: $topbar-bg-color;
   padding-left: .5em;
 }
 
+.set-bottom-gap {
+  margin-bottom: 1.25em;
+}
+
+.set-top-gap {
+  margin-top: 1.25em;
+}
+
 #user_accept_rule {
-  margin-bottom: 0em;
+  margin-bottom: 0;
+}
+
+.no-bottom-gap {
+  margin-bottom: 0;
+}
+
+.no-top-gap {
+  margin-top: 0;
+}
+
+.check-box {
+  margin-bottom: 1.25em;
+}
+
+input[readonly="readonly"] {
+  background-color: #e0e0e0
 }

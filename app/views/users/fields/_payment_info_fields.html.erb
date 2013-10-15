@@ -1,18 +1,21 @@
-<div class="grid_8 alpha omega dynamic_container input_item bottom_stroke">
-	<div class="grid_3 alpha">
-		<%= f.label :payment_date, 'Дата оплати' %><br />
-		<%= f.text_field :payment_date, value: date_to_text(f.object.payment_date), class: 'carddatefield' %>
-	</div>
-	<div class="grid_2">
-		<%= f.label :payment, 'Сумма платежу' %><br />
-		<%= f.text_field :payment, size: 10 %>
-	</div>
-	<div class="grid_2">
-		<%= f.label :paying_method, 'Метод проплати' %><br />
-		<%= f.text_field :paying_method, size: 10 %>
-	</div>
-	<div class="grid_1 omega center_align">
-		<%= f.hidden_field :_destroy %>
-		<%= link_to '', '#', class: "remove_fields simple_remove_icon" %>
+<div class="radius panel dynamic_container">
+	<div class="row">
+		<div class="large-3 columns">
+			<%= f.label :payment_date, 'Дата' %>
+			<%= f.text_field :payment_date, value: date_to_text(f.object.payment_date), class: 'carddatefield' %>
+		</div>
+		<div class="large-3 columns">
+			<%= f.label :payment, 'Сумма' %>
+			<%= f.text_field :payment, size: 10 %>
+		</div>
+		<div class="large-3 columns">
+			<%= f.label :paying_method, 'Метод' %>
+			<%= f.text_field :paying_method, size: 10 %>
+		</div>
+		
+		<div class="large-3 columns">
+			<%= f.hidden_field :_destroy %>
+			<%= link_to t(:delete), '#', class: "remove_fields radius small button set-top-gap" %>
+		</div>
 	</div>
 </div>

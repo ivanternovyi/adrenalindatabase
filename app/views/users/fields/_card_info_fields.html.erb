@@ -1,56 +1,58 @@
-<div class="grid_16 alpha omega dynamic_container bottom_stroke">
-	<div class="grid_8 alpha">
-		<div class="grid_4 alpha input_item">		
-			<%= f.label :card_number, 'Номер карти' %><br />
-			<%= f.text_field :card_number, size: 5, class: 'for_number' %>
-			<%= input_hint_text '4-значне число з карти' %>
-		</div>
-		<div class="grid_4 omega input_item">
-			<%= f.label :barcode, 'Штрихкод' %><br />
-			<%= f.text_field :barcode, size: 10, readonly: true, class: 'for_number' %>
-			<%= input_hint_text 'Буде згенеровано автоматично після збереження даних' %>
-		</div>
-		<div class="grid_4 alpha">
-			<div class="grid_4 alpha omega input_item">
-				<%= f.label :send_date, 'Дата відправки карти' %><br />
-				<%= f.text_field :send_date, value: date_to_text(f.object.send_date), class: 'carddatefield' %>
+<div class="row dynamic_container">
+	<div class="large-12 columns">
+		<div class='radius panel'>
+			<div class="row">
+				<div class="large-6 small-6 columns">
+					<%= f.label :card_number, 'Номер карти' %>
+					<%= f.text_field :card_number, size: 5, class: 'for_number' %>
+					<%= input_hint_text '4-значне число з карти' %>
+				</div>
+				<div class="large-6 small-6 columns">
+					<%= f.label :barcode, 'Штрихкод' %>
+					<%= f.text_field :barcode, size: 10, readonly: true, class: 'for_number' %>
+					<%= input_hint_text 'Буде згенеровано автоматично після збереження даних' %>
+				</div>
 			</div>
-			<div class="grid_4 alpha omega input_item">
-				<%= f.label :reminder_date, 'Дата листа нагадування' %><br />
-				<%= f.text_field :reminder_date, value: date_to_text(f.object.reminder_date), class: 'carddatefield' %>
+
+			<div class="row">
+				<div class="large-4 small-4 columns">
+					<%= f.label :send_date, 'Дата відправки карти' %>
+					<%= f.text_field :send_date, value: date_to_text(f.object.send_date), class: 'carddatefield' %>
+
+					<%= f.label :reminder_date, 'Дата листа нагадування' %>
+					<%= f.text_field :reminder_date, value: date_to_text(f.object.reminder_date), class: 'carddatefield' %>
+
+					<%= f.label :valid_until, 'Дійсна до' %>
+					<%= f.text_field :valid_until, value: date_to_text(f.object.valid_until), class: 'carddatefield' %>
+					<div>
+					<%= f.check_box :valid_unlimit %>
+					<%= f.label :valid_unlimit, 'Безлімітна картка', class: 'checkbox-label-inline' %>
+					</div>
+					<div class='set-bottom-gap'>
+					<%= f.check_box :discard %>
+					<%= f.label :discard, 'Карту аннульовано', class: 'checkbox-label-inline' %>
+					</div>
+					<%= f.label :payment_reward, 'Комісія' %>
+					<%= f.text_field :payment_reward, class: 'for_number' %>
+
+					<%= f.label :comment, 'Коментар' %>
+					<%= f.text_area :comment, cols: 40, rows: 2 %>
+				</div>
+
+				<div class="large-8 small-8 columns">
+					<%= f.fields_for :payment_infos do |build| %>
+						<%= render 'users/fields/payment_info_fields', f: build %>
+					<% end %>
+					<%= link_to_add_fields 'Додати проплату', f, :payment_infos %>
+				</div>
 			</div>
-			<div class="grid_4 alpha omega input_item">
-				<%= f.label :valid_until, 'Дійсна до' %><br />
-				<%= f.text_field :valid_until, value: date_to_text(f.object.valid_until), class: 'carddatefield' %>
+
+			<%= f.hidden_field :_destroy %>
+			<div class="row">
+				<div class="large-12 column">
+					<%= link_to 'Видалити карту', '#', class: "remove_fields radius small button no-bottom-gap" %>
+				</div>
 			</div>
 		</div>
-		<div class="grid_4 omega">
-			<div class="grid_4 alpha omega input_item">
-				<%= f.check_box :valid_unlimit %>
-				<%= f.label :valid_unlimit, 'Безлімітна картка' %>
-			</div>
-			<div class="grid_4 alpha omega input_item">
-				<%= f.check_box :discard %>
-				<%= f.label :discard, 'Карту аннульовано' %>
-			</div>
-			<div class="grid_4 alpha omega input_item">
-				<%= f.label :payment_reward, 'Комісія' %><br />
-				<%= f.text_field :payment_reward, class: 'for_number' %>
-			</div>
-		</div>
-		<div class="grid_8 alpha omega">
-			<%= f.label :comment, 'Коментар' %><br />
-			<%= f.text_area :comment, cols: 40, rows: 2 %>
-		</div>
-		<%= f.hidden_field :_destroy %>
-		<div class="grid_8 alpha omega">
-			<%= link_to 'Видалити карту', '#', class: "remove_fields remove_icon" %>
-		</div>
-	</div>
-	<div class="grid_8 alpha omega">
-		<%= f.fields_for :payment_infos do |build| %>
-			<%= render 'users/fields/payment_info_fields', f: build %>
-		<% end %>
-		<%= link_to_add_fields 'Додати проплату', f, :payment_infos %>
 	</div>
 </div>

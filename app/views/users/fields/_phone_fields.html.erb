@@ -1,17 +1,15 @@
-<div class="row dynamic_container">
-  <div class="large-6 columns">
-  	<%= f.label :phone_number, 'Номер телефону' %>
-  	<%= f.text_field :phone_number, class: "phone-field" %>
+<div class="radius panel">
+  <div class="row dynamic_container">
+    <div class="large-9 columns">
+    	<%= f.label :phone_number, 'Номер телефону' %>
+    	<%= f.text_field :phone_number, class: "phone-field" %>
+      <%= input_hint_text "Наприклад +38 (099) 999-99-99" %>
+      <%= f.check_box :main %>
+      <%= f.label :main, "Отримувати повідомлення", title: 'Отримувати повідомлення на телефон', data: {tooltip: true}, class: 'checkbox-label-inline' %>
+    </div>
+    <div class="large-3 columns">
+      <%= link_to t(:delete), '#', class: "remove_fields radius small button set-top-gap" %>
+    </div>
+    <%= f.hidden_field :_destroy %>
   </div>
-  <div class="large-2 columns">
-    <%= link_to :remove, '#', class: "remove_fields" %>
-  </div>
-  <div class="row">
-  <div class="large-8 columns">
-    <%= input_hint_text "Наприклад +38 (099) 999-99-99" %>
-    <%= f.check_box :main %>
-    <%= f.label :main, "Отримувати повід.", class: 'checkbox-label-inline' %>
-  </div>
-  </div>
-  <%= f.hidden_field :_destroy %>
 </div>
