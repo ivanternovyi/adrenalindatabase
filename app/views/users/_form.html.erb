@@ -33,7 +33,9 @@
 	  <% if !@user.user_detail.nil? %>
   	  <div class="row">
 			  <div class="large-12 columns">
-				  Користувача зареєстровано <%= l @user.user_detail.registration_timestamp, format: :long %>
+			  	<% unless @user.user_detail.registration_timestamp.nil? %>
+					  Користувача зареєстровано <%= l @user.user_detail.registration_timestamp, format: :long %>
+				  <% end %>
 				</div>
 			</div>
 		<% end %>

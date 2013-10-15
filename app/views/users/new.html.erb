@@ -1,12 +1,12 @@
 <div class="row">
   <div class="large-12 columns">
-    <%= admins_access { link_to 'Назад', :back } %>
+    <%= admins_access { link_to 'Назад', :back, class: 'radius small button' } %>
     <h1>Заявка на членство в ВГО &laquo;Адреналін&raquo;</h1>
   </div>
-  <div class="row">
-    <div class="large-12 columns">
-    	<%= render 'form' %>
-      <p><%= admins_access { link_to 'Назад', :back } %></p>
-    </div>
+  <div class="large-12 columns">
+    <%= render 'form' %>
+  </div>
+  <div class="large-12 columns">
+    <%= admins_access { link_to 'Назад', :back, class: 'radius small button' } %>
   </div>
 </div>
