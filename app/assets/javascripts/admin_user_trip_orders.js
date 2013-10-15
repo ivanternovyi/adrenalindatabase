@@ -1,6 +1,4 @@
 $(document).ready(function(){
-  payment_remove_fields();
-  payment_add_fields();
 
   $('#create-trip-for-user').on('click', function(evt){
     if($('body div#dark-plate')){
@@ -40,28 +38,3 @@ $(document).ready(function(){
   });
 
 });
-
-var payment_remove_fields = function(){
-  $('.remove_fields').on('click', function(evt){
-    $(this).prev('input[type=hidden]').val(1);
-    var old_element = $(this).closest('div.payment_info');
-    $(this).closest('form').submit();
-    old_element.hide();
-    old_element.empty();
-    old_element.remove();
-    evt.preventDefault();
-  });
-}
-
-var payment_add_fields = function(){
-  $('.add_payment_fields').on('click', function(evt){
-    time = new Date().getTime();
-    regexp = new RegExp($(this).data('id'), 'g');
-    $(this).before($(this).data('fields').replace(regexp, time));
-    $('input.carddatefield').datepicker({
-    changeYear: true,
-    yearRange: "-5:+5",
-    dateFormat: 'dd-mm-yy'});
-    evt.preventDefault();
-  });
-}
