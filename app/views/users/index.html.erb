@@ -1,21 +1,25 @@
-<div class="grid_5 filters">
-  <h2>Пошук</h2>
-  <%= render 'filter_users' %>
-</div>
-<div class="grid_11 content_list">
-  <h1>Список членів організації</h1>
-  <div class="clear"></div>
-  <div class="grid_11 alpha omega heading">
-    <div class="grid_2 alpha"><%= sortable 'reg_timestamp', 'Реєстр.' %></div>
-    <div class="grid_4 fio"><%= sortable 'surname', 'Прізвище Ім\'я По-Батькові' %></div>
-    <div class="grid_1"> № карти</div>
-    <div class="grid_2"><%= sortable 'birthday', 'Дата нар.' %></div>
-    <div class="grid_2 omega"><%= sortable 'town_office', 'Пр-ство' %></div>
-    <div class="clear"></div>
+<div class="row">
+  <div class="large-3 columns">
+    <fieldset>
+      <legend>Пошук</legend>
+      <%= render 'filter_users' %>
+    </fieldset>
   </div>
-  <%= render @users %>
-  <div class="clear"></div>
-  <div class='paginator'>
-    <%= will_paginate @users, previous_label: '<- Попередні', next_label: 'Наступні ->' %>
-</div>
+  <div class="large-9 columns">
+    <h1>Список членів організації</h1>
+    <div class="grid_11 alpha omega heading">
+      <div class="grid_2 alpha"><%= sortable 'reg_timestamp', 'Реєстр.' %></div>
+      <div class="grid_4 fio"><%= sortable 'surname', 'Прізвище Ім\'я По-Батькові' %></div>
+      <div class="grid_1"> № карти</div>
+      <div class="grid_2"><%= sortable 'birthday', 'Дата нар.' %></div>
+      <div class="grid_2 omega"><%= sortable 'town_office', 'Пр-ство' %></div>
+      <div class="clear"></div>
+    </div>
+    <%= render @users %>
+    <div class='row'>
+      <div class="large-12 columns">
+        <%= foundation_paginate @users, previous_label: '<- Попередні', next_label: 'Наступні ->' %>
+      </div>
+    </div>
+  </div>
 </div>
