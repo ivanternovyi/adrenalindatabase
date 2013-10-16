@@ -14,5 +14,5 @@
   <%= radio_button_tag :s_not_revised, 'false', (!params[:s_not_revised].nil? && params[:s_not_revised] == 'false') %>
   <%= label_tag :s_not_revised_false, 'Перевірені дані', class: 'checkbox-label-inline' %>
 
-  <%= submit_tag 'Шукати', name: nil, class: 'radius small button' %>
+  <%= submit_tag 'Шукати', name: nil, class: 'radius small button no-bottom-gap' %>
 <% end %>

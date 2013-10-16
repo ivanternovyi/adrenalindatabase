@@ -1,6 +1,6 @@
-<div class="grid_11 alpha omega record <%= cycle('even', 'odd') %>">
-  <div class="grid_2 alpha reg_timestamp">
-    <% revised = user.not_revised ? 'not_revised' : 'revised' %>
+<div class="row record <%= cycle('even', 'odd') %>">
+  <div class="large-2 small-2 columns reg-timestamp">
+    <% revised = user.not_revised ? 'not-revised' : 'revised' %>
     <div class=<%= revised %>></div>
     <% if !user.user_detail.nil? && !user.user_detail.registration_timestamp.nil? %>
       <%= date_to_text(user.user_detail.registration_timestamp) %>
@@ -8,30 +8,29 @@
       &nbsp;
     <% end %>
   </div>
-  <div class="grid_4 fio">
+  <div class="large-4 small-4 columns fio">
     <% if !user.user_detail.nil? %>
       <%= link_to "#{user.user_detail.surname} #{user.user_detail.name} #{user.user_detail.mid_name}", edit_user_path(user, current_page: @current_page) %>
     <% else %>
       &nbsp;
     <% end %>
   </div>
-  <div class="grid_1">
+  <div class="large-2 small-2 columns">
     <%= card_number_text(user) || raw('&nbsp;') %>
   </div>
-  <div class="grid_2">
+  <div class="large-2 small-2 columns">
     <% if !user.user_detail.nil? %>
       <%= raw '&nbsp;' if user.user_detail.birthday.blank? %>
-      <%= ua_date_short(user.user_detail.birthday) %>
+      <%= l user.user_detail.birthday, format: :default %>
     <% else %>
       &nbsp;
     <% end %>
   </div>
-  <div class="grid_2 omega town_office">
+  <div class="large-2 small-2 columns town_office">
     <% if !user.town_office_id.blank? %>
-      <%= Town.find(user.town_office_id).name %>
+      <%= truncate Town.find(user.town_office_id).name, length: 12 %>
     <% else %>
       &nbsp;
     <% end %>
   </div>
- 	<div class="clear"></div>
 </div>

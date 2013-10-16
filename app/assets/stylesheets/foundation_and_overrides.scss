@@ -1405,3 +1405,43 @@ $topbar-bg: $topbar-bg-color;
 input[readonly="readonly"] {
   background-color: #e0e0e0
 }
+
+.members-list-area {
+  .heading {
+    background-color: #e0e0e0;
+    font-weight: bold;
+    padding: .8em 0;
+  }
+  .record {
+    margin: .05em 0;
+    padding: .5em 0;
+    .reg-timestamp {
+      .not-revised {
+        display: inline-block;
+        margin-left: -.4em;
+        width: .3em;
+        height: .3em;
+        background-color: #d50d1d;
+      }
+      .revised {
+        display: inline-block;
+        margin-left: -.4em;
+        width: .3em;
+        height: .3em;
+        background-color: #26df2b; 
+      }
+    }
+    &.even {
+      background-color: #f3f3f3;
+    }
+    &.odd {
+      background-color: #f9f9f9;
+    }
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+  .paginator-area {
+    margin-top: 1.25em;
+  }
+}

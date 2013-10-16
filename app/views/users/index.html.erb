@@ -1,24 +1,25 @@
-<div class="row">
-  <div class="large-3 columns">
+<div class="row members-list-area">
+  <div class="large-3 small-3 columns">
     <fieldset>
       <legend>Пошук</legend>
       <%= render 'filter_users' %>
     </fieldset>
   </div>
-  <div class="large-9 columns">
+  <div class="large-9 small-12 columns">
     <h1>Список членів організації</h1>
-    <div class="grid_11 alpha omega heading">
-      <div class="grid_2 alpha"><%= sortable 'reg_timestamp', 'Реєстр.' %></div>
-      <div class="grid_4 fio"><%= sortable 'surname', 'Прізвище Ім\'я По-Батькові' %></div>
-      <div class="grid_1"> № карти</div>
-      <div class="grid_2"><%= sortable 'birthday', 'Дата нар.' %></div>
-      <div class="grid_2 omega"><%= sortable 'town_office', 'Пр-ство' %></div>
-      <div class="clear"></div>
+    <div class="row heading">
+      <div class="large-2 small-2 columns"><%= sortable 'reg_timestamp', 'Реєстр.' %></div>
+      <div class="large-4 small-4 columns fio"><%= sortable 'surname', 'Прізвище Ім\'я По-Батькові' %></div>
+      <div class="large-2 small-2 columns"> № карти</div>
+      <div class="large-2 small-2 columns"><%= sortable 'birthday', 'Дата нар.' %></div>
+      <div class="large-2 small-2 columns"><%= sortable 'town_office', 'Пр-ство' %></div>
     </div>
     <%= render @users %>
-    <div class='row'>
-      <div class="large-12 columns">
-        <%= foundation_paginate @users, previous_label: '<- Попередні', next_label: 'Наступні ->' %>
+    <div class='row paginator-area'>
+      <div class="large-12 small-12 columns">
+        <div class="pagination-centered">
+          <%= will_paginate @users %>
+        </div>
       </div>
     </div>
   </div>
