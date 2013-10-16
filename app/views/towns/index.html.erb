@@ -1,25 +1,29 @@
-<h1>Listing towns</h1>
+<div class="row towns-area">
+  <div class="large-12 small-12 columns">
+    <h1>Listing towns</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Office</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Office</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
 
-<% @towns.each do |town| %>
-  <tr>
-    <td><%= town.name %></td>
-    <td><%= '+' if town.office %></td>
-    <td><%= link_to 'Show', town %></td>
-    <td><%= link_to 'Edit', edit_town_path(town) %></td>
-    <td><%= link_to 'Destroy', town, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+    <% @towns.each do |town| %>
+      <tr>
+        <td><%= town.name %></td>
+        <td><%= '+' if town.office %></td>
+        <td><%= link_to 'Show', town, class: 'radius small button' %></td>
+        <td><%= link_to 'Edit', edit_town_path(town), class: 'radius small button' %></td>
+        <td><%= link_to 'Destroy', town, method: :delete, data: { confirm: 'Are you sure?' }, class: 'radius small button' %></td>
+      </tr>
+    <% end %>
+    </table>
 
-<br />
+    <br />
 
-<%= link_to 'New Town', new_town_path %>
+    <%= link_to 'New Town', new_town_path, class: 'radius small button' %>
+  </div>
+</div>
