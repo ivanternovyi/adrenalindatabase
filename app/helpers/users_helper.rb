@@ -20,4 +20,8 @@ module UsersHelper
       end
     end
   end
+
+  def card_valid_to(card)
+    # <%= l card.valid_until, format: :long %> 
+  end
 end

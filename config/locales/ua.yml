@@ -23,6 +23,14 @@ ua:
 
   card_information: Інформація по карті
   do_you_accept_rules: 'Ви приймаєте правила туру?'
+
+  profile:
+    your_profile: Ваш профіль
+    birthday: Дата народження
+  card:
+    number: Номер картки
+    valid_until: Дійсна до 
+
   trip:
     user_signed: записаний на подорожі
     title: Назва подорожі
@@ -40,6 +48,7 @@ ua:
     show_all: 'Показати всі тури'
     show_ordered_user_trips: Показати замовлені тури
     add_payment_for_trip_order: Додати проплату за тур
+    no_ordered_trips: Немає замовлених турів
 
   trip_date:
     title: Дати

@@ -7,7 +7,20 @@
   <div class="row">
     <div class="large-6 small-12 columns">
       <fieldset>
+        <legend><%= t :your_profile, scope: :profile %></legend>
+        <strong><%= t :birthday, scope: :profile %>: </strong><%= l @user.user_detail.birthday, format: :long %> <br />
+        <% @user.card_infos.each do |card| %>
+          <div class="panel radius">
+            <strong><%= t :number, scope: :card %>: </strong><%= card.card_number %> <br />
+            <strong><%= t :valid_until, scope: :card %>: </strong><%= card_valid_to card %><br />
+          </div>
+        <% end %>
+      </fieldset>
+    </div>
+    <div class="large-6 small-12 columns">
+      <fieldset>
         <legend><%= t :your_booked_trips, scope: :trip %></legend>
+        <%= t :no_ordered_trips, scope: :trip if @user.user_trip_orders.nil? %>
         <% @user.user_trip_orders.each do |utd| %>
           <%= show_ordered_trips utd %>
         <% end %>
