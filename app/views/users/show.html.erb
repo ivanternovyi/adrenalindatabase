@@ -8,15 +8,26 @@
     <div class="large-6 small-12 columns">
       <fieldset>
         <legend><%= t :your_profile, scope: :profile %></legend>
-        <strong><%= t :birthday, scope: :profile %>: </strong><%= l @user.user_detail.birthday, format: :long %> <br />
+        <strong><%= t :registration_date, scope: :profile %>: </strong><%= l @user.user_detail.registration_timestamp, format: :long %><br />
+        <strong><%= t :birthday, scope: :profile %>: </strong><%= l @user.user_detail.birthday, format: :long %><br />
+
+        <strong><%= t :post_address, scope: :profile %>: </strong><%= @user.user_detail.post_address %><br />
+        <strong><%= t :e_mail, scope: :profile %>: </strong><%= @user.email %><br />
+        <% @user.phones.each do |phone| %>
+          <strong><%= t :phone, scope: :profile %>: </strong><%= phone.phone_number %><br />
+        <% end %>
+        <strong><%= t :icq, scope: :profile %>: </strong>
+        <strong><%= t :skype, scope: :profile %>: </strong>
         <% @user.card_infos.each do |card| %>
-          <div class="panel radius">
-            <strong><%= t :number, scope: :card %>: </strong><%= card.card_number %> <br />
+          <div class="panel radius set-top-gap">
+            <strong><%= t :number, scope: :card %>: </strong><%= card.card_number %><br />
             <strong><%= t :valid_until, scope: :card %>: </strong><%= card_valid_to card %><br />
+            <strong><%= t :payments, scope: :card %>: </strong>
           </div>
         <% end %>
       </fieldset>
     </div>
+
     <div class="large-6 small-12 columns">
       <fieldset>
         <legend><%= t :your_booked_trips, scope: :trip %></legend>

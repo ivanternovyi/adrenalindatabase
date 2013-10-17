@@ -20,6 +20,7 @@ ua:
   save: Зберегти
   valute: грн.
   back: Назад
+  not_set: не вказано
 
   card_information: Інформація по карті
   do_you_accept_rules: 'Ви приймаєте правила туру?'
@@ -27,9 +28,13 @@ ua:
   profile:
     your_profile: Ваш профіль
     birthday: Дата народження
+    registration_date: Дата реєстрації
+
   card:
     number: Номер картки
-    valid_until: Дійсна до 
+    valid_until: Дійсна до
+    unlimit: безлімітна
+    not_set: не вказано
 
   trip:
     user_signed: записаний на подорожі

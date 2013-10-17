@@ -22,6 +22,12 @@ module UsersHelper
   end
 
   def card_valid_to(card)
-    # <%= l card.valid_until, format: :long %> 
+    return  t(:unlimit, scope: :card) if card.valid_unlimit
+    
+    if card.valid_until.nil?
+      t :not_set, scope: :card
+    else
+      l card.valid_until, format: :long
+    end
   end
 end

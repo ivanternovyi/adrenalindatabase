@@ -8,8 +8,8 @@
       <%= f.label :main, "Отримувати повідомлення", title: 'Отримувати повідомлення на телефон', data: {tooltip: true}, class: 'checkbox-label-inline' %>
     </div>
     <div class="large-3 columns">
+      <%= f.hidden_field :_destroy %>
       <%= link_to t(:delete), '#', class: "remove_fields radius small button set-top-gap" %>
     </div>
-    <%= f.hidden_field :_destroy %>
   </div>
 </div>

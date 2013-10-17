@@ -65,7 +65,7 @@ def regular_access
 
   def date_to_text(date)
     if !date.nil?
-      date.strftime('%d-%m-%Y')
+      l date.to_date, format: :default
     else
       ''
     end
