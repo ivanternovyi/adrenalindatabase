@@ -6,26 +6,36 @@
   </div>
   <div class="row">
     <div class="large-6 small-12 columns">
-      <fieldset>
-        <legend><%= t :your_profile, scope: :profile %></legend>
-        <strong><%= t :registration_date, scope: :profile %>: </strong><%= l @user.user_detail.registration_timestamp, format: :long %><br />
-        <strong><%= t :birthday, scope: :profile %>: </strong><%= l @user.user_detail.birthday, format: :long %><br />
-
-        <strong><%= t :post_address, scope: :profile %>: </strong><%= @user.user_detail.post_address %><br />
-        <strong><%= t :e_mail, scope: :profile %>: </strong><%= @user.email %><br />
-        <% @user.phones.each do |phone| %>
-          <strong><%= t :phone, scope: :profile %>: </strong><%= phone.phone_number %><br />
-        <% end %>
-        <strong><%= t :icq, scope: :profile %>: </strong>
-        <strong><%= t :skype, scope: :profile %>: </strong>
-        <% @user.card_infos.each do |card| %>
-          <div class="panel radius set-top-gap">
-            <strong><%= t :number, scope: :card %>: </strong><%= card.card_number %><br />
-            <strong><%= t :valid_until, scope: :card %>: </strong><%= card_valid_to card %><br />
-            <strong><%= t :payments, scope: :card %>: </strong>
-          </div>
-        <% end %>
-      </fieldset>
+      <h4><%= t :your_profile, scope: :profile %></h4>
+      <table id="member-info">
+        <tbody>
+          <tr><th><%= t :registration_date, scope: :profile %></th><td><%= l @user.user_detail.registration_timestamp, format: :long %></td></tr>
+          <tr><th><%= t :birthday, scope: :profile %></th><td><%= l @user.user_detail.birthday, format: :long %></td></tr>
+          <tr><th><%= t :post_address, scope: :profile %></th><td><%= @user.user_detail.post_address %></td></tr>
+          <tr><th><%= t :e_mail, scope: :profile %></th><td><%= @user.email %></td></tr>
+          <% @user.phones.each do |phone| %>
+            <tr><th><%= t :phone, scope: :profile %></th><td><%= phone.phone_number %></td></tr>
+          <% end %>
+          <tr><th><%= t :icq, scope: :profile %></th><td><%= @user.contact.icq_number %></td></tr>
+          <tr><th><%= t :skype, scope: :profile %></th><td><%= @user.contact.skype_name %></td></tr>
+        </tbody>
+      </table>
+      <% @user.card_infos.each do |card| %>
+        <fieldset>
+          <legend><%= t :number, scope: :card %>: <%= card.card_number %></legend>
+          <strong><%= t :valid_until, scope: :card %>: </strong><%= card_valid_to card %><br />
+          <strong><%= t :payments, scope: :card %></strong>
+          <table id="card-payments">
+            <tbody>
+              <% card.payment_infos.each do |payment| %>
+                <%= content_tag :th, l(payment.payment_date, format: :default) %>
+                <%= content_tag :td, "#{payment.payment} #{t :valute}" %>
+                <%= content_tag :td, payment.paying_method %>
+              <% end %>
+            </tbody>
+          </table>
+        </fieldset>
+      <% end %>
     </div>
 
     <div class="large-6 small-12 columns">

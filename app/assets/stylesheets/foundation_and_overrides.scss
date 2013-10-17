@@ -98,7 +98,7 @@ $default-float: left;
 // Control whether or not CSS classes come through in the CSS files.
 
 // $include-html-classes: true;
-// $include-print-styles: true;
+$include-print-styles: true;
 // $include-html-global-classes: $include-html-classes;
 // $include-html-inline-list-classes: $include-html-classes;
 // $include-html-type-classes: $include-html-classes;
@@ -1443,5 +1443,18 @@ input[readonly="readonly"] {
   }
   .paginator-area {
     margin-top: 1.25em;
+  }
+}
+
+#member-show-area {
+  table#member-info{
+    width: 100%;
+  }
+  table#card-payments{
+    width:100%;
+    font-size: .85em;
+  }
+  th{
+    text-align: left;
   }
 }
