@@ -1,8 +1,9 @@
 <header class="full-width header-area">
   <div class="row">
     <div class="large-3 columns">
-      <%= admins_access { link_to (image_tag 'adrenalin-logo.png'), root_path } %>
-      <%= link_to((image_tag 'adrenalin-logo.png'), new_user_session_path) if current_user.nil? %>
+      <%= admins_access { link_to(image_tag('adrenalin-logo.png'), root_path) } %>
+      <%= regular_access { link_to(image_tag('adrenalin-logo.png'), user_path(current_user)) } %>
+      <%= link_to((image_tag('adrenalin-logo.png')), new_user_session_path) if current_user.nil? %>
     </div>
     <div class="large-7 columns center" id="header-contacts">
         Якщо у Вас виникли питання:<br />

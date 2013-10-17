@@ -43,6 +43,14 @@ module ApplicationHelper
     end
   end
 
+def regular_access
+    if !current_user.nil? && (current_user.role? :regular_user)
+      yield
+    else
+      ''
+    end
+  end
+
   def sortable(column, title = nil)
     direction = (column == params[:sort] && params[:direction] == 'asc') ? 'desc' : 'asc'
     link_to title, sort: column, direction: direction

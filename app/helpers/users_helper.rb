@@ -15,7 +15,7 @@ module UsersHelper
     content_tag :div, class: "row" do
       content_tag :div, class: "large-12 small-12 columns set-bottom-gap" do
         cod = content_tag(:strong, "#{trip_title}: ")
-        cod << content_tag(:span, "#{trip_dates} ")
+        cod << content_tag(:span, "#{trip_dates} ", class: 'small-text')
         cod << content_tag(:span, raw("- #{trip_price}"))
       end
     end
