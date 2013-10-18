@@ -5,11 +5,11 @@
       <%= regular_access { link_to(image_tag('adrenalin-logo.png'), user_path(current_user)) } %>
       <%= link_to((image_tag('adrenalin-logo.png')), new_user_session_path) if current_user.nil? %>
     </div>
-    <div class="large-7 columns center" id="header-contacts">
+    <div class="large-7 columns center hide-for-print" id="header-contacts">
         Якщо у Вас виникли питання:<br />
         тел.: (044) 232-77-04, (093) 466-3999,<br /> e-mail: im@adrenalin-ua.com
     </div>
-  	<div class="large-2 columns">
+  	<div class="large-2 columns hide-for-print">
 			<%= link_to 'Вийти', destroy_user_session_path, method: :delete, class: 'radius small button right', id: 'sign-out-button' if !current_user.nil? %>
     </div>
   </div>

@@ -1,5 +1,5 @@
-<div class="row members-list-area">
-  <div class="large-3 small-3 columns">
+<div class="row" id="members-list-area">
+  <div class="large-3 small-12 columns hide-for-print">
     <fieldset>
       <legend>Пошук</legend>
       <%= render 'filter_users' %>
@@ -7,20 +7,29 @@
   </div>
   <div class="large-9 small-12 columns">
     <h1>Список членів організації</h1>
-    <div class="row heading">
-      <div class="large-2 small-2 columns"><%= sortable 'reg_timestamp', 'Реєстр.' %></div>
-      <div class="large-4 small-4 columns fio"><%= sortable 'surname', 'Прізвище Ім\'я По-Батькові' %></div>
-      <div class="large-2 small-2 columns"> № карти</div>
-      <div class="large-2 small-2 columns"><%= sortable 'birthday', 'Дата нар.' %></div>
-      <div class="large-2 small-2 columns"><%= sortable 'town_office', 'Пр-ство' %></div>
+  </div>
+  <div class="large-9 small-12 columns hide-for-print">
+    <div class="pagination-centered">
+      <%= will_paginate @users %>
     </div>
-    <%= render @users %>
-    <div class='row paginator-area'>
-      <div class="large-12 small-12 columns">
-        <div class="pagination-centered">
-          <%= will_paginate @users %>
-        </div>
-      </div>
+  </div>
+  <div class="large-9 small-12 columns">
+    <table id="members-list">
+      <thead>
+        <th><%= sortable 'reg_timestamp', 'Реєстр.' %></th>
+        <th><%= sortable 'surname', 'Прізвище Ім\'я По-Батькові' %></th>
+        <th> № карти</th>
+        <th><%= sortable 'birthday', 'Дата нар.' %></th>
+        <th><%= sortable 'town_office', 'Пр-ство' %></th>
+      </thead>
+      <tbody>
+      <%= render @users %>
+      </tbody>
+    </table>
+  </div>
+  <div class="large-12 small-12 columns hide-for-print">
+    <div class="pagination-centered">
+      <%= will_paginate @users %>
     </div>
   </div>
 </div>

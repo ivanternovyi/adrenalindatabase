@@ -26,11 +26,18 @@
           <strong><%= t :valid_until, scope: :card %>: </strong><%= card_valid_to card %><br />
           <strong><%= t :payments, scope: :card %></strong>
           <table id="card-payments">
+            <thead>
+              <th><%= t :date, scope: :payment %></th>
+              <th><%= t :amount, scope: :payment %></th>
+              <th><%= t :method, scope: :payment %></th>
+            </thead>
             <tbody>
               <% card.payment_infos.each do |payment| %>
-                <%= content_tag :th, l(payment.payment_date, format: :default) %>
-                <%= content_tag :td, "#{payment.payment} #{t :valute}" %>
-                <%= content_tag :td, payment.paying_method %>
+                <tr>
+                  <%= content_tag :th, l(payment.payment_date, format: :default) %>
+                  <%= content_tag :td, "#{payment.payment} #{t :valute}" %>
+                  <%= content_tag :td, payment.paying_method %>
+                </tr>
               <% end %>
             </tbody>
           </table>

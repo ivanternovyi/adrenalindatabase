@@ -22,7 +22,7 @@ ua:
   back: Назад
   not_set: не вказано
   date: дата
-  
+
   card_information: Інформація по карті
   do_you_accept_rules: 'Ви приймаєте правила туру?'
 
@@ -40,6 +40,11 @@ ua:
     unlimit: безлімітна
     not_set: не вказано
     payments: Платежі
+
+  payment:
+    date: Дата
+    method: Метод
+    amount: Сума
 
   trip:
     user_signed: записаний на подорожі
