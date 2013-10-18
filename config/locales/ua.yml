@@ -66,6 +66,9 @@ ua:
     no_ordered_trips: Немає замовлених турів
     sign_user_to_new_trip: Записати на подорож
     show_payments: Показати проплати
+    trip_title: Назва туру
+    dates: Дати
+    price: Ціна (грн.)
 
   trip_date:
     title: Дати

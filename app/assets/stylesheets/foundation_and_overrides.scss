@@ -1459,3 +1459,11 @@ input[readonly="readonly"] {
     text-align: left;
   }
 }
+
+table#trip-orders-list {
+  width: 100%;
+
+  td.trip-price{
+    text-align: right;
+  }
+}

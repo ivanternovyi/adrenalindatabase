@@ -63,9 +63,9 @@ def regular_access
     raw "#{day_str}&nbsp;#{mon_str.ljust(4, ' ')}&nbsp;#{year_str}"
   end
 
-  def date_to_text(date)
+  def date_to_text(date, format = :default)
     if !date.nil?
-      l date.to_date, format: :default
+      l date.to_date, format: format
     else
       ''
     end

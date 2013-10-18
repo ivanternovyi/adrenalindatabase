@@ -1,4 +1,4 @@
 $('#trip-orders-list').html('<%= j render "admin_user_trip_orders/trip_orders_list" %>');
 $('.trip-date-orders #payments-list').remove();
-$('#trip-date-order-<%= @order.id %>').append('<div id="payments-list"><%= j render "list" %></div>');
-$('#trip-date-order-<%= @order.id %> #payments-list').append('<div id="payment-form"><%= j render "form" %></div>');
+$('#trip-date-order-<%= @order.id %>').after('<%= j render "list" %>');
+$('#trip-date-order-<%= @order.id %> #payments-list').append('<td id="payment-form"><%= j render "form" %></td>');

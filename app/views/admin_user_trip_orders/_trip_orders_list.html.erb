@@ -1,12 +1,22 @@
-<div class="row">
-  <div class="large-12 small-12 columns">
+<table id="trip-orders-list">
+  <thead>
+    <th><%= t :trip_title, scope: :trip %></th>
+    <th><%= t :dates, scope: :trip %></th>
+    <th><%= t :price, scope: :trip %></th>
+    <th></th>
+  </thead>
+  <tbody>
     <% @trip_orders.each do |trip_order| %>
-      <div id=<%= "trip-date-order-#{trip_order.id}" %> class="trip-date-orders">
-        <%= "#{trip_order.trip.title}: #{l trip_order.trip_date.date_from, format: :long} - #{l trip_order.trip_date.date_to, format: :long} = #{trip_order.price}" %>
-        <%= link_to t(:edit), edit_user_admin_user_trip_order_path(@user, trip_order), remote: true, class: 'radius small button' %>
-        <%= link_to t(:delete), user_admin_user_trip_order_path(@user, trip_order), remote: true, method: :delete, data: {confirm: :are_you_sure}, class: 'radius small button' %>
-        <%= link_to t(:show_payments, scope: :trip), user_admin_user_trip_order_path(@user, trip_order), remote: true, class: 'radius small button' %>
-      </div>
+      <tr id=<%= "trip-date-order-#{trip_order.id}" %> class="trip-date-orders">
+        <td><%= trip_order.trip.title %></td>
+        <td><%= "#{date_to_text trip_order.trip_date.date_from, :long} - #{date_to_text trip_order.trip_date.date_to, :long}" %></td>
+        <td class="trip-price"><%= trip_order.price %></td>
+        <td>
+          <%= link_to t(:edit), edit_user_admin_user_trip_order_path(@user, trip_order), remote: true, class: 'radius tiny secondary button' %>
+          <%= link_to t(:delete), user_admin_user_trip_order_path(@user, trip_order), remote: true, method: :delete, data: {confirm: :are_you_sure}, class: 'radius tiny secondary button' %>
+          <%= link_to t(:show_payments, scope: :trip), user_admin_user_trip_order_path(@user, trip_order), remote: true, class: 'radius tiny button' %>
+          </td>
+      </tr>
     <% end %>
-  </div>
-</div>
+  </tbody>
+</table>
