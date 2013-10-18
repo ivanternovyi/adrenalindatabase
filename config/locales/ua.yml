@@ -64,6 +64,8 @@ ua:
     show_ordered_user_trips: Показати замовлені тури
     add_payment_for_trip_order: Додати проплату за тур
     no_ordered_trips: Немає замовлених турів
+    sign_user_to_new_trip: Записати на подорож
+    show_payments: Показати проплати
 
   trip_date:
     title: Дати

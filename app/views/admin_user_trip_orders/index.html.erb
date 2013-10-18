@@ -1,5 +1,12 @@
-<%= link_to "Sign user to new trip", '#', id: 'create-trip-for-user', remote: true %>
-<h1><%= "#{@user.user_detail.surname} #{@user.user_detail.name} #{@user.user_detail.mid_name} #{t :user_signed, scope: :trip}" %></h1>
-<div id="trip-orders-list">
-  <%= render 'trip_orders_list' %>
+<div class="row" id="members-trip-orders">
+  <div class="large-12 small-12 columns">
+    <%= link_to t(:back), :back, class: 'radius small button' %>
+    <%= link_to t(:sign_user_to_new_trip,  scope: :trip), '#', id: 'create-trip-for-user', remote: true, class: 'radius button' %>
+    <h3><%= "#{@user.user_detail.surname} #{@user.user_detail.name} #{@user.user_detail.mid_name} #{t :user_signed, scope: :trip}" %></h3>
+  </div>
+  <div class="large-12 small-12 columns">
+    <div id="trip-orders-list">
+      <%= render 'trip_orders_list' %>
+    </div>
+  </div>  
 </div>
