@@ -1,3 +1,3 @@
 $('.trip-date-orders #payments-list').remove();
-$('#trip-date-order-<%= @order.id %>').append('<div id="payments-list"><%= j render "list" %></div>');
-$('#trip-date-order-<%= @order.id %> #payments-list').append('<div id="payment-form"><%= j render "form" %></div>');
+$('#trip-date-order-<%= @order.id %>').append('<%= j render "list" %>');
+$("#trip-date-order-<%= @order.id %> #payments-list #payment-<%= @payment.id %>").html('<%= j render "form_in_row" %>');

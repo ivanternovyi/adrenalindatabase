@@ -1,13 +1,10 @@
-<td><%= @trip_order.trip.title %></td>
-<td><%= "#{date_to_text @trip_order.trip_date.date_from, :long} - #{date_to_text @trip_order.trip_date.date_to, :long}" %></td>
-<td>
-  <%= form_for @trip_order, url: user_admin_user_trip_order_path(@user, @trip_order), remote:true do |f| %>
-    <%= f.text_field :price, size: 10 %>
-    <%= f.submit t(:save), class: 'radius tiny button' %>
-  <% end %>
-</td>
-<td>
-  <%= link_to t(:edit), edit_user_admin_user_trip_order_path(@user, @trip_order), remote: true, class: 'radius tiny secondary button' %>
-  <%= link_to t(:delete), user_admin_user_trip_order_path(@user, @trip_order), remote: true, method: :delete, data: {confirm: :are_you_sure}, class: 'radius tiny secondary button' %>
-  <%= link_to t(:show_payments, scope: :trip), user_admin_user_trip_order_path(@user, @trip_order), remote: true, class: 'radius tiny button' %>
-</td>
+<div class="large-3 small-3 columns"><%= @trip_order.trip.title %></div>
+<div class="large-4 small-4 columns"><%= "#{date_to_text @trip_order.trip_date.date_from, :long} - #{date_to_text @trip_order.trip_date.date_to, :long}" %></div>
+<%= form_for @trip_order, url: user_admin_user_trip_order_path(@user, @trip_order), remote:true do |f| %>
+  <div class="large-1 small-1 columns">
+      <%= f.text_field :price, size: 10 %>
+  </div>
+  <div class="large-4 small-4 columns">
+      <%= f.submit t(:save), class: 'radius tiny button' %>
+  </div>
+<% end %>

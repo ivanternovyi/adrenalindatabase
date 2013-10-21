@@ -1,9 +1,12 @@
-<% @payments.each do |top| %>
-  <tr id=<%= "payment-#{top.id} payments-list" %>>
-  <td>
-    <%= "#{top.payment_date} : #{top.amount}" %>
-    <%= link_to :edit_payment, edit_admin_user_trip_order_admin_trip_order_payment_path(@order, top), remote: true %>
-    <%= link_to :delete_payment, admin_user_trip_order_admin_trip_order_payment_path(@order, top), method: :delete, remote: true, data: {confirm: :are_you_sure_to_delere_payment} %>
-    </td>
-  </tr>
-<% end %>
+<div id="payments-list">
+  <% @payments.each do |top| %>
+    <div class="row" id=<%= "payment-#{top.id} payments-list" %>>
+      <div class="large-2 large-offset-1 small-3 columns offset-1"><%= @payments.first == top ? t(:payments, scope: :trip) : raw("&nbsp;") %></div>
+      <div class="large-3 small-3 columns"><%= l top.payment_date, format: :default %></div>
+      <div class="large-2 small-2 columns"><%= "#{top.amount} #{t :valute}" %></div>
+      <div class="large-4 small-4 columns"><%= link_to t(:edit, scope: :payment), edit_admin_user_trip_order_admin_trip_order_payment_path(@order, top), remote: true, class: 'radius secondary tiny button' %>
+        <%= link_to t(:delete, scope: :payment), admin_user_trip_order_admin_trip_order_payment_path(@order, top), method: :delete, remote: true, data: {confirm: :are_you_sure_to_delere_payment}, class: 'radius secondary tiny button' %>
+      </div>
+    </div>
+  <% end %>
+</div>

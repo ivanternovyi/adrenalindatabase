@@ -14,6 +14,7 @@ class AdminTripOrderPaymentsController < ApplicationController
     if @payment.save
       @payments = get_order.user_payment_trip_orders
       @payment = get_order.user_payment_trip_orders.build
+      render 'update'
     end
   end
 
@@ -35,6 +36,7 @@ class AdminTripOrderPaymentsController < ApplicationController
     @payment.destroy
     @payments = get_order.user_payment_trip_orders
     @payment = get_order.user_payment_trip_orders.build
+    render 'update'
   end
 
   private

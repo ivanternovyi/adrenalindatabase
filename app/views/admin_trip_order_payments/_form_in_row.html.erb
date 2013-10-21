@@ -1,0 +1,8 @@
+<div class="large-2 large-offset-1 small-3 columns offset-1"><%= t :new_payment, scope: :trip %></div>
+<%= form_for @payment, url: (@payment.new_record? ?
+                              admin_user_trip_order_admin_trip_order_payments_path(@order, @payment) :
+                              admin_user_trip_order_admin_trip_order_payment_path(@order, @payment)), remote: true do |pf| %>
+  <div class="large-3 small-3 columns"><%= pf.text_field :payment_date %></div>
+  <div class="large-2 small-2 columns"><%= pf.text_field :amount %></div>
+  <div class="large-4 small-4 columns"><%= pf.submit t(:save_payment, scope: :trip), class: "radius secondary small button" %></div>
+<% end %>

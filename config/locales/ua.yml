@@ -45,6 +45,8 @@ ua:
     date: Дата
     method: Метод
     amount: Сума
+    edit: Редагувати
+    delete: Видалити
 
   trip:
     user_signed: записаний на подорожі
@@ -69,6 +71,9 @@ ua:
     trip_title: Назва туру
     dates: Дати
     price: Ціна (грн.)
+    payments: Проплати
+    new_payment: Створити проплату
+    save_payment: Зберегти проплату
 
   trip_date:
     title: Дати

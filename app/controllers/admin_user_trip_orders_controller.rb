@@ -27,6 +27,7 @@ class AdminUserTripOrdersController < ApplicationController
     @trip_order = get_user.user_trip_orders.find params[:id]
     @trip_order.delete
     @trip_orders = get_user.user_trip_orders
+    render 'update'
   end
 
   private

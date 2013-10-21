@@ -1,22 +1,20 @@
-<table id="trip-orders-list">
-  <thead>
-    <th><%= t :trip_title, scope: :trip %></th>
-    <th><%= t :dates, scope: :trip %></th>
-    <th><%= t :price, scope: :trip %></th>
-    <th></th>
-  </thead>
-  <tbody>
-    <% @trip_orders.each do |trip_order| %>
-      <tr id=<%= "trip-date-order-#{trip_order.id}" %> class="trip-date-orders">
-        <td><%= trip_order.trip.title %></td>
-        <td><%= "#{date_to_text trip_order.trip_date.date_from, :long} - #{date_to_text trip_order.trip_date.date_to, :long}" %></td>
-        <td class="trip-price"><%= trip_order.price %></td>
-        <td>
-          <%= link_to t(:edit), edit_user_admin_user_trip_order_path(@user, trip_order), remote: true, class: 'radius tiny secondary button' %>
-          <%= link_to t(:delete), user_admin_user_trip_order_path(@user, trip_order), remote: true, method: :delete, data: {confirm: :are_you_sure}, class: 'radius tiny secondary button' %>
-          <%= link_to t(:show_payments, scope: :trip), user_admin_user_trip_order_path(@user, trip_order), remote: true, class: 'radius tiny button' %>
-          </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div id="trip-orders-list">
+  <div class="row">
+    <div class="large-3 small-3 columns"><%= t :trip_title, scope: :trip %></div>
+    <div class="large-4 small-4 columns"><%= t :dates, scope: :trip %></div>
+    <div class="large-1 small-1 columns"><%= t :price, scope: :trip %></div>
+    <div class="large-4 small-4 columns">&nbsp;</div>
+  </div>
+  <% @trip_orders.each do |trip_order| %>
+    <div id=<%= "trip-date-order-#{trip_order.id}" %> class="row trip-date-orders">
+      <div class="large-3 small-3 columns"><%= trip_order.trip.title %></div>
+      <div class="large-4 small-4 columns"><%= "#{date_to_text trip_order.trip_date.date_from, :long} - #{date_to_text trip_order.trip_date.date_to, :long}" %></div>
+      <div class="large-1 small-1 columns"><%= trip_order.price %></div>
+      <div class="large-4 small-4 columns">
+        <%= link_to t(:edit), edit_user_admin_user_trip_order_path(@user, trip_order), remote: true, class: 'radius tiny secondary button' %>
+        <%= link_to t(:delete), user_admin_user_trip_order_path(@user, trip_order), remote: true, method: :delete, data: {confirm: :are_you_sure}, class: 'radius tiny secondary button' %>
+        <%= link_to t(:show_payments, scope: :trip), user_admin_user_trip_order_path(@user, trip_order), remote: true, class: 'radius tiny button' %>
+        </div>
+    </div>
+  <% end %>
+</div>
