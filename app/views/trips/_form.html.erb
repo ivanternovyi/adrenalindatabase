@@ -1,24 +1,26 @@
-<%= form_for @trip do |f| %>
-  <%= f.label :title, t(:title, scope: 'trip') %><br />
-  <%= f.text_field :title %>
-  <br />
-  <%= f.label :description, t(:description, scope: 'trip') %><br />
-  <%= f.text_area :description, cols: 40, rows: 5 %>
-  <br />
-  <%= f.label :rule, t(:rule, scope: 'trip') %><br />
-  <%= f.text_area :rule, cols: 40, rows: 2 %>
-  <br />
+<div class="row">
+  <%= form_for @trip do |f| %>
+    <%= f.label :title, t(:title, scope: 'trip') %><br />
+    <%= f.text_field :title %>
+    <br />
+    <%= f.label :description, t(:description, scope: 'trip') %><br />
+    <%= f.text_area :description, cols: 40, rows: 5 %>
+    <br />
+    <%= f.label :rule, t(:rule, scope: 'trip') %><br />
+    <%= f.text_area :rule, cols: 40, rows: 2 %>
+    <br />
 
-  <% @trip.trip_dates.each do |trd| %>
-    <p>
-      <%= "#{trd.date_from} .. #{trd.date_to} | #{trd.price}" %>
-      <%= link_to t(:edit), edit_trip_trip_date_path(@trip, trd) %> | 
-      <%= link_to t(:delete), trip_trip_date_path(@trip, trd), method: :delete, data: {confirm: t(:sure_to_delete, scope: :trip_date)} %>
-    </p>
+    <% @trip.trip_dates.each do |trd| %>
+      <p>
+        <%= "#{trd.date_from} .. #{trd.date_to} | #{trd.price}" %>
+        <%= link_to t(:edit), edit_trip_trip_date_path(@trip, trd) %> | 
+        <%= link_to t(:delete), trip_trip_date_path(@trip, trd), method: :delete, data: {confirm: t(:sure_to_delete, scope: :trip_date)} %>
+      </p>
+    <% end %>
+    <%= link_to(t(:new, scope: :trip_date), new_trip_trip_date_path(@trip)) unless @trip.id.nil? %>
+    <%= t(:save_before_add_dates, scope: :trip) if @trip.id.nil? %>
+    <br />
+    <%= f.submit t(:save) %>
+
   <% end %>
-  <%= link_to(t(:new, scope: :trip_date), new_trip_trip_date_path(@trip)) unless @trip.id.nil? %>
-  <%= t(:save_before_add_dates, scope: :trip) if @trip.id.nil? %>
-  <br />
-  <%= f.submit t(:save) %>
-
-<% end %>
+</div>

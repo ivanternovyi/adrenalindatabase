@@ -1,8 +1,19 @@
-<h1><%= t :trips_list %></h1>
-<%= link_to t(:new), new_trip_path %>
-<% @trips.each do |trip| %>
-  <p>
-    <%= trip.title %>
-    <%= link_to t(:edit), edit_trip_path(trip) %> | <%= link_to t(:delete), trip_path(trip), method: :delete, data: {confirm: t(:sure_to_delete, scope: :trip)} %>
-  </p>
-<% end %>
+<div class="row">
+  <div class="large-12 small-12 columns">
+    <%= link_to t(:create, scope: :trip), new_trip_path, class: 'radius button' %>
+  </div>
+  <div class="large-12 small-12 columns">
+    <h1><%= t :trips_list %></h1>
+  </div>
+  <div class="large-12 small-12 columns">
+    <% @trips.each do |trip| %>
+      <div class="row">
+        <div class="small-4 columns"><%= trip.title %></div>
+        <div class="small-4 columns">
+          <%= link_to t(:edit), edit_trip_path(trip), class: 'radius small button' %>
+          <%= link_to t(:delete), trip_path(trip), method: :delete, data: {confirm: t(:sure_to_delete, scope: :trip)}, class: 'radius small button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

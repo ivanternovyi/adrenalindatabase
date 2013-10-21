@@ -73,6 +73,7 @@ ua:
     price: Ціна (грн.)
     payments: Проплати
     new_payment: Створити проплату
+    create: Створити подорож
     save_payment: Зберегти проплату
 
   trip_date:
