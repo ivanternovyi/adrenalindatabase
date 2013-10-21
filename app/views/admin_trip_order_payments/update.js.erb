@@ -1,3 +1,4 @@
 $('.trip-date-orders #payments-list').remove();
 $('#trip-date-order-<%= @order.id %>').append('<%= j render "list" %>');
 $('#trip-date-order-<%= @order.id %> #payments-list').append('<%= j render "form" %>');
+update_datepicker();

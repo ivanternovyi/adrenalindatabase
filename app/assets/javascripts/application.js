@@ -18,3 +18,11 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+var update_datepicker = function() {
+  $('input.datefield').datepicker({
+    changeYear: true,
+    yearRange: "-100:+0",
+    dateFormat: 'dd-mm-yy'
+  });
+}

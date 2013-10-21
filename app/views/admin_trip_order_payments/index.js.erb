@@ -1,3 +1,4 @@
 $('#trip-orders-list').html('<%= j render "admin_user_trip_orders/trip_orders_list" %>');
 $('#trip-date-order-<%= @order.id %>').append('<%= j render "list" %>');
 $('#trip-date-order-<%= @order.id %> #payments-list').append('<%= j render "form" %>');
+update_datepicker();
