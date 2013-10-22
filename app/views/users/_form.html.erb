@@ -60,7 +60,7 @@
 
 						<%= f.fields_for :contact do |by_email| %>
 							<%= by_email.check_box :by_email %>
-							<%= by_email.label :by_email, 'Отримувати повідомлення', title: 'Отримувати повідомлення на e-mail', data: {tooltip: true}, class: 'checkbox-label-inline' %>
+							<%= by_email.label :by_email, 'Отримувати повідомлення', class: 'checkbox-label-inline' %>
 						<% end %>
 					</div>
 				</div>

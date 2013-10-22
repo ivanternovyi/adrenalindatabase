@@ -5,7 +5,7 @@
     	<%= f.text_field :phone_number, class: "phone-field" %>
       <%= input_hint_text "Наприклад +38 (099) 999-99-99" %>
       <%= f.check_box :main %>
-      <%= f.label :main, "Отримувати повідомлення", title: 'Отримувати повідомлення на телефон', data: {tooltip: true}, class: 'checkbox-label-inline' %>
+      <%= f.label :main, "Отримувати повідомлення", class: 'checkbox-label-inline' %>
     </div>
     <div class="large-3 columns">
       <%= f.hidden_field :_destroy %>
