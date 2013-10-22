@@ -1,3 +1,12 @@
-<h1><%= t :new_trip %></h1>
-<%= render 'form' %>
-<%= link_to t(:back), trips_path %>
+<div class="row">
+  <div class="large-12 small-12 columns">
+    <%= link_to t(:back), trips_path, class: 'radius small button' %>
+    <h1><%= t :new_trip, scope: :trip %></h1>
+  </div>
+  <div class="large-12 small-12 columns">
+    <%= render 'form' %>
+  </div>
+  <div class="large-12 small-12 columns">
+    <%= link_to t(:back), trips_path, class: 'radius small button' %>
+  </div>
+</div>

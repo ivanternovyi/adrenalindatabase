@@ -1,26 +1,31 @@
 <div class="row">
   <%= form_for @trip do |f| %>
-    <%= f.label :title, t(:title, scope: 'trip') %><br />
-    <%= f.text_field :title %>
-    <br />
-    <%= f.label :description, t(:description, scope: 'trip') %><br />
-    <%= f.text_area :description, cols: 40, rows: 5 %>
-    <br />
-    <%= f.label :rule, t(:rule, scope: 'trip') %><br />
-    <%= f.text_area :rule, cols: 40, rows: 2 %>
-    <br />
+    <div class="large-6 small-12 columns">
+        <%= f.label :title, t(:title, scope: 'trip') %>
+        <%= f.text_field :title %>
 
-    <% @trip.trip_dates.each do |trd| %>
-      <p>
-        <%= "#{trd.date_from} .. #{trd.date_to} | #{trd.price}" %>
-        <%= link_to t(:edit), edit_trip_trip_date_path(@trip, trd) %> | 
-        <%= link_to t(:delete), trip_trip_date_path(@trip, trd), method: :delete, data: {confirm: t(:sure_to_delete, scope: :trip_date)} %>
-      </p>
-    <% end %>
-    <%= link_to(t(:new, scope: :trip_date), new_trip_trip_date_path(@trip)) unless @trip.id.nil? %>
-    <%= t(:save_before_add_dates, scope: :trip) if @trip.id.nil? %>
-    <br />
-    <%= f.submit t(:save) %>
+        <%= f.label :description, t(:description, scope: 'trip') %>
+        <%= f.text_area :description, cols: "40", rows: "10" %>
 
+        <%= f.label :rule, t(:rule, scope: 'trip') %>
+        <%= f.text_area :rule, cols: "40", rows: "5" %>
+
+        <%= f.submit t(:save), class: 'radius button' %>
+    </div>
+    
+    <div class="large-6 small-12 columns">
+    <div class="panel radius">
+        <h3><%= t :trip_dates, scope: :trip %></h3>
+        <%= f.submit t(:save_before_add_dates, scope: :trip), class: 'radius button' if @trip.id.nil? %>
+        <% @trip.trip_dates.each do |trd| %>
+          <p>
+            <%= "#{date_to_text trd.date_from} .. #{date_to_text trd.date_to} | #{trd.price}" %>
+            <%= link_to t(:edit), edit_trip_trip_date_path(@trip, trd), class: 'tiny radius secondaty button' %>
+            <%= link_to t(:delete), trip_trip_date_path(@trip, trd), method: :delete, data: {confirm: t(:sure_to_delete, scope: :trip_date)}, class: 'tiny radius secondaty button' %>
+          </p>
+        <% end %>
+        <%= link_to(t(:new, scope: :trip_date), new_trip_trip_date_path(@trip)) unless @trip.id.nil? %>
+    </div>
+    </div>
   <% end %>
 </div>

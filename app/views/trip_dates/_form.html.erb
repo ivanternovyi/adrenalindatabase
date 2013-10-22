@@ -1,10 +1,10 @@
 <%= form_for [@trip, @trip_date] do |f| %>
   <p>
     <%= f.label :date_from, t(:date_from, scope: :trip_date) %>
-    <%= f.text_field :date_from, class: 'datefield' %>
+    <%= f.text_field :date_from, value: date_to_text(f.object.date_from), class: 'datefield' %>
     
     <%= f.label :date_to, t(:date_to, scope: :trip_date) %>
-    <%= f.text_field :date_to, class: 'datefield' %>
+    <%= f.text_field :date_to, value: date_to_text(f.object.date_to), class: 'datefield' %>
 
     <%= f.label :price, t(:price, scope: :trip_date) %>
     <%= f.text_field :price %>

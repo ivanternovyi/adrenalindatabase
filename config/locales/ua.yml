@@ -75,6 +75,8 @@ ua:
     new_payment: Створити проплату
     create: Створити подорож
     save_payment: Зберегти проплату
+    trip_dates: Дати турів
+    new_trip: Нова подорож
 
   trip_date:
     title: Дати
