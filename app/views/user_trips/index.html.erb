@@ -1,6 +1,17 @@
-<h1><%= t :trips_list %></h1>
-<% @trips.each do |trip| %>
-  <p>
-    <%= link_to trip.title, user_trip_path(trip) %>
-  </p>
-<% end %>
+<div class='row'>
+  <div class="large-12 small-12 columns">
+    <h1><%= t :trips_list %></h1>
+  </div>
+  <div class="large-12 small-12 columns">
+    <ul class="large-block-grid-4 small-block-grid-2">
+    <% @trips.each do |trip| %>
+      <li><div class="panel radius">
+        <h6><%= link_to trip.title, user_trip_path(trip) %></h6>
+        <p>
+          <%= truncate trip.description, length: 50 %>
+        </p></div>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>

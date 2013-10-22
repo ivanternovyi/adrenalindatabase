@@ -67,6 +67,7 @@ ua:
     add_payment_for_trip_order: Додати проплату за тур
     no_ordered_trips: Немає замовлених турів
     sign_user_to_new_trip: Записати на подорож
+    sign_to_trip: Записатись
     show_payments: Показати проплати
     trip_title: Назва туру
     dates: Дати
@@ -77,6 +78,7 @@ ua:
     save_payment: Зберегти проплату
     trip_dates: Дати турів
     new_trip: Нова подорож
+    no_new_trips_dates: Ще немає нових дат на цей тур. Або Ви вже запісані на доступні дати.
 
   trip_date:
     title: Дати

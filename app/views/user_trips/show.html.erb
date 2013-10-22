@@ -1,17 +1,30 @@
-<%= link_to t(:show_all, scope: :trip), user_trips_path %>
-<h1><%= "#{t(:title, scope: :trip)} #{@trip.title}" %></h1>
-<p><%= @trip.description %></p>
-<h3><%= t :title, scope: :trip_date %></h3>
+<div class="row">
+  <div class="large-12 small-12 columns">
+    <%= link_to t(:show_all, scope: :trip), user_trips_path %>
+    <h1><%= "#{t(:title, scope: :trip)} #{@trip.title}" %></h1>
+    <%= @trip.description %>
+  </div>
 
-<% unless current_user.nil? %>
-  <% @trip_dates.each do |trd| %>
-    <%= button_to "#{l trd.date_f} .. #{l trd.date_t} - #{trd.price}", user_trip_orders_path(trip_id: @trip.id, trip_date_id: trd.id), data: {confirm: "#{t(:do_you_accept_rules)} \n #{@trip.rule}"} %><br />
-  <% end %>
-<% else %>
-  <% @trip.trip_dates.each do |trd| %>
-    <%= "#{l trd.date_f} .. #{l trd.date_t} - #{trd.price}" %>
-    <%= button_to "Увійдіть або зареєструйтесь", new_user_session_path %><br />
-  <% end %>
-<% end %>
-<h3><%= t :rule, scope: :trip %></h3>
-<p><%= @trip.rule %></p>
+  <div class="large-12 small-12 columns">
+    <h3><%= t :title, scope: :trip_date %></h3>
+    <% unless current_user.nil? %>
+      <%= t :no_new_trips_dates, scope: :trip if @trip_dates.count == 0 %>
+      <% @trip_dates.each do |trd| %>
+      <div>
+        <%= raw "#{l trd.date_f} .. #{l trd.date_t}&nbsp;&nbsp;&nbsp;<strong>#{t :price, scope: :trip}</strong> #{trd.price}" %>
+        <%= link_to t(:sign_to_trip, scope: :trip), user_trip_orders_path(trip_id: @trip.id, trip_date_id: trd.id), method: :post, data: {confirm: "#{t(:do_you_accept_rules)} \n #{@trip.rule}"}, class: 'radius button' %><br />
+        </div>
+      <% end %>
+    <% else %>
+      <% @trip.trip_dates.each do |trd| %>
+        <%= raw "#{l trd.date_f} .. #{l trd.date_t}&nbsp;&nbsp;&nbsp;<strong>#{t :price, scope: :trip}</strong> #{trd.price}" %>
+        <%= link_to "Увійдіть або зареєструйтесь", new_user_session_path, class: 'radius button' %><br />
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="large-12 small-12 columns">
+    <h3><%= t :rule, scope: :trip %></h3>
+    <%= raw @trip.rule %>
+  </div>
+</div>
