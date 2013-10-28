@@ -16,8 +16,10 @@
           <% @user.phones.each do |phone| %>
             <tr><th><%= t :phone, scope: :profile %></th><td><%= phone.phone_number %></td></tr>
           <% end %>
-          <tr><th><%= t :icq, scope: :profile %></th><td><%= @user.contact.icq_number %></td></tr>
-          <tr><th><%= t :skype, scope: :profile %></th><td><%= @user.contact.skype_name %></td></tr>
+          <% unless @user.contact.nil? %>
+            <tr><th><%= t :icq, scope: :profile %></th><td><%= @user.contact.icq_number %></td></tr>
+            <tr><th><%= t :skype, scope: :profile %></th><td><%= @user.contact.skype_name %></td></tr>
+          <% end %>
         </tbody>
       </table>
       <% @user.card_infos.each do |card| %>
