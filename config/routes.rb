@@ -13,6 +13,9 @@ Adrenalindatabase::Application.routes.draw do
   resources :trips do
     resources :trip_dates
   end
+  resources :admin_import_trips do
+    post 'upload', on: :collection
+  end
   resources :user_trips
   resources :user_trip_orders
 end

@@ -1,6 +1,7 @@
 <div class="row">
   <div class="large-12 small-12 columns">
     <%= link_to t(:create, scope: :trip), new_trip_path, class: 'radius button' %>
+    <%= link_to t(:import_orders_history, scope: :trip), admin_import_trips_path, class: 'radius button' %>
   </div>
   <div class="large-12 small-12 columns">
     <h1><%= t :trips_list %></h1>

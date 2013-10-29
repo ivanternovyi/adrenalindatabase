@@ -79,6 +79,7 @@ ua:
     trip_dates: Дати турів
     new_trip: Нова подорож
     no_new_trips_dates: Ще немає нових дат на цей тур. Або Ви вже запісані на доступні дати.
+    import_orders_history: Імпорт подорожей з xlsx файлів
 
   trip_date:
     title: Дати
